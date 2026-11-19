@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Govi Thena Story Board // Live Collaborative Studio</title>
+<title>Govi Thena Story Board // Live Cutscene & Asset Studio</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,6 +20,8 @@
   --built:#3b7432; --built-soft:rgba(59,116,50,.13);
   --planned:#8e600c; --planned-soft:rgba(148,101,15,.14);
   --stale:#b3441c; --stale-soft:rgba(179,68,28,.12);
+  --cutscene:#7c3aed; --cutscene-soft:rgba(124,58,237,.13);
+  --asset:#0891b2; --asset-soft:rgba(8,145,178,.13);
   --z-deep:#d6d4cb; --z-day:#d9e2c3; --z-dusk:#e6d7c1; --z-night:#1f2546;
   --z-ink:#1c211b; --z-muted:#5a6155; --z-night-ink:#e9ecf8; --z-night-muted:#aab1d2;
   --note:#f3e29a; --note-ink:#352d0c; --note-edge:rgba(80,64,0,.22);
@@ -40,6 +42,8 @@
     --built:#82c46f; --built-soft:rgba(130,196,111,.14);
     --planned:#dcaa48; --planned-soft:rgba(220,170,72,.14);
     --stale:#ef8256; --stale-soft:rgba(239,130,86,.14);
+    --cutscene:#a78bfa; --cutscene-soft:rgba(167,139,250,.15);
+    --asset:#22d3ee; --asset-soft:rgba(34,211,238,.14);
     --z-deep:#18191d; --z-day:#152016; --z-dusk:#211b15; --z-night:#111631;
     --z-ink:#e6e9df; --z-muted:#a2aa9a; --z-night-ink:#e9ecf8; --z-night-muted:#9aa3c9;
     --note:#e8d47e; --note-ink:#2d260a; --note-edge:rgba(0,0,0,.35);
@@ -56,6 +60,8 @@
   --built:#82c46f; --built-soft:rgba(130,196,111,.14);
   --planned:#dcaa48; --planned-soft:rgba(220,170,72,.14);
   --stale:#ef8256; --stale-soft:rgba(239,130,86,.14);
+  --cutscene:#a78bfa; --cutscene-soft:rgba(167,139,250,.15);
+  --asset:#22d3ee; --asset-soft:rgba(34,211,238,.14);
   --z-deep:#18191d; --z-day:#152016; --z-dusk:#211b15; --z-night:#111631;
   --z-ink:#e6e9df; --z-muted:#a2aa9a; --z-night-ink:#e9ecf8; --z-night-muted:#9aa3c9;
   --note:#e8d47e; --note-ink:#2d260a; --note-edge:rgba(0,0,0,.35);
@@ -70,33 +76,33 @@ button,input,select,textarea{font-family:inherit}
 :focus-visible{outline:2px solid var(--light);outline-offset:2px}
 
 /* top bar */
-.bar{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding-block:9px;padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px));background:var(--bar);border-bottom:1px solid var(--bar-edge);position:relative;z-index:15}
+.bar{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding-block:8px;padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px));background:var(--bar);border-bottom:1px solid var(--bar-edge);position:relative;z-index:15}
 .brand{display:flex;align-items:center;gap:9px;flex:none}
 .brand b{font-family:var(--f-display);font-weight:780;font-size:19px;letter-spacing:-.01em}
 .brand span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
-.parts{display:flex;gap:5px;overflow-x:auto;min-width:0;flex:1 1 240px;scrollbar-width:none;padding-block:2px;align-items:center}
+.parts{display:flex;gap:5px;overflow-x:auto;min-width:0;flex:1 1 200px;scrollbar-width:none;padding-block:2px;align-items:center}
 .parts::-webkit-scrollbar{display:none}
 .chip{flex:none;font:500 12.5px/1 var(--f-body);color:var(--muted);background:transparent;border:1px solid var(--bar-edge);border-radius:999px;padding:7px 11px;cursor:pointer;white-space:nowrap;transition:all .15s}
 .chip:hover{color:var(--ink);border-color:var(--faint)}
 .chip[aria-current="true"]{color:var(--ink);background:var(--card);border-color:var(--path);box-shadow:0 0 0 1px var(--path)}
 .chip.add-chip{border-style:dashed;color:var(--path);border-color:var(--path);font-weight:600}
 .chip.add-chip:hover{background:rgba(200,162,80,.12)}
-.tools{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.tools{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 
 /* Story Built/Planned Progress Bar */
 .progress{display:flex;align-items:center;gap:7px;font:500 11.5px var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;background:var(--card);padding:5px 10px;border-radius:999px;border:1px solid var(--edge)}
-.meter{width:76px;height:7px;border-radius:4px;background:rgba(128,128,128,.16);overflow:hidden;display:flex}
+.meter{width:70px;height:7px;border-radius:4px;background:rgba(128,128,128,.16);overflow:hidden;display:flex}
 .meter .m-built{height:100%;background:var(--built);transition:width .3s}
 .meter .m-planned{height:100%;background:var(--planned);transition:width .3s}
 
-.btn{font:600 12px/1 var(--f-body);color:var(--ink);background:var(--card);border:1px solid var(--edge);border-radius:9px;padding:8px 11px;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;transition:all .15s}
-.btn:hover{border-color:var(--faint);transform:translateY(-1px)}
+.btn{font:600 12px/1 var(--f-body);color:var(--ink);background:var(--card);border:1px solid var(--edge);border-radius:9px;padding:7px 10px;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:5px;transition:all .15s}
+.btn:hover:not([disabled]){border-color:var(--faint);transform:translateY(-1px)}
 .btn.primary{background:var(--light);color:var(--on-light);border-color:transparent}
 .btn.gold{background:var(--path);color:#fff;border-color:transparent}
 .btn.live-btn{background:var(--built-soft);color:var(--built);border-color:var(--built)}
 .btn.live-btn.connected{background:var(--built);color:#fff;border-color:transparent;box-shadow:0 0 14px rgba(130,196,111,.4)}
 .btn.danger{background:var(--stale-soft);color:var(--stale);border-color:rgba(179,68,28,.3)}
-.btn[disabled]{opacity:.5;cursor:default;transform:none}
+.btn[disabled]{opacity:.38;cursor:default;transform:none}
 
 .live-dot{width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block}
 .btn.live-btn.connected .live-dot{background:#fff;animation:livePulse 1.8s infinite}
@@ -125,6 +131,7 @@ button,input,select,textarea{font-family:inherit}
 .w-line.color-blue{stroke:var(--light)}
 .w-line.color-green{stroke:var(--built)}
 .w-line.color-crimson{stroke:#e11d48}
+.w-line.color-violet{stroke:var(--cutscene)}
 .wire-group:hover .w-line,.wire-group.selected .w-line{stroke-width:4.5;filter:drop-shadow(0 0 8px var(--path))}
 .w-label-bg{fill:var(--bar);stroke:var(--path);stroke-width:1;rx:6}
 .w-label-text{font:600 10.5px var(--f-mono);fill:var(--ink);letter-spacing:.06em;text-transform:uppercase;pointer-events:none}
@@ -148,7 +155,6 @@ button,input,select,textarea{font-family:inherit}
 .mood{display:flex;align-items:center;gap:8px;font:500 12.5px var(--f-mono);color:var(--zmuted);flex-wrap:wrap}
 .mood .k{letter-spacing:.14em;text-transform:uppercase;margin-right:4px}
 .sw{width:20px;height:20px;border-radius:50%;box-shadow:0 0 0 1px var(--edge)}
-.gap{position:absolute;width:200px;margin-left:-100px;text-align:center;font:500 12px/1.35 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);pointer-events:none}
 
 /* zone action bar */
 .zactions{display:inline-flex;gap:6px;align-items:center;margin-top:12px;flex-wrap:wrap}
@@ -160,11 +166,35 @@ button,input,select,textarea{font-family:inherit}
 .zone:hover .zone-resize{opacity:1}
 
 /* cards (freely draggable & connectable) */
-.card{position:absolute;width:272px;box-sizing:border-box;background:var(--card);border:1.5px solid var(--edge);border-radius:14px;padding:16px 18px 18px;box-shadow:0 1px 0 var(--edge),0 14px 28px -18px var(--shadow);transition:box-shadow .15s,border-color .15s;cursor:grab;z-index:2}
+.card{position:absolute;width:280px;box-sizing:border-box;background:var(--card);border:1.5px solid var(--edge);border-radius:14px;padding:15px 17px 17px;box-shadow:0 1px 0 var(--edge),0 14px 28px -18px var(--shadow);transition:box-shadow .15s,border-color .15s;cursor:grab;z-index:2}
 .card:hover{border-color:var(--faint)}
 .card.dragging{cursor:grabbing;z-index:12;box-shadow:0 24px 48px -12px var(--shadow),0 0 0 2px var(--path);transform:scale(1.02)}
 .card.selected{border-color:var(--path);box-shadow:0 0 0 2.5px var(--path),0 18px 36px -14px var(--shadow);z-index:5}
 .card.wire-target-hover{border-color:var(--light);box-shadow:0 0 0 3px var(--light),0 0 28px var(--light-glow)}
+
+/* Card Type Variations: Cutscene & Asset / Photo Card */
+.card.kind-cutscene{border-top:4px solid var(--cutscene)}
+.card.kind-asset{border-top:4px solid var(--asset)}
+.kind-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 7px;border-radius:6px;font:600 9.5px/1 var(--f-mono);letter-spacing:.07em;text-transform:uppercase}
+.kind-badge.cutscene{background:var(--cutscene-soft);color:var(--cutscene)}
+.kind-badge.asset{background:var(--asset-soft);color:var(--asset)}
+.kind-badge.story{background:rgba(154,122,50,.14);color:var(--path)}
+
+/* Card Photo / Storyboard Frame Slot */
+.card-photo-wrap{position:relative;margin:-4px -6px 11px;border-radius:10px;overflow:hidden;border:1px solid var(--edge);background:rgba(0,0,0,.22)}
+.card-photo{display:block;width:100%;max-height:175px;object-fit:cover}
+.card-photo-cap{font:500 10px/1.3 var(--f-mono);color:var(--muted);padding:5px 8px;background:var(--bar);border-top:1px solid var(--edge);display:flex;justify-content:space-between;align-items:center}
+
+/* Cutscene Specs Grid & Asset Checklist on Card */
+.cutscene-specs{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:10px 0;padding:8px;border-radius:9px;background:var(--cutscene-soft);font:500 11px/1.3 var(--f-mono)}
+.cs-spec b{display:block;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--cutscene);margin-bottom:2px}
+.asset-checklist{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:5px}
+.asset-chk{display:flex;align-items:center;gap:7px;font-size:12.5px;padding:5px 8px;border-radius:7px;background:rgba(128,128,128,.08);cursor:pointer}
+.asset-chk input{margin:0;accent-color:var(--built);cursor:pointer}
+.asset-chk.done span{text-decoration:line-through;color:var(--muted)}
+
+/* Inline Title Rename Input */
+.inline-rename-input{width:100%;box-sizing:border-box;font-family:var(--f-display);font-weight:720;font-size:20px;color:var(--ink);background:var(--ground);border:2px solid var(--light);border-radius:7px;padding:3px 7px;margin-bottom:6px}
 
 /* Connection Ports (Left input, Right output) */
 .port{position:absolute;top:50%;width:15px;height:15px;border-radius:50%;background:var(--card);border:2.5px solid var(--path);transform:translateY(-50%);cursor:crosshair;z-index:6;transition:transform .15s,background .15s,box-shadow .15s;opacity:.35}
@@ -178,8 +208,6 @@ button,input,select,textarea{font-family:inherit}
 .card:hover .card-tools,.card.selected .card-tools{opacity:1}
 .ctool{width:24px;height:24px;border-radius:6px;border:1px solid var(--edge);background:var(--bar);color:var(--muted);font:600 12px/1 var(--f-mono);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
 .ctool:hover{color:var(--ink);border-color:var(--faint);background:var(--card)}
-.ctool.conn-btn{color:var(--path);border-color:rgba(200,162,80,.4)}
-.ctool.conn-btn:hover{background:var(--path);color:#fff}
 .ctool.del:hover{background:var(--stale-soft);color:var(--stale);border-color:var(--stale)}
 
 /* Status badge pill on card */
@@ -188,11 +216,11 @@ button,input,select,textarea{font-family:inherit}
 .status-pill.planned{background:var(--planned-soft);color:var(--planned)}
 .status-pill.draft{background:rgba(128,128,128,.14);color:var(--muted)}
 
-.kicker{font:500 11px/1 var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--faint);display:flex;gap:8px;align-items:center;margin-bottom:10px;padding-right:64px;flex-wrap:wrap}
+.kicker{font:500 11px/1 var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--faint);display:flex;gap:6px;align-items:center;margin-bottom:9px;padding-right:64px;flex-wrap:wrap}
 .kicker .no{color:var(--path);font-variant-numeric:tabular-nums;font-weight:700}
 .beat h3{font-family:var(--f-display);font-weight:720;font-size:21px;line-height:1.14;letter-spacing:-.01em;margin:0 0 8px;text-wrap:balance}
-.beat p{font-size:15px;line-height:1.45;margin:0;white-space:pre-wrap}
-.tags{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:6px}
+.beat p{font-size:14.5px;line-height:1.45;margin:0;white-space:pre-wrap}
+.tags{list-style:none;margin:11px 0 0;padding:0;display:grid;gap:6px}
 .tag{font-size:12.5px;line-height:1.38;padding:7px 10px;border-radius:8px;position:relative}
 .tag b{display:block;font:500 10px/1 var(--f-mono);letter-spacing:.09em;text-transform:uppercase;margin-bottom:4px}
 .tag.built{background:var(--built-soft)} .tag.built b{color:var(--built)}
@@ -226,22 +254,47 @@ button,input,select,textarea{font-family:inherit}
 .nc-dot{width:11px;height:11px;border-radius:50%;border:1px solid rgba(0,0,0,.25);cursor:pointer;padding:0}
 .note-del{font:500 10.5px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--note-ink);background:transparent;border:1px solid transparent;border-radius:6px;padding:3px 6px;cursor:pointer;opacity:.65}
 .note-del:hover{opacity:1;border-color:var(--note-edge)}
-.note-del.armed{opacity:1;border-color:currentColor;background:rgba(179,68,28,.15)}
 .note textarea{display:block;width:100%;box-sizing:border-box;border:0;background:transparent;resize:none;overflow:hidden;font-family:var(--f-hand);font-weight:500;font-size:25px;line-height:1.18;color:var(--note-ink);padding:4px 12px 16px;min-height:84px;user-select:text;-webkit-user-select:text}
 .note textarea:focus{outline:none}
+
+/* ==================================================================
+   RIGHT-CLICK RADIAL WHEEL MENU & CARD CONTEXT MENU
+   ================================================================== */
+.radial-overlay{position:fixed;inset:0;z-index:50;pointer-events:none}
+.radial-wheel{position:fixed;width:280px;height:280px;margin-left:-140px;margin-top:-140px;pointer-events:auto;animation:wheelPop .16s cubic-bezier(.16,1,.3,1)}
+.radial-wheel[hidden]{display:none}
+@keyframes wheelPop{0%{transform:scale(.68);opacity:0}100%{transform:scale(1);opacity:1}}
+.radial-center{position:absolute;left:50%;top:50%;width:68px;height:68px;margin-left:-34px;margin-top:-34px;border-radius:50%;background:var(--bar);border:2px solid var(--path);box-shadow:0 8px 28px rgba(0,0,0,.45);display:flex;flex-direction:column;align-items:center;justify-content:center;font:600 9.5px/1.15 var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);text-align:center;cursor:pointer;z-index:2}
+.radial-center:hover{border-color:var(--stale);color:var(--stale)}
+.radial-node{position:absolute;width:86px;height:64px;margin-left:-43px;margin-top:-32px;border-radius:14px;background:var(--bar);border:1.5px solid var(--edge);box-shadow:0 10px 26px rgba(0,0,0,.42);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;transition:transform .14s,border-color .14s,background .14s;padding:4px;text-align:center}
+.radial-node:hover{transform:scale(1.12);border-color:var(--path);background:var(--card);z-index:3}
+.radial-node .r-ico{font-size:19px;line-height:1}
+.radial-node .r-lbl{font:600 10.5px/1.1 var(--f-body);color:var(--ink)}
+.radial-ring-svg{position:absolute;inset:0;width:280px;height:280px;pointer-events:none}
+
+/* Card Right-Click Context Action Menu */
+.ctx-menu{position:fixed;min-width:215px;background:var(--bar);border:1.5px solid var(--bar-edge);border-radius:14px;padding:6px;box-shadow:0 20px 50px rgba(0,0,0,.55);z-index:55;display:flex;flex-direction:column;gap:2px;animation:ctxFade .12s ease-out}
+.ctx-menu[hidden]{display:none}
+@keyframes ctxFade{0%{opacity:0;transform:translateY(-4px) scale(.96)}100%{opacity:1;transform:translateY(0) scale(1)}}
+.ctx-header{padding:6px 10px;font:600 10px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--bar-edge);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px}
+.ctx-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;border-radius:9px;border:0;background:transparent;color:var(--ink);font:500 13px/1 var(--f-body);cursor:pointer;text-align:left;width:100%}
+.ctx-item:hover{background:var(--card);color:var(--path)}
+.ctx-item.danger{color:var(--stale)}
+.ctx-item.danger:hover{background:var(--stale-soft)}
+.ctx-item .kbd{font:500 10.5px var(--f-mono);color:var(--muted)}
+.ctx-sep{height:1px;background:var(--bar-edge);margin:4px 2px}
 
 /* Canva-Style Remote Multiplayer Cursors */
 #layerCursors{position:absolute;left:0;top:0;pointer-events:none;z-index:30}
 .remote-cursor{position:absolute;left:0;top:0;pointer-events:none;transition:transform 55ms linear;will-change:transform;z-index:30}
 .rc-svg{width:22px;height:22px;filter:drop-shadow(0 2px 5px rgba(0,0,0,.45))}
 .rc-badge{position:absolute;left:16px;top:16px;padding:3px 9px;border-radius:999px;font:600 11.5px/1.2 var(--f-body);color:#fff;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.35);display:flex;align-items:center;gap:5px}
-.rc-action{font:500 10px var(--f-mono);opacity:.9}
 
 /* Remote peer card selection ring */
 .peer-editing-tag{position:absolute;top:-22px;left:10px;padding:2px 8px;border-radius:6px;font:600 10px var(--f-mono);color:#fff;pointer-events:none;white-space:nowrap;z-index:8;box-shadow:0 2px 6px rgba(0,0,0,.3)}
 
 /* Right-hand Inspector Drawer */
-.inspector{width:350px;max-width:92vw;background:var(--bar);border-left:1px solid var(--bar-edge);display:flex;flex-direction:column;z-index:14;box-shadow:-12px 0 32px -16px var(--shadow)}
+.inspector{width:365px;max-width:92vw;background:var(--bar);border-left:1px solid var(--bar-edge);display:flex;flex-direction:column;z-index:14;box-shadow:-12px 0 32px -16px var(--shadow)}
 .inspector[hidden]{display:none}
 .insp-head{padding:14px 16px;border-bottom:1px solid var(--bar-edge);display:flex;align-items:center;justify-content:space-between;gap:10px}
 .insp-head h3{font-family:var(--f-display);font-weight:750;font-size:17px;margin:0}
@@ -250,12 +303,16 @@ button,input,select,textarea{font-family:inherit}
 .field{display:flex;flex-direction:column;gap:5px}
 .field label{font:600 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .field input,.field textarea,.field select{width:100%;box-sizing:border-box;font:400 13.5px/1.4 var(--f-body);color:var(--ink);background:var(--card);border:1px solid var(--edge);border-radius:8px;padding:8px 10px}
-.field textarea{resize:vertical;min-height:76px}
+.field textarea{resize:vertical;min-height:70px}
 .row-2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .tag-editor-list{display:flex;flex-direction:column;gap:8px}
 .tag-edit-item{background:var(--card);border:1px solid var(--edge);border-radius:8px;padding:8px;display:flex;flex-direction:column;gap:6px}
 .tag-edit-top{display:flex;justify-content:space-between;align-items:center;gap:6px}
 .insp-foot{padding:12px 16px;border-top:1px solid var(--bar-edge);display:flex;gap:8px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+
+/* Photo drop/upload box inside Inspector */
+.photo-upload-box{border:1.5px dashed var(--edge);border-radius:10px;padding:10px;background:var(--card);display:flex;flex-direction:column;gap:8px;align-items:center;text-align:center}
+.photo-preview-img{max-width:100%;max-height:130px;border-radius:7px;object-fit:cover}
 
 /* floating HUD controls */
 .hud{position:absolute;right:calc(env(safe-area-inset-right,0px) + 14px);bottom:calc(env(safe-area-inset-bottom,0px) + 14px);display:flex;gap:4px;align-items:center;background:var(--bar);border:1px solid var(--bar-edge);border-radius:12px;padding:5px;z-index:6;box-shadow:0 10px 24px -16px var(--shadow)}
@@ -286,24 +343,31 @@ button,input,select,textarea{font-family:inherit}
 </head>
 <body>
 
+<!-- Hidden Global Photo Upload Input (Used by Radial Wheel, Context Menu & Inspector) -->
+<input type="file" id="globalPhotoInput" accept="image/*" hidden />
+
 <div class="bar" role="toolbar" aria-label="Govi Thena Story Board Studio Controls">
   <div class="brand">
     <b>Govi Thena</b>
-    <span>Live Co-Op Board</span>
+    <span>Cutscene &amp; Story Studio</span>
     <a href="/" class="chip" style="margin-left:4px;text-decoration:none;font-size:11px;padding:5px 9px" title="Switch to CrimsonThread Detective Board">← CrimsonThread</a>
   </div>
 
   <nav class="parts" id="parts" aria-label="Jump to a part"></nav>
 
   <div class="tools">
-    <!-- Story Progress Meter (Built + Planned vs Total Beats) -->
-    <div class="progress" aria-live="polite" title="Story implementation progress across all parts">
+    <!-- Story Progress Meter -->
+    <div class="progress" aria-live="polite" title="Story & Cutscene implementation progress">
       <span class="meter">
         <i class="m-built" id="meterBuilt" style="width:0%"></i>
         <i class="m-planned" id="meterPlanned" style="width:0%"></i>
       </span>
       <span id="progText">0/0 built</span>
     </div>
+
+    <!-- Undo & Redo Buttons -->
+    <button class="btn" id="undoBtn" type="button" disabled title="Undo (Ctrl+Z)">↶ Undo</button>
+    <button class="btn" id="redoBtn" type="button" disabled title="Redo (Ctrl+Y / Ctrl+Shift+Z)">↷ Redo</button>
 
     <!-- Connected Peer Avatars -->
     <div class="peer-avatars" id="peerAvatars"></div>
@@ -314,11 +378,11 @@ button,input,select,textarea{font-family:inherit}
       <span id="collabBtnLabel">Live Sync</span>
     </button>
 
-    <button class="btn gold" id="addCardBtn" type="button">+ Add card</button>
-    <button class="btn" id="addPartBtn" type="button">+ New part</button>
-    <button class="btn" id="addNote" type="button">+ Sticky note</button>
-    <button class="btn" id="autoLayoutBtn" type="button" title="Tidy & snap all cards back into clean part columns">Tidy layout</button>
-    <button class="btn" id="copyAll" type="button">Export / JSON</button>
+    <button class="btn gold" id="addCardBtn" type="button">+ Card</button>
+    <button class="btn" id="addCutsceneBtn" type="button" style="border-color:var(--cutscene);color:var(--cutscene)">🎬 + Cutscene</button>
+    <button class="btn" id="importPhotoBtn" type="button" style="border-color:var(--asset);color:var(--asset)">🖼 + Photo</button>
+    <button class="btn" id="autoLayoutBtn" type="button" title="Tidy & snap all cards back into clean part columns">Tidy</button>
+    <button class="btn" id="copyAll" type="button">Export</button>
     <button class="btn" id="themeToggle" type="button" title="Switch Light / Dark theme">Theme</button>
   </div>
 </div>
@@ -333,7 +397,7 @@ button,input,select,textarea{font-family:inherit}
       <div class="layer" id="layerNotes"></div>
       <div class="layer" id="layerCursors"></div>
     </div>
-    <div class="hint">Drag any card or part header to move it · Drag from a card’s right gold dot (●) to connect lines · Click any card or wire to edit</div>
+    <div class="hint">Right-click empty space for the Radial Creation Wheel · Right-click any card for quick actions · Delete / Ctrl+Z / Ctrl+Y supported</div>
     <div class="hud">
       <button type="button" id="zoomOut" aria-label="Zoom out">−</button>
       <span class="pct" id="zoomPct">100%</span>
@@ -343,7 +407,7 @@ button,input,select,textarea{font-family:inherit}
   </main>
 
   <!-- Right-hand Inspector Drawer -->
-  <aside class="inspector" id="inspector" hidden aria-label="Card, Wire & Part Inspector">
+  <aside class="inspector" id="inspector" hidden aria-label="Card, Cutscene, Wire & Part Inspector">
     <div class="insp-head">
       <div>
         <div class="sub-k" id="inspKicker">INSPECTOR</div>
@@ -356,6 +420,23 @@ button,input,select,textarea{font-family:inherit}
   </aside>
 </div>
 
+<!-- 1. RIGHT-CLICK RADIAL CREATION WHEEL (On Empty Canvas Space) -->
+<div class="radial-wheel" id="radialWheel" hidden role="menu" aria-label="Quick creation wheel">
+  <svg class="radial-ring-svg" viewBox="0 0 280 280">
+    <circle cx="140" cy="140" r="98" fill="none" stroke="rgba(200,162,80,0.32)" stroke-width="28" stroke-dasharray="6 4" />
+    <circle cx="140" cy="140" r="98" fill="none" stroke="rgba(200,162,80,0.55)" stroke-width="1.5" />
+  </svg>
+  <button type="button" class="radial-center" id="radialCloseBtn" title="Close wheel (Esc)">
+    <span>✕</span>
+    <span>Close</span>
+  </button>
+  <!-- Radial items are positioned in a circle around (140, 140) -->
+  <div id="radialNodesContainer"></div>
+</div>
+
+<!-- 2. RIGHT-CLICK CONTEXT MENU (On Any Existing Card / Wire / Part) -->
+<div class="ctx-menu" id="cardCtxMenu" hidden role="menu" aria-label="Card context actions"></div>
+
 <!-- Live Multiplayer Co-Op Room Modal -->
 <div class="sheet" id="collabSheet" hidden>
   <div class="sheet-box" role="dialog" aria-modal="true" aria-labelledby="collabTitle">
@@ -366,7 +447,7 @@ button,input,select,textarea{font-family:inherit}
       </div>
       <button class="btn" id="collabClose" type="button">Close</button>
     </div>
-    <p>Enter your name and a shared <b>Room Code</b>. When you and your friend join the same Room Code (or open the invite link), you will see each other's <b>live mouse pointers</b>, move cards together, draw connection lines, and create parts in real time.</p>
+    <p>Enter your name and a shared <b>Room Code</b>. When you and your friend join the same Room Code (or open the invite link), you will see each other's <b>live mouse pointers</b>, plan cutscenes, upload reference photos, and move cards in real time.</p>
 
     <div class="collab-grid">
       <div class="collab-card">
@@ -390,7 +471,7 @@ button,input,select,textarea{font-family:inherit}
       <div class="collab-card">
         <div class="field">
           <label>Shared Room Code</label>
-          <input type="text" id="roomCodeInput" placeholder="e.g. govi-thena-team" />
+          <input type="text" id="roomCodeInput" placeholder="e.g. govi-thena-live" />
         </div>
         <div style="display:flex;gap:8px;margin-top:auto">
           <button class="btn primary" id="joinRoomBtn" type="button" style="flex:1;justify-content:center">Connect to Room</button>
@@ -419,13 +500,13 @@ button,input,select,textarea{font-family:inherit}
 <div class="sheet" id="sheet" hidden>
   <div class="sheet-box" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-      <h2 id="sheetTitle">Story Outline &amp; JSON Backup</h2>
+      <h2 id="sheetTitle">Story Outline, Cutscenes &amp; JSON Backup</h2>
       <div style="display:flex;gap:6px">
         <button class="btn" id="tabFullScriptBtn" type="button">Markdown Outline</button>
         <button class="btn" id="tabJsonBtn" type="button">JSON Board State</button>
       </div>
     </div>
-    <p id="sheetDesc">Complete Markdown outline or full JSON backup of all parts, cards, positions, wires, and sticky notes.</p>
+    <p id="sheetDesc">Complete Markdown production outline (including cutscenes &amp; asset checklists) or full JSON backup.</p>
     <textarea id="sheetText" aria-labelledby="sheetTitle"></textarea>
     <div class="sheet-row">
       <span class="status" id="sheetMsg" role="status"></span>
@@ -442,7 +523,7 @@ button,input,select,textarea{font-family:inherit}
 <script>
 (() => {
 /* ==================================================================
-   1. DEFAULT STORY DATA (NO HOLES, FREE-MOVING CARDS + WIRES)
+   1. DEFAULT STORY DATA (WITH CUTSCENE & ASSET SUPPORT)
    ================================================================== */
 const DEFAULT_STORY_ZONES = [
   { id:'cast', kind:'cast', tone:'cast', chip:"Who's who", era:'Before you start', title:"Who's who",
@@ -461,74 +542,86 @@ const DEFAULT_STORY_ZONES = [
     sub:'Before any people lived here.', mood:'deep time · stone · silence', swatches:['#4a4e57','#8b8577','#1b2a3a'],
     gapBefore:'The story starts here',
     beats:[
-      { id:'a1', title:'It comes on a mission', text:'A ship comes to this place on a mission. It doesn’t crash.', status:'planned', tags:[] },
-      { id:'a2', title:'It’s left in the ground', text:'The ship stays buried under the place that will one day be the village. Its entrance is at the bottom of what will be the wewa.', status:'planned', tags:[] },
-      { id:'a3', title:'Still brand new', text:'It’s never used. It still has all its fuel, so one day they’ll come back for it.', status:'planned', tags:[] },
+      { id:'a1', cardType:'story', title:'It comes on a mission', text:'A ship comes to this place on a mission. It doesn’t crash.', status:'planned', tags:[] },
+      { id:'a2', cardType:'story', title:'It’s left in the ground', text:'The ship stays buried under the place that will one day be the village. Its entrance is at the bottom of what will be the wewa.', status:'planned', tags:[] },
+      { id:'a3', cardType:'story', title:'Still brand new', text:'It’s never used. It still has all its fuel, so one day they’ll come back for it.', status:'planned', tags:[] },
     ]},
   { id:'night', kind:'timeline', tone:'night', chip:'1935', era:'1935', title:'The night',
     sub:'Tata and his friend, alone in the jungle.', mood:'thunder · lantern · blue light', swatches:['#10163a','#f2b44a','#3d7bff'],
     gapBefore:'Thousands of years pass',
     beats:[
-      { id:'b1', title:'A small ship lands', text:'A small alien ship comes down near the village. An alien jumps out.', status:'planned', tags:[] },
-      { id:'b2', title:'The friend shoots', text:'Tata and his friend see it. The friend shoots it by mistake, and it dies.', status:'planned', tags:[] },
-      { id:'b3', title:'They hide the body', text:'They panic and hide it.', status:'planned', tags:[] },
-      { id:'b4', title:'Into the jungle', text:'That night they carry the body into the jungle to bury it.', status:'planned', tags:[] },
-      { id:'b5', title:'The blue light', text:'Another ship comes. Not the big mothership, an ordinary one. This is the blue light.', status:'built',
+      { id:'b1', cardType:'story', title:'A small ship lands', text:'A small alien ship comes down near the village. An alien jumps out.', status:'planned', tags:[] },
+      { id:'b2', cardType:'story', title:'The friend shoots', text:'Tata and his friend see it. The friend shoots it by mistake, and it dies.', status:'planned', tags:[] },
+      { id:'b3', cardType:'story', title:'They hide the body', text:'They panic and hide it.', status:'planned', tags:[] },
+      { id:'b4', cardType:'story', title:'Into the jungle', text:'That night they carry the body into the jungle to bury it.', status:'planned', tags:[] },
+      { id:'b5', cardType:'cutscene', title:'The blue light', text:'Another ship comes. Not the big mothership, an ordinary one. This is the blue light.', status:'built',
+        camera:'Low angle through jungle canopy', audio:'Deep resonant hum + thunder', duration:'14s',
+        assets:[{name:'Blue ship volumetric light rig', done:true},{name:'Jungle rain particle VFX', done:true}],
         tags:[{k:'built', t:'The opening shows the blue light.'}] },
-      { id:'b6', title:'Bullets bounce off', text:'They shoot at it and the bullets bounce off. They hide in a cave.', status:'planned', tags:[] },
-      { id:'b7', title:'Tata runs home for his gun', text:'A gun is the only weapon they trust. He runs to the village, takes the gun and the lantern, and heads back.', status:'built',
+      { id:'b6', cardType:'story', title:'Bullets bounce off', text:'They shoot at it and the bullets bounce off. They hide in a cave.', status:'planned', tags:[] },
+      { id:'b7', cardType:'cutscene', title:'Tata runs home for his gun', text:'A gun is the only weapon they trust. He runs to the village, takes the gun and the lantern, and heads back.', status:'built',
+        camera:'Tracking shot behind Tata with swinging lantern', audio:'Heavy breathing + rain on thatch', duration:'22s',
+        assets:[{name:'Tata 3D/Sprite run cycle', done:true},{name:'Brass lantern point light', done:true},{name:'1935 rifle prop', done:true}],
         tags:[{k:'built', t:'This is the opening scene.'}] },
-      { id:'b8', title:'The cave', text:'His friend lies dead. The aliens take Tata. They kill only the one who killed.', status:'built',
+      { id:'b8', cardType:'cutscene', title:'The cave', text:'His friend lies dead. The aliens take Tata. They kill only the one who killed.', status:'built',
+        camera:'Slow push-in to cave mouth, white-blue overexposure fade', audio:'High-pitched pulse → sudden silence', duration:'18s',
+        assets:[{name:'Cave entrance rock megascan', done:false},{name:'Screen-fill blue flash shader', done:true}],
         tags:[{k:'built', t:'The opening ends as the light fills the screen. The cave isn’t shown.'}] },
     ]},
   { id:'exile', kind:'timeline', tone:'dusk', chip:'Exile', era:'The days after', title:'The exile',
     sub:'The village decides what happened.', mood:'whispers · shut doors · the long walk', swatches:['#8a6e58','#c9b79c','#5a5f66'],
     gapBefore:'Days later',
     beats:[
-      { id:'c1', title:'The body is found', text:'The village finds the friend’s body. Tata is gone.', status:'planned', tags:[] },
-      { id:'c2', title:'Tata gets the blame', text:'They decide Tata killed his friend and ran away.', status:'planned',
+      { id:'c1', cardType:'story', title:'The body is found', text:'The village finds the friend’s body. Tata is gone.', status:'planned', tags:[] },
+      { id:'c2', cardType:'story', title:'Tata gets the blame', text:'They decide Tata killed his friend and ran away.', status:'planned',
         tags:[{k:'stale', t:'Baas calls it a curse ("a light in the sky, a man gone"), not a murder.'}] },
-      { id:'c3', title:'“You are not welcome”', text:'The village throws the family out.', status:'planned', tags:[] },
-      { id:'c4', title:'The farm past the jungle', text:'Putha, Amma and Seeya start again on their own land, away from the village.', status:'built',
+      { id:'c3', cardType:'story', title:'“You are not welcome”', text:'The village throws the family out.', status:'planned', tags:[] },
+      { id:'c4', cardType:'story', title:'The farm past the jungle', text:'Putha, Amma and Seeya start again on their own land, away from the village.', status:'built',
         tags:[{k:'built', t:'The farm, the field and the house.'}] },
     ]},
   { id:'farm', kind:'timeline', tone:'day', chip:'The farm', era:'3 months later', title:'The farm',
     sub:'The game you play. Cozy days, scary nights.', mood:'mud · sun · goyam kavi', swatches:['#6f9a3c','#c7a15a','#e9dfb8'],
     gapBefore:'3 months pass',
     beats:[
-      { id:'d1', title:'Putha wakes up', text:'The night of 1935 comes back as a nightmare. He wakes in the farm house. Nobody is home.', status:'built',
+      { id:'d1', cardType:'cutscene', title:'Putha wakes up', text:'The night of 1935 comes back as a nightmare. He wakes in the farm house. Nobody is home.', status:'built',
+        camera:'Close-up on Putha waking on woven mat → pan to sunny doorway', audio:'Morning birds + distant koyal', duration:'12s',
+        assets:[{name:'Farmhouse interior room', done:true},{name:'Verandah morning lighting', done:true}],
         tags:[{k:'built', t:'The end of the opening.'}] },
-      { id:'d2', title:'Waking the field', text:'Flood, churn, level, sow. Seeya teaches him, and Kammala Baas makes the tools.', status:'built',
+      { id:'d2', cardType:'story', title:'Waking the field', text:'Flood, churn, level, sow. Seeya teaches him, and Kammala Baas makes the tools.', status:'built',
         tags:[{k:'built', t:'The farming and the upgrades.'}] },
-      { id:'d3', title:'The village keeps away', text:'Only Kammala Baas still deals with the family.', status:'built',
+      { id:'d3', cardType:'story', title:'The village keeps away', text:'Only Kammala Baas still deals with the family.', status:'built',
         tags:[{k:'built', t:'Baas: "The village says I should not deal with your family."'}] },
-      { id:'d4', title:'Seeya knows something', text:'He isn’t saying what. Finding out is part of the game.', status:'planned',
+      { id:'d4', cardType:'story', title:'Seeya knows something', text:'He isn’t saying what. Finding out is part of the game.', status:'planned',
         tags:[{k:'stale', t:'His story still says a violet light and the udella.'}] },
     ]},
   { id:'fields', kind:'timeline', tone:'dusk', chip:'The fields die', era:'Later', title:'The fields die',
     sub:'The aliens’ first try to empty the village.', mood:'dry stalks · crop circles · signs at night', swatches:['#b29a5d','#5b4a3a','#3d7bff'],
     beats:[
-      { id:'e1', title:'The village crops fail', text:'The aliens make every village field impossible to harvest.', status:'planned',
+      { id:'e1', cardType:'story', title:'The village crops fail', text:'The aliens make every village field impossible to harvest.', status:'planned',
         tags:[{k:'planned', t:'Crop circles, then a disease.'}] },
-      { id:'e2', title:'Only our land grows', text:'The family’s field, out past the jungle, still grows.', status:'planned', tags:[] },
-      { id:'e3', title:'The village comes to us', text:'They don’t leave. They walk to the land of the family they threw out, harvest it and carry the food home.', status:'planned', tags:[] },
-      { id:'e4', title:'Field leader', text:'The king asks Putha his secret. "It’s the land." He makes Putha field leader, and every village helps grow the field.', status:'planned',
+      { id:'e2', cardType:'story', title:'Only our land grows', text:'The family’s field, out past the jungle, still grows.', status:'planned', tags:[] },
+      { id:'e3', cardType:'story', title:'The village comes to us', text:'They don’t leave. They walk to the land of the family they threw out, harvest it and carry the food home.', status:'planned', tags:[] },
+      { id:'e4', cardType:'story', title:'Field leader', text:'The king asks Putha his secret. "It’s the land." He makes Putha field leader, and every village helps grow the field.', status:'planned',
         tags:[{k:'planned', t:'The last upgrade level.'}] },
-      { id:'e5', title:'The signs', text:'The aliens are provoked. They start sending signs to Putha.', status:'planned', tags:[] },
+      { id:'e5', cardType:'story', title:'The signs', text:'The aliens are provoked. They start sending signs to Putha.', status:'planned', tags:[] },
     ]},
   { id:'deal', kind:'timeline', tone:'night', chip:'The deal', era:'The end', title:'The deal',
     sub:'Putha gets his father back.', mood:'dust · a father home · the ship leaves', swatches:['#6b6257','#f2b44a','#9fc0ff'],
     beats:[
-      { id:'f1', title:'Putha sees the danger', text:'The signs convince him the village can’t stay.', status:'planned', tags:[] },
-      { id:'f2', title:'The deal', text:'The aliens’ offer: do this, and we give you your father back.', status:'planned', tags:[] },
-      { id:'f3', title:'The trick', text:'Putha gets every villager out of the village.', status:'planned', tags:[] },
-      { id:'f4', title:'Tata comes home', text:'Putha gets his father back.', status:'planned', tags:[] },
-      { id:'f5', title:'The ship rises', text:'The ancient ship comes up from under the village. The village crumbles, and the ship leaves to carry on its mission.', status:'planned', tags:[] },
+      { id:'f1', cardType:'story', title:'Putha sees the danger', text:'The signs convince him the village can’t stay.', status:'planned', tags:[] },
+      { id:'f2', cardType:'story', title:'The deal', text:'The aliens’ offer: do this, and we give you your father back.', status:'planned', tags:[] },
+      { id:'f3', cardType:'story', title:'The trick', text:'Putha gets every villager out of the village.', status:'planned', tags:[] },
+      { id:'f4', cardType:'cutscene', title:'Tata comes home', text:'Putha gets his father back.', status:'planned',
+        camera:'Wide silhouette at wewa bund at dusk', audio:'Soft flute theme + footsteps in mud', duration:'25s',
+        assets:[{name:'Tata reunion animation', done:false}], tags:[] },
+      { id:'f5', cardType:'cutscene', title:'The ship rises', text:'The ancient ship comes up from under the village. The village crumbles, and the ship leaves to carry on its mission.', status:'planned',
+        camera:'Extreme wide shot from high ground overlooking wewa & village', audio:'Earthquake rumble + ancient monolith chord', duration:'40s',
+        assets:[{name:'Ancient ship 3D model', done:false},{name:'Wewa water drain & crumble destruction sim', done:false}], tags:[] },
     ]},
 ];
 
 const TAG = { built:'In the game', planned:'Planned', stale:'Game says otherwise' };
-const CW = 272, GX = 64, PAD = 56, ZGAP = 180, CAST_COLS = 4, CAST_GX = 26;
+const CW = 280, GX = 64, PAD = 56, ZGAP = 180, CAST_COLS = 4, CAST_GX = 26;
 const LS_BOARD = 'gt-collab-board-v3';
 const LS_THEME = 'gt-story-theme-v1';
 const LS_USER  = 'gt-collab-user-v1';
@@ -536,7 +629,6 @@ const LS_USER  = 'gt-collab-user-v1';
 const lsGet = (k) => { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (_) { return null; } };
 const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
 
-/* Build initial positioned board state (zones, free-positioned cards, wires, notes) */
 function createInitialStateFromZones(rawZones) {
   const zonesData = JSON.parse(JSON.stringify(rawZones));
   const connections = [];
@@ -553,19 +645,20 @@ function createInitialStateFromZones(rawZones) {
     z.x = xCursor;
     z.y = 0;
     z.w = innerW + PAD * 2;
-    z.h = isCast ? 720 : 680;
+    z.h = isCast ? 740 : 720;
 
     if (isCast) {
       items.forEach((c, idx) => {
         const r = Math.floor(idx / CAST_COLS);
         const col = idx % CAST_COLS;
         c.x = z.x + PAD + col * (CW + CAST_GX);
-        c.y = topY + r * 205;
+        c.y = topY + r * 210;
       });
     } else {
       items.forEach((b, idx) => {
         b.x = z.x + PAD + idx * (CW + GX);
         b.y = topY;
+        if (!b.cardType) b.cardType = 'story';
         if (!b.status) {
           const hasBuilt = (b.tags || []).some(t => t.k === 'built');
           b.status = hasBuilt ? 'built' : 'planned';
@@ -575,7 +668,7 @@ function createInitialStateFromZones(rawZones) {
             id: 'w_' + prevBeatId + '_' + b.id,
             from: prevBeatId,
             to: b.id,
-            color: 'gold',
+            color: b.cardType === 'cutscene' ? 'violet' : 'gold',
             label: idx === 0 && z.gapBefore ? z.gapBefore : ''
           });
         }
@@ -599,13 +692,61 @@ if (!BOARD || !Array.isArray(BOARD.zones) || !Array.isArray(BOARD.connections)) 
 }
 
 /* ==================================================================
-   2. DOM HELPERS & VIEWPORT STATE
+   2. UNDO / REDO HISTORY STACK (Ctrl+Z, Ctrl+Y, Ctrl+Shift+Z)
+   ================================================================== */
+const undoStack = [];
+const redoStack = [];
+const MAX_HISTORY = 50;
+
+function pushHistorySnapshot() {
+  const snap = JSON.stringify(BOARD);
+  if (undoStack.length && undoStack[undoStack.length - 1] === snap) return;
+  undoStack.push(snap);
+  if (undoStack.length > MAX_HISTORY) undoStack.shift();
+  redoStack.length = 0;
+  updateHistoryButtons();
+}
+
+function performUndo() {
+  if (!undoStack.length) return;
+  redoStack.push(JSON.stringify(BOARD));
+  const prevSnap = undoStack.pop();
+  BOARD = JSON.parse(prevSnap);
+  saveBoard(true, false);
+  rebuildBoard();
+  if (selectedItem) openInspector(selectedItem);
+  updateHistoryButtons();
+}
+
+function performRedo() {
+  if (!redoStack.length) return;
+  undoStack.push(JSON.stringify(BOARD));
+  const nextSnap = redoStack.pop();
+  BOARD = JSON.parse(nextSnap);
+  saveBoard(true, false);
+  rebuildBoard();
+  if (selectedItem) openInspector(selectedItem);
+  updateHistoryButtons();
+}
+
+function updateHistoryButtons() {
+  const uBtn = document.querySelector('#undoBtn');
+  const rBtn = document.querySelector('#redoBtn');
+  if (uBtn) uBtn.disabled = undoStack.length === 0;
+  if (rBtn) rBtn.disabled = redoStack.length === 0;
+}
+
+/* ==================================================================
+   3. DOM HELPERS & VIEWPORT STATE
    ================================================================== */
 const $ = (s) => document.querySelector(s);
 const world = $('#world'), vp = $('#viewport'), wires = $('#wires');
 const layerZones = $('#layerZones'), layerCards = $('#layerCards'), layerNotes = $('#layerNotes'), layerCursors = $('#layerCursors');
 const progText = $('#progText'), meterBuilt = $('#meterBuilt'), meterPlanned = $('#meterPlanned');
 const inspectorEl = $('#inspector'), inspKicker = $('#inspKicker'), inspTitle = $('#inspTitle'), inspBody = $('#inspBody'), inspFoot = $('#inspFoot');
+const radialWheel = $('#radialWheel'), radialNodesContainer = $('#radialNodesContainer');
+const cardCtxMenu = $('#cardCtxMenu');
+const globalPhotoInput = $('#globalPhotoInput');
 
 function h(tag, attrs = {}, ...kids) {
   const e = document.createElement(tag);
@@ -624,10 +765,13 @@ function autosize(ta) { if (!ta) return; ta.style.height = 'auto'; ta.style.heig
 
 let tx = 0, ty = 0, z = 0.78;
 const MINZ = 0.08, MAXZ = 2.2;
-let selectedItem = null; // { type: 'beat' | 'person' | 'zone' | 'wire', zoneId?, itemId }
-const cardElements = new Map(); // cardId -> HTMLElement
-const zoneRecords = new Map();  // zoneId -> { bg, head, data }
+let selectedItem = null; // { type: 'beat' | 'person' | 'zone' | 'wire' | 'note', zoneId?, itemId }
+const cardElements = new Map();
+const zoneRecords = new Map();
 let chips = [];
+
+// Pending photo upload callback: either attaches to an existing card or spawns a new photo/asset card at (wx, wy)
+let pendingPhotoAction = null;
 
 // Theme setup
 const savedTheme = localStorage.getItem(LS_THEME);
@@ -640,10 +784,61 @@ $('#themeToggle').addEventListener('click', () => {
   localStorage.setItem(LS_THEME, next);
 });
 
+$('#undoBtn').addEventListener('click', performUndo);
+$('#redoBtn').addEventListener('click', performRedo);
+
 /* ==================================================================
-   3. SAVE & PROGRESS TRACKING
+   4. IMAGE COMPRESSION HELPER (SO PHOTOS SYNC INSTANTLY OVER WEBRTC)
    ================================================================== */
-function saveBoard(broadcast = true) {
+function processImageFileToDataUrl(file, maxWidth = 720, quality = 0.78) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const img = new Image();
+      img.onload = () => {
+        const scale = Math.min(1, maxWidth / Math.max(1, img.width));
+        const w = Math.round(img.width * scale);
+        const h = Math.round(img.height * scale);
+        const canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = reject;
+      img.src = ev.target.result;
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+globalPhotoInput.addEventListener('change', async (e) => {
+  const file = e.target.files && e.target.files[0];
+  if (!file) return;
+  try {
+    const dataUrl = await processImageFileToDataUrl(file);
+    if (pendingPhotoAction) {
+      await pendingPhotoAction(dataUrl, file.name);
+      pendingPhotoAction = null;
+    }
+  } catch (err) {
+    alert('Could not load image file.');
+  }
+  e.target.value = '';
+});
+
+function promptPhotoUpload(callback) {
+  pendingPhotoAction = callback;
+  globalPhotoInput.click();
+}
+
+/* ==================================================================
+   5. SAVE & PROGRESS TRACKING
+   ================================================================== */
+function saveBoard(broadcast = true, recordHistory = false) {
+  if (recordHistory) pushHistorySnapshot();
   lsSet(LS_BOARD, BOARD);
   updateProgress();
   if (broadcast) broadcastBoardState();
@@ -681,7 +876,7 @@ function updateProgress() {
 }
 
 /* ==================================================================
-   4. RENDER ZONES (PARTS), CARDS, STICKY NOTES & CONNECTION WIRES
+   6. RENDER ZONES (PARTS), CARDS (STORY / CUTSCENE / ASSET), NOTES & WIRES
    ================================================================== */
 function rebuildBoard() {
   layerZones.replaceChildren();
@@ -701,27 +896,27 @@ function rebuildBoard() {
       left: (zo.x || 0) + 'px',
       top: (zo.y || 0) + 'px',
       width: (zo.w || 900) + 'px',
-      height: (zo.h || 680) + 'px'
+      height: (zo.h || 700) + 'px'
     });
 
-    // Resize handle at bottom-right of each Part zone
     const resizeHandle = h('div', { class: 'zone-resize', title: 'Drag to resize this Part container', text: '↘' });
     makeZoneResizable(resizeHandle, zo, bg);
     bg.append(resizeHandle);
     layerZones.append(bg);
 
-    // Zone Header (Draggable to move the entire Part + its cards!)
-    const titleEl = h('h2', { text: zo.title, title: 'Click to edit Part · Drag header to move Part' });
+    const titleEl = h('h2', { text: zo.title, title: 'Click to edit Part · Right-click for options · Drag to move Part' });
     const actionsBar = h('div', { class: 'zactions' });
 
     if (zo.kind === 'cast') {
-      const addCharBtn = h('button', { class: 'zbtn', type: 'button', text: '+ Add character' });
+      const addCharBtn = h('button', { class: 'zbtn', type: 'button', text: '+ Character' });
       addCharBtn.addEventListener('click', (e) => { e.stopPropagation(); addCharacterCard(zo.id); });
       actionsBar.append(addCharBtn);
     } else {
-      const addBeatBtn = h('button', { class: 'zbtn', type: 'button', text: '+ Add card to part' });
-      addBeatBtn.addEventListener('click', (e) => { e.stopPropagation(); addBeatCard(zo.id); });
-      actionsBar.append(addBeatBtn);
+      const addBeatBtn = h('button', { class: 'zbtn', type: 'button', text: '+ Story card' });
+      addBeatBtn.addEventListener('click', (e) => { e.stopPropagation(); addBeatCard(zo.id, null, { cardType: 'story' }); });
+      const addCsBtn = h('button', { class: 'zbtn', type: 'button', style: 'color:var(--cutscene)', text: '🎬 + Cutscene' });
+      addCsBtn.addEventListener('click', (e) => { e.stopPropagation(); addBeatCard(zo.id, null, { cardType: 'cutscene' }); });
+      actionsBar.append(addBeatBtn, addCsBtn);
     }
     const editZoneBtn = h('button', { class: 'zbtn', type: 'button', text: '⚙ Edit part' });
     editZoneBtn.addEventListener('click', (e) => {
@@ -730,7 +925,7 @@ function rebuildBoard() {
     });
     actionsBar.append(editZoneBtn);
 
-    const head = h('header', { class: 'zhead tone-' + (zo.tone || 'dusk') },
+    const head = h('header', { class: 'zhead tone-' + (zo.tone || 'dusk'), 'data-zone-head': zo.id },
       h('div', { class: 'era' },
         h('span', { text: zo.era || 'Chapter' }),
         h('span', { class: 'era-drag-badge', text: '⠿ Drag Part' })
@@ -757,7 +952,6 @@ function rebuildBoard() {
 
     zoneRecords.set(zo.id, { bg, head, data: zo });
 
-    // Build Cards inside this Part
     if (zo.kind === 'cast') {
       for (const c of (zo.cards || [])) {
         const el = c.legend ? buildLegendCard(c, zo) : buildPersonCard(c, zo);
@@ -773,7 +967,6 @@ function rebuildBoard() {
       }
     }
 
-    // Top bar chip for jumping to this Part
     const chipBtn = h('button', { class: 'chip', type: 'button', text: zo.chip || zo.title });
     chipBtn.addEventListener('click', () => goZone(zIdx));
     $('#parts').append(chipBtn);
@@ -784,7 +977,6 @@ function rebuildBoard() {
   addPartChip.addEventListener('click', () => addNewPart());
   $('#parts').append(addPartChip);
 
-  // Build Sticky Notes
   for (const [nId, nData] of Object.entries(BOARD.notes || {})) {
     if (nData && Number.isFinite(nData.x)) makeNoteElement(nId, nData);
   }
@@ -793,24 +985,25 @@ function rebuildBoard() {
     drawWires();
     updateProgress();
     renderPeerSelectionBadges();
+    updateHistoryButtons();
   });
 }
 
 function buildLegendCard(c, zo) {
   const el = h('article', { class: 'card legend', 'data-card': c.id },
-    h('h3', { text: 'How to co-edit this board' })
+    h('h3', { text: 'Controls & Cutscene Workflow' })
   );
   const ul = h('ul');
   const row = (cls, text) => ul.append(h('li', {}, h('span', { class: 'mk ' + cls }), h('span', { text })));
-  row('line', 'Drag from any card’s right gold dot (●) to another card to connect lines.');
-  row('built', 'In the game: already built (counts toward progress).');
-  row('planned', 'Planned: designed on the board, not built yet.');
-  row('stale', 'Game says otherwise: discrepancy note.');
+  row('line', 'Right-click empty canvas for the Radial Creation Wheel.');
+  row('built', 'Right-click any card to Rename, Attach Photo, Duplicate, or Delete.');
+  row('planned', 'Drag from any card’s right gold dot (●) to connect lines.');
+  row('stale', 'Press Delete to remove selected item · Ctrl+Z / Ctrl+Y to Undo/Redo.');
   el.append(
     ul,
     h('div', {
       class: 'how',
-      text: 'Drag any card to move it freely. Drag a Part title to move the entire Part. Click "Live Sync" in the top bar to edit together with live cursors.'
+      text: 'Drag any card or Part header freely. Import storyboard frames, concept art, and track Cutscene camera/audio & asset checklists.'
     })
   );
   place(el, c.x || 56, c.y || 310);
@@ -821,11 +1014,22 @@ function buildLegendCard(c, zo) {
 function buildPersonCard(c, zo) {
   const isSel = selectedItem && selectedItem.itemId === c.id;
   const tools = h('div', { class: 'card-tools' });
+  const photoB = h('button', { class: 'ctool', type: 'button', title: 'Attach character portrait / photo', text: '🖼' });
   const editB = h('button', { class: 'ctool', type: 'button', title: 'Edit character', text: '✎' });
   const delB = h('button', { class: 'ctool del', type: 'button', title: 'Delete character', text: '×' });
+
+  photoB.addEventListener('click', (e) => {
+    e.stopPropagation();
+    promptPhotoUpload((dataUrl) => {
+      pushHistorySnapshot();
+      c.photo = dataUrl;
+      saveBoard(true);
+      rebuildBoard();
+    });
+  });
   editB.addEventListener('click', (e) => { e.stopPropagation(); openInspector({ type: 'person', zoneId: zo.id, itemId: c.id }); });
   delB.addEventListener('click', (e) => { e.stopPropagation(); deleteCard(zo.id, c.id); });
-  tools.append(editB, delB);
+  tools.append(photoB, editB, delB);
 
   const portIn = h('div', { class: 'port port-in', 'data-port-in': c.id, title: 'Drop connection wire here' });
   const portOut = h('div', { class: 'port port-out', 'data-port-out': c.id, title: 'Drag to connect this character to any card' });
@@ -834,8 +1038,24 @@ function buildPersonCard(c, zo) {
   const el = h('article', { class: 'card person' + (isSel ? ' selected' : ''), 'data-card': c.id },
     tools,
     portIn,
-    portOut,
-    h('h3', { text: c.name || 'Character' }),
+    portOut
+  );
+
+  if (c.photo) {
+    const pWrap = h('div', { class: 'card-photo-wrap' },
+      h('img', { class: 'card-photo', src: c.photo, alt: c.name || 'Character portrait' })
+    );
+    el.append(pWrap);
+  }
+
+  const titleEl = h('h3', { text: c.name || 'Character', title: 'Double-click or right-click to rename' });
+  titleEl.addEventListener('dblclick', (e) => {
+    e.stopPropagation();
+    startInlineRename(el, c, 'name');
+  });
+
+  el.append(
+    titleEl,
     h('div', { class: 'si', text: c.si || '' }),
     h('p', { text: c.text || '' })
   );
@@ -846,15 +1066,27 @@ function buildPersonCard(c, zo) {
 
 function buildBeatCard(b, no, zo) {
   const isSel = selectedItem && selectedItem.itemId === b.id;
+  const cType = b.cardType || 'story';
   const tools = h('div', { class: 'card-tools' });
+  const photoB = h('button', { class: 'ctool', type: 'button', title: 'Import photo / storyboard frame onto this card', text: '🖼' });
   const editB = h('button', { class: 'ctool', type: 'button', title: 'Edit card', text: '✎' });
   const addAfterB = h('button', { class: 'ctool', type: 'button', title: 'Add connected card after this one', text: '+' });
   const delB = h('button', { class: 'ctool del', type: 'button', title: 'Delete card', text: '×' });
 
+  photoB.addEventListener('click', (e) => {
+    e.stopPropagation();
+    promptPhotoUpload((dataUrl, fileName) => {
+      pushHistorySnapshot();
+      b.photo = dataUrl;
+      if (!b.photoCaption) b.photoCaption = fileName.replace(/\.[^.]+$/, '');
+      saveBoard(true);
+      rebuildBoard();
+    });
+  });
   editB.addEventListener('click', (e) => { e.stopPropagation(); openInspector({ type: 'beat', zoneId: zo.id, itemId: b.id }); });
-  addAfterB.addEventListener('click', (e) => { e.stopPropagation(); addBeatCard(zo.id, b.id); });
+  addAfterB.addEventListener('click', (e) => { e.stopPropagation(); addBeatCard(zo.id, b.id, { cardType: cType }); });
   delB.addEventListener('click', (e) => { e.stopPropagation(); deleteCard(zo.id, b.id); });
-  tools.append(editB, addAfterB, delB);
+  tools.append(photoB, editB, addAfterB, delB);
 
   const portIn = h('div', { class: 'port port-in', 'data-port-in': b.id, title: 'Drop connection line here' });
   const portOut = h('div', { class: 'port port-out', 'data-port-out': b.id, title: 'Drag from here to connect to another card' });
@@ -866,18 +1098,77 @@ function buildBeatCard(b, no, zo) {
     text: st === 'built' ? '✓ Built' : st === 'planned' ? 'Planned' : 'Draft'
   });
 
-  const el = h('article', { class: 'card beat' + (isSel ? ' selected' : ''), 'data-card': b.id },
+  const typeBadge = h('span', {
+    class: 'kind-badge ' + cType,
+    text: cType === 'cutscene' ? '🎬 Cutscene' : cType === 'asset' ? '🖼 Asset' : 'Story'
+  });
+
+  const el = h('article', {
+    class: `card beat kind-${cType}` + (isSel ? ' selected' : ''),
+    'data-card': b.id
+  },
     tools,
     portIn,
     portOut,
     h('div', { class: 'kicker' },
       h('span', { class: 'no', text: String(no).padStart(2, '0') }),
-      h('span', { text: zo.era || zo.title }),
+      typeBadge,
       statusBadge
-    ),
-    h('h3', { text: b.title || 'Untitled Beat' }),
-    h('p', { text: b.text || '' })
+    )
   );
+
+  // Attached Photo / Storyboard Frame
+  if (b.photo) {
+    const pWrap = h('div', { class: 'card-photo-wrap' },
+      h('img', { class: 'card-photo', src: b.photo, alt: b.title || 'Storyboard frame' })
+    );
+    if (b.photoCaption) {
+      pWrap.append(h('div', { class: 'card-photo-cap' }, h('span', { text: b.photoCaption })));
+    }
+    el.append(pWrap);
+  }
+
+  const titleEl = h('h3', { text: b.title || 'Untitled Card', title: 'Double-click or right-click to rename' });
+  titleEl.addEventListener('dblclick', (e) => {
+    e.stopPropagation();
+    startInlineRename(el, b, 'title');
+  });
+  el.append(titleEl, h('p', { text: b.text || '' }));
+
+  // Cutscene Camera, Audio & Duration Specs
+  if (cType === 'cutscene' && (b.camera || b.audio || b.duration)) {
+    const specs = h('div', { class: 'cutscene-specs' });
+    if (b.camera) {
+      specs.append(h('div', { class: 'cs-spec', style: 'grid-column:1 / -1' }, h('b', { text: '🎥 Camera / Shot' }), document.createTextNode(b.camera)));
+    }
+    if (b.audio) {
+      specs.append(h('div', { class: 'cs-spec' }, h('b', { text: '🔊 Audio / SFX' }), document.createTextNode(b.audio)));
+    }
+    if (b.duration) {
+      specs.append(h('div', { class: 'cs-spec' }, h('b', { text: '⏱ Duration' }), document.createTextNode(b.duration)));
+    }
+    el.append(specs);
+  }
+
+  // Required Assets Checklist (for Cutscenes or Asset Cards)
+  if (Array.isArray(b.assets) && b.assets.length > 0) {
+    const aList = h('ul', { class: 'asset-checklist' });
+    b.assets.forEach((ast) => {
+      const row = h('li', { class: 'asset-chk' + (ast.done ? ' done' : '') });
+      const cb = h('input', { type: 'checkbox' });
+      cb.checked = !!ast.done;
+      cb.addEventListener('click', (e) => e.stopPropagation());
+      cb.addEventListener('change', () => {
+        pushHistorySnapshot();
+        ast.done = cb.checked;
+        row.classList.toggle('done', ast.done);
+        saveBoard(true);
+      });
+      row.append(cb, h('span', { text: ast.name }));
+      aList.append(row);
+    });
+    el.append(aList);
+  }
 
   if (b.tags && b.tags.length) {
     const ul = h('ul', { class: 'tags' });
@@ -892,15 +1183,311 @@ function buildBeatCard(b, no, zo) {
   return el;
 }
 
+/* Inline Rename on Card Title */
+function startInlineRename(cardEl, cardObj, propName = 'title') {
+  const h3 = cardEl.querySelector('h3');
+  if (!h3) return;
+  const input = h('input', {
+    type: 'text',
+    class: 'inline-rename-input',
+    value: cardObj[propName] || ''
+  });
+  h3.replaceWith(input);
+  input.focus();
+  input.select();
+
+  let committed = false;
+  const commit = () => {
+    if (committed) return;
+    committed = true;
+    const nextVal = input.value.trim() || cardObj[propName] || 'Untitled';
+    if (nextVal !== cardObj[propName]) {
+      pushHistorySnapshot();
+      cardObj[propName] = nextVal;
+      saveBoard(true);
+    }
+    rebuildBoard();
+  };
+  input.addEventListener('blur', commit);
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); commit(); }
+    else if (e.key === 'Escape') { committed = true; rebuildBoard(); }
+  });
+}
+
 /* ==================================================================
-   5. FREE DRAGGING OF CARDS, PARTS (ZONES) & WIRE DRAWING
+   7. RIGHT-CLICK RADIAL WHEEL MENU & CARD CONTEXT MENU
+   ================================================================== */
+let radialWorldTarget = { x: 400, y: 310, zoneId: null };
+
+const RADIAL_OPTIONS = [
+  { id: 'story',    icon: '📄', label: 'Story Card',    angle: -90 },
+  { id: 'cutscene', icon: '🎬', label: 'Cutscene',      angle: -38 },
+  { id: 'photo',    icon: '🖼', label: 'Import Photo',  angle: 14 },
+  { id: 'sticky',   icon: '📝', label: 'Sticky Note',   angle: 66 },
+  { id: 'part',     icon: '🗂', label: 'New Part',      angle: 118 },
+  { id: 'char',     icon: '👤', label: 'Character',     angle: 170 },
+  { id: 'tidy',     icon: '✨', label: 'Tidy Layout',   angle: -142 }
+];
+
+function buildRadialWheelNodes() {
+  radialNodesContainer.replaceChildren();
+  const radius = 98;
+  const cx = 140, cy = 140;
+
+  for (const opt of RADIAL_OPTIONS) {
+    const rad = (opt.angle * Math.PI) / 180;
+    const nx = cx + Math.cos(rad) * radius;
+    const ny = cy + Math.sin(rad) * radius;
+    const btn = h('button', {
+      type: 'button',
+      class: 'radial-node',
+      'data-radial-action': opt.id,
+      style: `left:${Math.round(nx)}px;top:${Math.round(ny)}px`
+    },
+      h('span', { class: 'r-ico', text: opt.icon }),
+      h('span', { class: 'r-lbl', text: opt.label })
+    );
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      executeRadialAction(opt.id);
+      hideMenus();
+    });
+    radialNodesContainer.append(btn);
+  }
+}
+buildRadialWheelNodes();
+
+$('#radialCloseBtn').addEventListener('click', (e) => {
+  e.stopPropagation();
+  hideMenus();
+});
+
+function showRadialWheel(clientX, clientY, worldX, worldY, zoneId) {
+  hideMenus();
+  radialWorldTarget = { x: Math.round(worldX), y: Math.round(worldY), zoneId };
+  const clampedX = clamp(clientX, 150, window.innerWidth - 150);
+  const clampedY = clamp(clientY, 150, window.innerHeight - 150);
+  radialWheel.style.left = clampedX + 'px';
+  radialWheel.style.top = clampedY + 'px';
+  radialWheel.hidden = false;
+}
+
+function executeRadialAction(actionId) {
+  const { x, y, zoneId } = radialWorldTarget;
+  const targetZone = (zoneId && BOARD.zones.find(z => z.id === zoneId && z.kind !== 'cast')) || getZoneAtWorldPoint(x, y) || getActiveTimelineZone();
+
+  if (actionId === 'story') {
+    addBeatCard(targetZone?.id, null, { cardType: 'story', x, y });
+  } else if (actionId === 'cutscene') {
+    addBeatCard(targetZone?.id, null, {
+      cardType: 'cutscene',
+      title: 'New Cutscene Shot',
+      text: 'Plan the cinematic action, camera movement, and key dialogue.',
+      camera: 'Wide establishing shot → slow push-in',
+      audio: 'Ambient wind + score swell',
+      duration: '15s',
+      assets: [{ name: 'Environment / prop asset', done: false }],
+      x,
+      y
+    });
+  } else if (actionId === 'photo') {
+    promptPhotoUpload((dataUrl, fileName) => {
+      const cleanName = fileName.replace(/\.[^.]+$/, '');
+      addBeatCard(targetZone?.id, null, {
+        cardType: 'asset',
+        title: cleanName || 'Concept Art / Photo',
+        text: 'Visual reference & production asset card.',
+        photo: dataUrl,
+        photoCaption: fileName,
+        assets: [{ name: 'Approve final asset in engine', done: false }],
+        x,
+        y
+      });
+    });
+  } else if (actionId === 'sticky') {
+    addStickyNote(x - 110, y - 40);
+  } else if (actionId === 'part') {
+    addNewPart(x, y);
+  } else if (actionId === 'char') {
+    addCharacterCard('cast', x, y);
+  } else if (actionId === 'tidy') {
+    tidyAutoLayout();
+  }
+}
+
+function showCardContextMenu(clientX, clientY, cardId) {
+  hideMenus();
+  const info = findCardById(cardId);
+  if (!info) return;
+  const { card, zone, kind } = info;
+  selectedItem = { type: kind, zoneId: zone.id, itemId: card.id };
+  cardElements.forEach((el, id) => el.classList.toggle('selected', id === card.id));
+
+  cardCtxMenu.replaceChildren();
+  cardCtxMenu.append(h('div', { class: 'ctx-header', text: card.title || card.name || 'Card Options' }));
+
+  const addItem = (label, kbd, onClick, isDanger = false) => {
+    const btn = h('button', { type: 'button', class: 'ctx-item' + (isDanger ? ' danger' : '') },
+      h('span', { text: label }),
+      kbd ? h('span', { class: 'kbd', text: kbd }) : null
+    );
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      hideMenus();
+      onClick();
+    });
+    cardCtxMenu.append(btn);
+  };
+
+  addItem('✎ Rename Title', 'Dbl-Click', () => {
+    const el = cardElements.get(card.id);
+    if (el) startInlineRename(el, card, kind === 'person' ? 'name' : 'title');
+  });
+
+  addItem('⚙ Open in Inspector', 'Enter', () => {
+    openInspector({ type: kind, zoneId: zone.id, itemId: card.id });
+  });
+
+  addItem('🖼 Import / Change Photo', '', () => {
+    promptPhotoUpload((dataUrl, fileName) => {
+      pushHistorySnapshot();
+      card.photo = dataUrl;
+      if (!card.photoCaption) card.photoCaption = fileName;
+      saveBoard(true);
+      rebuildBoard();
+    });
+  });
+
+  if (kind === 'beat') {
+    addItem('🎬 Switch to Cutscene Card', '', () => {
+      pushHistorySnapshot();
+      card.cardType = card.cardType === 'cutscene' ? 'story' : 'cutscene';
+      if (card.cardType === 'cutscene' && !card.camera) {
+        card.camera = 'Tracking camera shot';
+        card.duration = '15s';
+        card.assets = card.assets || [{ name: 'Cutscene asset', done: false }];
+      }
+      saveBoard(true);
+      rebuildBoard();
+    });
+
+    addItem('✓ Toggle Built / Planned', '', () => {
+      pushHistorySnapshot();
+      card.status = card.status === 'built' ? 'planned' : 'built';
+      saveBoard(true);
+      rebuildBoard();
+    });
+
+    addItem('➕ Add Connected Card After', '', () => {
+      addBeatCard(zone.id, card.id, { cardType: card.cardType || 'story' });
+    });
+  }
+
+  addItem('⧉ Duplicate Card', 'Ctrl+D', () => {
+    duplicateCard(zone.id, card.id);
+  });
+
+  cardCtxMenu.append(h('div', { class: 'ctx-sep' }));
+
+  addItem('🗑 Delete Card', 'Del', () => {
+    deleteCard(zone.id, card.id);
+  }, true);
+
+  const clampedX = clamp(clientX, 12, window.innerWidth - 235);
+  const clampedY = clamp(clientY, 12, window.innerHeight - 290);
+  cardCtxMenu.style.left = clampedX + 'px';
+  cardCtxMenu.style.top = clampedY + 'px';
+  cardCtxMenu.hidden = false;
+}
+
+function hideMenus() {
+  radialWheel.hidden = true;
+  cardCtxMenu.hidden = true;
+}
+
+// Global Right-Click (contextmenu) Handler on Canvas
+vp.addEventListener('contextmenu', (e) => {
+  e.preventDefault();
+  const pt = vpPoint(e.clientX, e.clientY);
+  const wx = (pt.x - tx) / z;
+  const wy = (pt.y - ty) / z;
+
+  const cardEl = e.target.closest('.card');
+  if (cardEl && cardEl.dataset.card && cardEl.dataset.card !== 'c-legend') {
+    showCardContextMenu(e.clientX, e.clientY, cardEl.dataset.card);
+    return;
+  }
+
+  const zoneEl = e.target.closest('[data-zone]');
+  const zoneId = zoneEl ? zoneEl.dataset.zone : null;
+  showRadialWheel(e.clientX, e.clientY, wx, wy, zoneId);
+});
+
+window.addEventListener('pointerdown', (e) => {
+  if (!e.target.closest('#radialWheel, #cardCtxMenu')) {
+    hideMenus();
+  }
+});
+
+/* ==================================================================
+   8. KEYBOARD SHORTCUTS: DELETE, CTRL+Z (UNDO), CTRL+Y (REDO), CTRL+D
+   ================================================================== */
+window.addEventListener('keydown', (e) => {
+  const inInput = e.target.closest && e.target.closest('textarea, input, select');
+
+  // Ctrl+Z / Cmd+Z (Undo) and Ctrl+Y / Ctrl+Shift+Z (Redo)
+  if ((e.ctrlKey || e.metaKey) && !inInput) {
+    if (e.key.toLowerCase() === 'z' && !e.shiftKey) {
+      e.preventDefault();
+      performUndo();
+      return;
+    }
+    if (e.key.toLowerCase() === 'y' || (e.key.toLowerCase() === 'z' && e.shiftKey)) {
+      e.preventDefault();
+      performRedo();
+      return;
+    }
+    if (e.key.toLowerCase() === 'd' && selectedItem && (selectedItem.type === 'beat' || selectedItem.type === 'person')) {
+      e.preventDefault();
+      duplicateCard(selectedItem.zoneId, selectedItem.itemId);
+      return;
+    }
+  }
+
+  if (inInput) return;
+
+  // Delete or Backspace deletes the selected card, connection line, or part
+  if ((e.key === 'Delete' || e.key === 'Backspace') && selectedItem) {
+    e.preventDefault();
+    if (selectedItem.type === 'beat' || selectedItem.type === 'person') {
+      deleteCard(selectedItem.zoneId, selectedItem.itemId);
+    } else if (selectedItem.type === 'wire') {
+      pushHistorySnapshot();
+      BOARD.connections = BOARD.connections.filter(w => w.id !== selectedItem.itemId);
+      closeInspector();
+      saveBoard(true);
+      drawWires();
+    }
+    return;
+  }
+
+  if (e.key === 'Escape') {
+    hideMenus();
+    closeInspector();
+  }
+});
+
+/* ==================================================================
+   9. FREE DRAGGING OF CARDS, PARTS (ZONES) & WIRE DRAWING
    ================================================================== */
 function makeCardDraggable(el, cardObj, zoneObj, inspectType = null) {
   let drag = null;
   el.addEventListener('pointerdown', (e) => {
-    if (e.target.closest('button, .port, input, textarea, select')) return;
+    if (e.target.closest('button, .port, input, textarea, select, .asset-chk')) return;
     if (e.button !== 0 && e.pointerType === 'mouse') return;
     e.stopPropagation();
+    hideMenus();
     el.setPointerCapture(e.pointerId);
     drag = {
       id: e.pointerId,
@@ -908,7 +1495,8 @@ function makeCardDraggable(el, cardObj, zoneObj, inspectType = null) {
       sy: e.clientY,
       ox: cardObj.x || 0,
       oy: cardObj.y || 0,
-      moved: false
+      moved: false,
+      snapshotTaken: false
     };
   });
 
@@ -918,6 +1506,10 @@ function makeCardDraggable(el, cardObj, zoneObj, inspectType = null) {
     const dy = (e.clientY - drag.sy) / z;
     if (!drag.moved && Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) > 4) {
       drag.moved = true;
+      if (!drag.snapshotTaken) {
+        pushHistorySnapshot();
+        drag.snapshotTaken = true;
+      }
       el.classList.add('dragging');
     }
     if (drag.moved) {
@@ -935,7 +1527,6 @@ function makeCardDraggable(el, cardObj, zoneObj, inspectType = null) {
     drag = null;
     el.classList.remove('dragging');
     if (wasMoved) {
-      // Check if card was dragged into a different timeline Part zone
       reassignCardZoneIfNeeded(cardObj, zoneObj);
       saveBoard(true);
     } else if (inspectType) {
@@ -946,21 +1537,27 @@ function makeCardDraggable(el, cardObj, zoneObj, inspectType = null) {
   el.addEventListener('pointercancel', endDrag);
 }
 
+function getZoneAtWorldPoint(wx, wy) {
+  for (const zo of BOARD.zones) {
+    if (zo.kind === 'cast') continue;
+    if (wx >= (zo.x || 0) && wx <= (zo.x || 0) + (zo.w || 900) &&
+        wy >= (zo.y || 0) && wy <= (zo.y || 0) + (zo.h || 700)) {
+      return zo;
+    }
+  }
+  return null;
+}
+
 function reassignCardZoneIfNeeded(cardObj, currentZone) {
   if (currentZone.kind === 'cast') return;
   const cx = (cardObj.x || 0) + CW / 2;
   const cy = (cardObj.y || 0) + 80;
-  for (const zo of BOARD.zones) {
-    if (zo.kind === 'cast') continue;
-    if (cx >= zo.x && cx <= zo.x + zo.w && cy >= zo.y && cy <= zo.y + zo.h) {
-      if (zo.id !== currentZone.id) {
-        currentZone.beats = (currentZone.beats || []).filter(b => b.id !== cardObj.id);
-        zo.beats = zo.beats || [];
-        zo.beats.push(cardObj);
-        rebuildBoard();
-      }
-      return;
-    }
+  const hitZone = getZoneAtWorldPoint(cx, cy);
+  if (hitZone && hitZone.id !== currentZone.id) {
+    currentZone.beats = (currentZone.beats || []).filter(b => b.id !== cardObj.id);
+    hitZone.beats = hitZone.beats || [];
+    hitZone.beats.push(cardObj);
+    rebuildBoard();
   }
 }
 
@@ -970,6 +1567,7 @@ function makeZoneDraggable(headEl, zo) {
     if (e.target.closest('button, input, textarea, select')) return;
     if (e.button !== 0 && e.pointerType === 'mouse') return;
     e.stopPropagation();
+    hideMenus();
     headEl.setPointerCapture(e.pointerId);
     const items = zo.kind === 'cast' ? (zo.cards || []) : (zo.beats || []);
     drag = {
@@ -979,7 +1577,8 @@ function makeZoneDraggable(headEl, zo) {
       ox: zo.x || 0,
       oy: zo.y || 0,
       cardStarts: items.map(item => ({ item, x: item.x || 0, y: item.y || 0 })),
-      moved: false
+      moved: false,
+      snapshotTaken: false
     };
   });
 
@@ -987,6 +1586,10 @@ function makeZoneDraggable(headEl, zo) {
     if (!drag || drag.id !== e.pointerId) return;
     if (!drag.moved && Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) > 5) {
       drag.moved = true;
+      if (!drag.snapshotTaken) {
+        pushHistorySnapshot();
+        drag.snapshotTaken = true;
+      }
     }
     if (drag.moved) {
       const dx = Math.round((e.clientX - drag.sx) / z);
@@ -1026,8 +1629,9 @@ function makeZoneResizable(handleEl, zo, bgEl) {
   let rDrag = null;
   handleEl.addEventListener('pointerdown', (e) => {
     e.stopPropagation();
+    pushHistorySnapshot();
     handleEl.setPointerCapture(e.pointerId);
-    rDrag = { id: e.pointerId, sx: e.clientX, sy: e.clientY, ow: zo.w || 900, oh: zo.h || 680 };
+    rDrag = { id: e.pointerId, sx: e.clientX, sy: e.clientY, ow: zo.w || 900, oh: zo.h || 700 };
   });
   handleEl.addEventListener('pointermove', (e) => {
     if (!rDrag || rDrag.id !== e.pointerId) return;
@@ -1048,7 +1652,7 @@ function makeZoneResizable(handleEl, zo, bgEl) {
 }
 
 /* Interactive Drag-to-Connect Wires Between Any Cards */
-let activeWireDrag = null; // { fromId, x1, y1, x2, y2, hoverCardId }
+let activeWireDrag = null;
 
 function makePortConnectable(portEl, fromCardId) {
   portEl.addEventListener('pointerdown', (e) => {
@@ -1069,7 +1673,6 @@ function makePortConnectable(portEl, fromCardId) {
     activeWireDrag.x2 = (pt.x - tx) / z;
     activeWireDrag.y2 = (pt.y - ty) / z;
 
-    // Hit-test target card
     let hitId = null;
     for (const [cid, cEl] of cardElements.entries()) {
       cEl.classList.remove('wire-target-hover');
@@ -1099,6 +1702,7 @@ function makePortConnectable(portEl, fromCardId) {
     if (targetId && targetId !== sourceId) {
       const exists = BOARD.connections.some(w => w.from === sourceId && w.to === targetId);
       if (!exists) {
+        pushHistorySnapshot();
         const newWire = {
           id: 'w_' + Date.now().toString(36),
           from: sourceId,
@@ -1118,7 +1722,7 @@ function makePortConnectable(portEl, fromCardId) {
 }
 
 /* ==================================================================
-   6. SVG CURVED CONNECTION WIRES RENDERER
+   10. SVG CURVED CONNECTION WIRES RENDERER
    ================================================================== */
 function drawWires() {
   const NS = 'http://www.w3.org/2000/svg';
@@ -1149,17 +1753,14 @@ function drawWires() {
     const isSel = selectedItem && selectedItem.type === 'wire' && selectedItem.itemId === conn.id;
     const g = addSvg(wires, 'g', { class: 'wire-group' + (isSel ? ' selected' : ''), 'data-wire': conn.id });
 
-    // Wide invisible hit path so clicking a wire is effortless
     addSvg(g, 'path', { d: pathD, class: 'w-hit' });
     addSvg(g, 'path', { d: pathD, class: 'w-line color-' + (conn.color || 'gold') });
 
-    // Arrowhead at destination
     addSvg(g, 'path', {
       d: `M ${x2 - 11} ${y2 - 7} L ${x2} ${y2} L ${x2 - 11} ${y2 + 7}`,
       class: 'w-line color-' + (conn.color || 'gold')
     });
 
-    // Midpoint chevron or label badge
     const mx = (x1 + x2) / 2;
     const my = (y1 + y2) / 2;
     if (conn.label) {
@@ -1186,7 +1787,6 @@ function drawWires() {
     });
   }
 
-  // Draw active drag preview wire
   if (activeWireDrag) {
     const { x1, y1, x2, y2 } = activeWireDrag;
     const dx = Math.max(50, Math.abs(x2 - x1) * 0.38);
@@ -1198,7 +1798,7 @@ function drawWires() {
 }
 
 /* ==================================================================
-   7. ADD / EDIT / DELETE CARDS, PARTS (ZONES) & WIRES
+   11. ADD / DUPLICATE / DELETE CARDS, CUTSCENES, PHOTOS & PARTS
    ================================================================== */
 function getActiveTimelineZone() {
   if (selectedItem && selectedItem.zoneId) {
@@ -1213,39 +1813,49 @@ function getActiveTimelineZone() {
   return cur;
 }
 
-function addBeatCard(zoneId, afterBeatId = null) {
+function addBeatCard(zoneId, afterBeatId = null, opts = {}) {
+  pushHistorySnapshot();
   const zo = BOARD.zones.find(s => s.id === zoneId && s.kind !== 'cast') || getActiveTimelineZone();
   if (!zo) return;
   zo.beats = zo.beats || [];
   const newId = 'b_' + Date.now().toString(36);
+  const cType = opts.cardType || 'story';
 
-  let spawnX = (zo.x || 0) + PAD;
-  let spawnY = (zo.y || 0) + 310;
+  let spawnX = Number.isFinite(opts.x) ? opts.x : (zo.x || 0) + PAD;
+  let spawnY = Number.isFinite(opts.y) ? opts.y : (zo.y || 0) + 310;
   let connectFromId = afterBeatId;
 
-  if (afterBeatId) {
-    const prev = zo.beats.find(b => b.id === afterBeatId);
-    if (prev) {
-      spawnX = (prev.x || 0) + CW + GX;
-      spawnY = (prev.y || 310) + 24;
+  if (!Number.isFinite(opts.x)) {
+    if (afterBeatId) {
+      const prev = zo.beats.find(b => b.id === afterBeatId);
+      if (prev) {
+        spawnX = (prev.x || 0) + CW + GX;
+        spawnY = (prev.y || 310) + 24;
+      }
+    } else if (zo.beats.length > 0) {
+      const last = zo.beats[zo.beats.length - 1];
+      spawnX = (last.x || 0) + CW + GX;
+      spawnY = last.y || 310;
+      connectFromId = last.id;
     }
-  } else if (zo.beats.length > 0) {
-    const last = zo.beats[zo.beats.length - 1];
-    spawnX = (last.x || 0) + CW + GX;
-    spawnY = last.y || 310;
-    connectFromId = last.id;
   }
 
-  // Expand zone width if card extends past right edge
   if (spawnX + CW + PAD > (zo.x || 0) + (zo.w || 900)) {
     zo.w = (spawnX + CW + PAD) - (zo.x || 0);
   }
 
   const newBeat = {
     id: newId,
-    title: 'New story card',
-    text: 'Write what happens in this beat. Drag the card anywhere or connect its right port to another card.',
-    status: 'planned',
+    cardType: cType,
+    title: opts.title || (cType === 'cutscene' ? 'New Cutscene Shot' : cType === 'asset' ? 'Photo / Asset Card' : 'New Story Card'),
+    text: opts.text || (cType === 'cutscene' ? 'Plan camera movement, dialogue, and visual beat.' : 'Describe what happens in this moment.'),
+    status: opts.status || 'planned',
+    camera: opts.camera || (cType === 'cutscene' ? 'Wide establishing shot' : ''),
+    audio: opts.audio || (cType === 'cutscene' ? 'Ambient score + SFX' : ''),
+    duration: opts.duration || (cType === 'cutscene' ? '15s' : ''),
+    photo: opts.photo || '',
+    photoCaption: opts.photoCaption || '',
+    assets: opts.assets || (cType === 'cutscene' ? [{ name: 'Key cutscene prop / anim', done: false }] : []),
     x: spawnX,
     y: spawnY,
     tags: []
@@ -1258,7 +1868,7 @@ function addBeatCard(zoneId, afterBeatId = null) {
       id: 'w_' + Date.now().toString(36),
       from: connectFromId,
       to: newId,
-      color: 'gold',
+      color: cType === 'cutscene' ? 'violet' : 'gold',
       label: ''
     });
   }
@@ -1267,10 +1877,32 @@ function addBeatCard(zoneId, afterBeatId = null) {
   selectedItem = { type: 'beat', zoneId: zo.id, itemId: newId };
   rebuildBoard();
   openInspector(selectedItem);
-  focusCardOnCanvas(newId);
 }
 
-function addCharacterCard(zoneId = 'cast') {
+function duplicateCard(zoneId, cardId) {
+  const info = findCardById(cardId);
+  if (!info) return;
+  pushHistorySnapshot();
+  const copy = JSON.parse(JSON.stringify(info.card));
+  copy.id = (info.kind === 'person' ? 'c_' : 'b_') + Date.now().toString(36);
+  if (copy.title) copy.title += ' (Copy)';
+  if (copy.name) copy.name += ' (Copy)';
+  copy.x = (info.card.x || 0) + 40;
+  copy.y = (info.card.y || 0) + 40;
+
+  if (info.kind === 'person') {
+    info.zone.cards.push(copy);
+  } else {
+    info.zone.beats.push(copy);
+  }
+  saveBoard(true);
+  selectedItem = { type: info.kind, zoneId: info.zone.id, itemId: copy.id };
+  rebuildBoard();
+  openInspector(selectedItem);
+}
+
+function addCharacterCard(zoneId = 'cast', customX = null, customY = null) {
+  pushHistorySnapshot();
   const zo = BOARD.zones.find(s => s.id === zoneId) || BOARD.zones[0];
   if (!zo) return;
   zo.cards = zo.cards || [];
@@ -1283,21 +1915,22 @@ function addCharacterCard(zoneId = 'cast') {
     name: 'New Character',
     si: '',
     text: 'Who they are and their connection to the village.',
-    x: (zo.x || 0) + PAD + col * (CW + CAST_GX),
-    y: (zo.y || 0) + 310 + r * 205
+    x: Number.isFinite(customX) ? customX : (zo.x || 0) + PAD + col * (CW + CAST_GX),
+    y: Number.isFinite(customY) ? customY : (zo.y || 0) + 310 + r * 210
   };
   zo.cards.push(newChar);
-  zo.h = Math.max(zo.h || 720, 310 + (r + 1) * 215 + PAD);
+  zo.h = Math.max(zo.h || 740, 310 + (r + 1) * 215 + PAD);
   saveBoard(true);
   selectedItem = { type: 'person', zoneId: zo.id, itemId: newId };
   rebuildBoard();
   openInspector(selectedItem);
-  focusCardOnCanvas(newId);
 }
 
-function addNewPart() {
+function addNewPart(customX = null, customY = null) {
+  pushHistorySnapshot();
   const lastZone = BOARD.zones[BOARD.zones.length - 1];
-  const startX = lastZone ? (lastZone.x || 0) + (lastZone.w || 900) + ZGAP : 0;
+  const startX = Number.isFinite(customX) ? customX : (lastZone ? (lastZone.x || 0) + (lastZone.w || 900) + ZGAP : 0);
+  const startY = Number.isFinite(customY) ? customY : 0;
   const newZoneId = 'part_' + Date.now().toString(36);
   const firstBeatId = 'b_' + Date.now().toString(36) + '_1';
 
@@ -1312,49 +1945,34 @@ function addNewPart() {
     mood: 'wind · lanterns · mystery',
     swatches: ['#8a6e58', '#c9b79c', '#3d7bff'],
     x: startX,
-    y: 0,
+    y: startY,
     w: CW * 2 + GX + PAD * 2,
-    h: 680,
+    h: 700,
     beats: [
       {
         id: firstBeatId,
+        cardType: 'story',
         title: 'Opening beat of this part',
-        text: 'Drag this card or connect it to the rest of the story.',
+        text: 'Right-click anywhere or drag from the right dot (●) to connect.',
         status: 'planned',
         x: startX + PAD,
-        y: 310,
+        y: startY + 310,
         tags: []
       }
     ]
   };
-
-  // Auto-connect from previous zone's last beat
-  const prevTimelineZones = BOARD.zones.filter(s => s.kind !== 'cast' && s.beats && s.beats.length);
-  const prevZone = prevTimelineZones[prevTimelineZones.length - 1];
-  if (prevZone) {
-    const prevBeat = prevZone.beats[prevZone.beats.length - 1];
-    if (prevBeat) {
-      BOARD.connections.push({
-        id: 'w_' + Date.now().toString(36),
-        from: prevBeat.id,
-        to: firstBeatId,
-        color: 'gold',
-        label: 'Next Part'
-      });
-    }
-  }
 
   BOARD.zones.push(newZone);
   saveBoard(true);
   selectedItem = { type: 'zone', zoneId: newZoneId, itemId: newZoneId };
   rebuildBoard();
   openInspector(selectedItem);
-  goZone(BOARD.zones.length - 1);
 }
 
 function deleteCard(zoneId, cardId) {
   const zo = BOARD.zones.find(s => s.id === zoneId);
   if (!zo) return;
+  pushHistorySnapshot();
   if (zo.kind === 'cast') {
     zo.cards = (zo.cards || []).filter(c => c.id !== cardId);
   } else {
@@ -1367,6 +1985,7 @@ function deleteCard(zoneId, cardId) {
 }
 
 function tidyAutoLayout() {
+  pushHistorySnapshot();
   let xCursor = 0;
   const topY = 310;
   for (const zo of BOARD.zones) {
@@ -1378,13 +1997,13 @@ function tidyAutoLayout() {
     zo.x = xCursor;
     zo.y = 0;
     zo.w = innerW + PAD * 2;
-    zo.h = isCast ? 720 : 680;
+    zo.h = isCast ? 740 : 720;
     if (isCast) {
       items.forEach((c, idx) => {
         const r = Math.floor(idx / CAST_COLS);
         const col = idx % CAST_COLS;
         c.x = zo.x + PAD + col * (CW + CAST_GX);
-        c.y = topY + r * 205;
+        c.y = topY + r * 210;
       });
     } else {
       items.forEach((b, idx) => {
@@ -1405,13 +2024,46 @@ $('#addCardBtn').addEventListener('click', () => {
   }
   const activeZone = getActiveTimelineZone();
   const afterBeatId = (selectedItem && selectedItem.type === 'beat') ? selectedItem.itemId : null;
-  if (activeZone) addBeatCard(activeZone.id, afterBeatId);
+  if (activeZone) addBeatCard(activeZone.id, afterBeatId, { cardType: 'story' });
 });
-$('#addPartBtn').addEventListener('click', () => addNewPart());
+
+$('#addCutsceneBtn').addEventListener('click', () => {
+  const activeZone = getActiveTimelineZone();
+  const afterBeatId = (selectedItem && selectedItem.type === 'beat') ? selectedItem.itemId : null;
+  if (activeZone) addBeatCard(activeZone.id, afterBeatId, { cardType: 'cutscene' });
+});
+
+$('#importPhotoBtn').addEventListener('click', () => {
+  if (selectedItem && (selectedItem.type === 'beat' || selectedItem.type === 'person')) {
+    const info = findCardById(selectedItem.itemId);
+    if (info) {
+      promptPhotoUpload((dataUrl, fileName) => {
+        pushHistorySnapshot();
+        info.card.photo = dataUrl;
+        if (!info.card.photoCaption) info.card.photoCaption = fileName;
+        saveBoard(true);
+        rebuildBoard();
+        openInspector(selectedItem);
+      });
+      return;
+    }
+  }
+  const activeZone = getActiveTimelineZone();
+  promptPhotoUpload((dataUrl, fileName) => {
+    addBeatCard(activeZone?.id, null, {
+      cardType: 'asset',
+      title: fileName.replace(/\.[^.]+$/, '') || 'Concept Art / Photo',
+      text: 'Imported visual asset reference.',
+      photo: dataUrl,
+      photoCaption: fileName
+    });
+  });
+});
+
 $('#autoLayoutBtn').addEventListener('click', () => tidyAutoLayout());
 
 /* ==================================================================
-   8. RIGHT-HAND INSPECTOR DRAWER (CARDS, WIRES, PARTS)
+   12. RIGHT-HAND INSPECTOR DRAWER (CARDS, CUTSCENES, PHOTOS, WIRES, PARTS)
    ================================================================== */
 function closeInspector() {
   selectedItem = null;
@@ -1445,7 +2097,7 @@ function openInspector(sel) {
     inspKicker.textContent = 'CONNECTION LINE';
     inspTitle.textContent = `${fromInfo?.card.title || fromInfo?.card.name || 'Card'} → ${toInfo?.card.title || toInfo?.card.name || 'Card'}`;
 
-    const labelIn = h('input', { type: 'text', value: wire.label || '', placeholder: 'e.g. 3 months later / Secret branch' });
+    const labelIn = h('input', { type: 'text', value: wire.label || '', placeholder: 'e.g. Cut to 1935 / After cutscene' });
     labelIn.addEventListener('input', () => {
       wire.label = labelIn.value;
       saveBoard(true);
@@ -1454,7 +2106,8 @@ function openInspector(sel) {
 
     const colorSel = h('select');
     [
-      { id: 'gold', label: 'Golden Thread (Default)' },
+      { id: 'gold', label: 'Golden Thread (Story Flow)' },
+      { id: 'violet', label: 'Violet Thread (Cutscene Transition)' },
       { id: 'blue', label: 'Electric Blue (Mystery / Alien)' },
       { id: 'green', label: 'Emerald Green (Farm / Built)' },
       { id: 'crimson', label: 'Crimson Red (Conflict / Danger)' }
@@ -1464,6 +2117,7 @@ function openInspector(sel) {
       colorSel.append(o);
     });
     colorSel.addEventListener('change', () => {
+      pushHistorySnapshot();
       wire.color = colorSel.value;
       saveBoard(true);
       drawWires();
@@ -1476,6 +2130,7 @@ function openInspector(sel) {
 
     const delWireBtn = h('button', { class: 'btn danger', type: 'button', text: 'Delete Connection Line' });
     delWireBtn.addEventListener('click', () => {
+      pushHistorySnapshot();
       BOARD.connections = BOARD.connections.filter(w => w.id !== wire.id);
       closeInspector();
       saveBoard(true);
@@ -1494,10 +2149,11 @@ function openInspector(sel) {
     const cardEl = cardElements.get(beat.id);
     if (cardEl) cardEl.classList.add('selected');
 
-    inspKicker.textContent = `STORY CARD · ${zo.title.toUpperCase()}`;
+    inspKicker.textContent = `${(beat.cardType || 'story').toUpperCase()} CARD · ${zo.title.toUpperCase()}`;
     inspTitle.textContent = beat.title || 'Story Card';
 
     const titleIn = h('input', { type: 'text', value: beat.title || '' });
+    titleIn.addEventListener('focus', () => pushHistorySnapshot());
     titleIn.addEventListener('input', () => {
       beat.title = titleIn.value;
       inspTitle.textContent = beat.title || 'Story Card';
@@ -1505,141 +2161,166 @@ function openInspector(sel) {
       rebuildBoard();
     });
 
+    // Card Type & Status Row
+    const typeSel = h('select');
+    [
+      { id: 'story', label: '📄 Story Beat Card' },
+      { id: 'cutscene', label: '🎬 Cutscene Shot Card' },
+      { id: 'asset', label: '🖼 Visual Asset / Photo Card' }
+    ].forEach(t => {
+      const o = h('option', { value: t.id, text: t.label });
+      if ((beat.cardType || 'story') === t.id) o.selected = true;
+      typeSel.append(o);
+    });
+    typeSel.addEventListener('change', () => {
+      pushHistorySnapshot();
+      beat.cardType = typeSel.value;
+      saveBoard(true);
+      rebuildBoard();
+      openInspector(sel);
+    });
+
     const statusSel = h('select');
     [
-      { id: 'built', label: '✓ In the game (Built — counts in progress)' },
-      { id: 'planned', label: 'Planned (On story board)' },
-      { id: 'draft', label: 'Draft / Idea' }
+      { id: 'built', label: '✓ Built (In the game)' },
+      { id: 'planned', label: 'Planned' },
+      { id: 'draft', label: 'Draft' }
     ].forEach(st => {
       const o = h('option', { value: st.id, text: st.label });
       if ((beat.status || 'planned') === st.id) o.selected = true;
       statusSel.append(o);
     });
     statusSel.addEventListener('change', () => {
+      pushHistorySnapshot();
       beat.status = statusSel.value;
       saveBoard(true);
       rebuildBoard();
     });
 
-    const textIn = h('textarea', { rows: '4' });
+    const textIn = h('textarea', { rows: '3' });
     textIn.value = beat.text || '';
+    textIn.addEventListener('focus', () => pushHistorySnapshot());
     textIn.addEventListener('input', () => {
       beat.text = textIn.value;
       saveBoard(true);
       rebuildBoard();
     });
 
-    // Quick Connect to Another Card dropdown
-    const connectSel = h('select');
-    connectSel.append(h('option', { value: '', text: 'Select a card to connect a line to...' }));
-    for (const part of BOARD.zones) {
-      const list = part.kind === 'cast' ? (part.cards || []) : (part.beats || []);
-      for (const item of list) {
-        if (item.legend || item.id === beat.id) continue;
-        connectSel.append(h('option', { value: item.id, text: `[${part.title}] ${item.title || item.name}` }));
-      }
+    // Photo / Storyboard Frame Import Box
+    const photoBox = h('div', { class: 'photo-upload-box' });
+    if (beat.photo) {
+      photoBox.append(h('img', { class: 'photo-preview-img', src: beat.photo, alt: 'Preview' }));
     }
-    const connectBtn = h('button', { class: 'btn gold', type: 'button', text: '+ Connect Line' });
-    connectBtn.addEventListener('click', () => {
-      const targetId = connectSel.value;
-      if (!targetId) return;
-      BOARD.connections.push({
-        id: 'w_' + Date.now().toString(36),
-        from: beat.id,
-        to: targetId,
-        color: 'gold',
-        label: ''
-      });
-      connectSel.value = '';
-      saveBoard(true);
-      drawWires();
-      openInspector(sel);
-    });
-
-    // Existing connections list
-    const linkedWires = BOARD.connections.filter(w => w.from === beat.id || w.to === beat.id);
-    const wiresBox = h('div', { class: 'tag-editor-list' });
-    linkedWires.forEach(w => {
-      const otherId = w.from === beat.id ? w.to : w.from;
-      const other = findCardById(otherId);
-      const dirLabel = w.from === beat.id ? '→ To: ' : '← From: ';
-      const row = h('div', { class: 'tag-edit-item' });
-      const top = h('div', { class: 'tag-edit-top' },
-        h('span', { style: 'font:600 11.5px var(--f-mono)', text: dirLabel + (other?.card.title || other?.card.name || otherId) }),
-        h('button', {
-          class: 'btn danger',
-          type: 'button',
-          style: 'padding:3px 7px;font-size:11px',
-          text: 'Unlink'
-        })
-      );
-      top.querySelector('button').addEventListener('click', () => {
-        BOARD.connections = BOARD.connections.filter(item => item.id !== w.id);
+    const photoBtnRow = h('div', { style: 'display:flex;gap:6px;flex-wrap:wrap;justify-content:center' });
+    const uploadPhotoB = h('button', { class: 'btn', type: 'button', text: beat.photo ? '🖼 Replace Photo' : '🖼 Upload Photo / Frame' });
+    uploadPhotoB.addEventListener('click', () => {
+      promptPhotoUpload((dataUrl, fileName) => {
+        pushHistorySnapshot();
+        beat.photo = dataUrl;
+        if (!beat.photoCaption) beat.photoCaption = fileName;
         saveBoard(true);
-        drawWires();
+        rebuildBoard();
         openInspector(sel);
       });
-      row.append(top);
-      wiresBox.append(row);
     });
-
-    // Callout tags editor
-    const tagsWrap = h('div', { class: 'field' }, h('label', { text: 'Callout Notes on Card' }));
-    const tagList = h('div', { class: 'tag-editor-list' });
-    const renderTags = () => {
-      tagList.replaceChildren();
-      (beat.tags || []).forEach((tg, idx) => {
-        const item = h('div', { class: 'tag-edit-item' });
-        const topRow = h('div', { class: 'tag-edit-top' });
-        const kindSel = h('select');
-        [
-          { k: 'built', label: 'In the game (Built)' },
-          { k: 'planned', label: 'Planned' },
-          { k: 'stale', label: 'Game says otherwise' }
-        ].forEach(opt => {
-          const o = h('option', { value: opt.k, text: opt.label });
-          if (tg.k === opt.k) o.selected = true;
-          kindSel.append(o);
-        });
-        kindSel.addEventListener('change', () => { tg.k = kindSel.value; saveBoard(true); rebuildBoard(); });
-        const rmB = h('button', { class: 'btn danger', type: 'button', style: 'padding:3px 7px', text: '×' });
-        rmB.addEventListener('click', () => { beat.tags.splice(idx, 1); saveBoard(true); rebuildBoard(); renderTags(); });
-        topRow.append(kindSel, rmB);
-        const tIn = h('input', { type: 'text', value: tg.t });
-        tIn.addEventListener('input', () => { tg.t = tIn.value; saveBoard(true); rebuildBoard(); });
-        item.append(topRow, tIn);
-        tagList.append(item);
+    photoBtnRow.append(uploadPhotoB);
+    if (beat.photo) {
+      const clearPhotoB = h('button', { class: 'btn danger', type: 'button', text: 'Remove Photo' });
+      clearPhotoB.addEventListener('click', () => {
+        pushHistorySnapshot();
+        beat.photo = '';
+        beat.photoCaption = '';
+        saveBoard(true);
+        rebuildBoard();
+        openInspector(sel);
       });
-    };
-    renderTags();
-    const addTagB = h('button', { class: 'btn', type: 'button', text: '+ Add Callout Tag' });
-    addTagB.addEventListener('click', () => {
-      beat.tags = beat.tags || [];
-      beat.tags.push({ k: 'planned', t: 'Note on this scene.' });
+      photoBtnRow.append(clearPhotoB);
+    }
+    const captionIn = h('input', { type: 'text', value: beat.photoCaption || '', placeholder: 'Photo caption / shot code (e.g. SHOT_04A)...' });
+    captionIn.addEventListener('input', () => {
+      beat.photoCaption = captionIn.value;
       saveBoard(true);
       rebuildBoard();
-      renderTags();
     });
-    tagsWrap.append(tagList, addTagB);
+    photoBox.append(photoBtnRow, captionIn);
+
+    // Cutscene Production Planning Fields (Camera, Audio, Duration)
+    const cutsceneSection = h('div', { class: 'tag-edit-item', style: 'border-color:var(--cutscene)' },
+      h('label', { style: 'font:600 10.5px var(--f-mono);color:var(--cutscene);text-transform:uppercase', text: '🎬 Cutscene Direction & Specs' })
+    );
+    const camIn = h('input', { type: 'text', value: beat.camera || '', placeholder: '🎥 Camera angle / movement (e.g. Low angle dolly)...' });
+    camIn.addEventListener('input', () => { beat.camera = camIn.value; saveBoard(true); rebuildBoard(); });
+
+    const audDurRow = h('div', { class: 'row-2' });
+    const audIn = h('input', { type: 'text', value: beat.audio || '', placeholder: '🔊 Audio / SFX / Music...' });
+    audIn.addEventListener('input', () => { beat.audio = audIn.value; saveBoard(true); rebuildBoard(); });
+    const durIn = h('input', { type: 'text', value: beat.duration || '', placeholder: '⏱ Duration (e.g. 18s)' });
+    durIn.addEventListener('input', () => { beat.duration = durIn.value; saveBoard(true); rebuildBoard(); });
+    audDurRow.append(audIn, durIn);
+    cutsceneSection.append(camIn, audDurRow);
+
+    // Required 3D/2D/Audio Assets Checklist Editor
+    const assetsWrap = h('div', { class: 'field' }, h('label', { text: 'Required Assets to Create (3D / Art / SFX)' }));
+    const assetsListEl = h('div', { class: 'tag-editor-list' });
+    const renderAssetsEditor = () => {
+      assetsListEl.replaceChildren();
+      (beat.assets || []).forEach((ast, idx) => {
+        const row = h('div', { style: 'display:flex;gap:6px;align-items:center' });
+        const cb = h('input', { type: 'checkbox', style: 'width:16px;height:16px' });
+        cb.checked = !!ast.done;
+        cb.addEventListener('change', () => {
+          pushHistorySnapshot();
+          ast.done = cb.checked;
+          saveBoard(true);
+          rebuildBoard();
+        });
+        const nameIn = h('input', { type: 'text', value: ast.name || '', placeholder: 'Asset name (e.g. Wewa sluice gate 3D mesh)...' });
+        nameIn.addEventListener('input', () => {
+          ast.name = nameIn.value;
+          saveBoard(true);
+          rebuildBoard();
+        });
+        const delAstB = h('button', { class: 'btn danger', type: 'button', style: 'padding:5px 8px', text: '×' });
+        delAstB.addEventListener('click', () => {
+          pushHistorySnapshot();
+          beat.assets.splice(idx, 1);
+          saveBoard(true);
+          rebuildBoard();
+          renderAssetsEditor();
+        });
+        row.append(cb, nameIn, delAstB);
+        assetsListEl.append(row);
+      });
+    };
+    renderAssetsEditor();
+    const addAssetB = h('button', { class: 'btn', type: 'button', text: '+ Add Required Asset' });
+    addAssetB.addEventListener('click', () => {
+      pushHistorySnapshot();
+      beat.assets = beat.assets || [];
+      beat.assets.push({ name: 'New production asset', done: false });
+      saveBoard(true);
+      rebuildBoard();
+      renderAssetsEditor();
+    });
+    assetsWrap.append(assetsListEl, addAssetB);
 
     inspBody.append(
       h('div', { class: 'field' }, h('label', { text: 'Card Title' }), titleIn),
-      h('div', { class: 'field' }, h('label', { text: 'Progress Status' }), statusSel),
-      h('div', { class: 'field' }, h('label', { text: 'Story Text' }), textIn),
-      h('div', { class: 'field' },
-        h('label', { text: 'Connect Line to Another Card' }),
-        connectSel,
-        connectBtn,
-        wiresBox
+      h('div', { class: 'row-2' },
+        h('div', { class: 'field' }, h('label', { text: 'Card Type' }), typeSel),
+        h('div', { class: 'field' }, h('label', { text: 'Status' }), statusSel)
       ),
-      tagsWrap
+      h('div', { class: 'field' }, h('label', { text: 'Story / Scene Action' }), textIn),
+      h('div', { class: 'field' }, h('label', { text: 'Storyboard Frame / Concept Photo' }), photoBox),
+      cutsceneSection,
+      assetsWrap
     );
 
-    const addNextBtn = h('button', { class: 'btn gold', type: 'button', text: '+ Card After' });
-    addNextBtn.addEventListener('click', () => addBeatCard(zo.id, beat.id));
+    const dupBtn = h('button', { class: 'btn', type: 'button', text: '⧉ Duplicate' });
+    dupBtn.addEventListener('click', () => duplicateCard(zo.id, beat.id));
     const delBtn = h('button', { class: 'btn danger', type: 'button', text: 'Delete Card' });
     delBtn.addEventListener('click', () => deleteCard(zo.id, beat.id));
-    inspFoot.append(addNextBtn, delBtn);
+    inspFoot.append(dupBtn, delBtn);
   }
 
   else if (sel.type === 'person') {
@@ -1661,10 +2342,22 @@ function openInspector(sel) {
     textIn.value = person.text || '';
     textIn.addEventListener('input', () => { person.text = textIn.value; saveBoard(true); rebuildBoard(); });
 
+    const uploadPortraitB = h('button', { class: 'btn', type: 'button', text: person.photo ? '🖼 Change Portrait Photo' : '🖼 Upload Character Portrait' });
+    uploadPortraitB.addEventListener('click', () => {
+      promptPhotoUpload((dataUrl) => {
+        pushHistorySnapshot();
+        person.photo = dataUrl;
+        saveBoard(true);
+        rebuildBoard();
+        openInspector(sel);
+      });
+    });
+
     inspBody.append(
       h('div', { class: 'field' }, h('label', { text: 'Character Name' }), nameIn),
       h('div', { class: 'field' }, h('label', { text: 'Sinhala Script / Subtitle' }), siIn),
-      h('div', { class: 'field' }, h('label', { text: 'Description & Role' }), textIn)
+      h('div', { class: 'field' }, h('label', { text: 'Description & Role' }), textIn),
+      h('div', { class: 'field' }, h('label', { text: 'Reference Portrait' }), uploadPortraitB)
     );
 
     const delBtn = h('button', { class: 'btn danger', type: 'button', text: 'Delete Character' });
@@ -1697,7 +2390,7 @@ function openInspector(sel) {
       if (zo.tone === t.id) o.selected = true;
       toneSel.append(o);
     });
-    toneSel.addEventListener('change', () => { zo.tone = toneSel.value; saveBoard(true); rebuildBoard(); });
+    toneSel.addEventListener('change', () => { pushHistorySnapshot(); zo.tone = toneSel.value; saveBoard(true); rebuildBoard(); });
 
     const subIn = h('textarea', { rows: '2' });
     subIn.value = zo.sub || '';
@@ -1721,6 +2414,7 @@ function openInspector(sel) {
       const delZoneBtn = h('button', { class: 'btn danger', type: 'button', text: 'Delete Entire Part' });
       delZoneBtn.addEventListener('click', () => {
         if (!confirm(`Delete part "${zo.title}" and its cards?`)) return;
+        pushHistorySnapshot();
         BOARD.zones = BOARD.zones.filter(s => s.id !== zo.id);
         closeInspector();
         saveBoard(true);
@@ -1732,7 +2426,7 @@ function openInspector(sel) {
 }
 
 /* ==================================================================
-   9. STICKY NOTES
+   13. STICKY NOTES
    ================================================================== */
 const NOTE_TONES = [
   { id: 'gold', bg: '#f3e29a' },
@@ -1755,6 +2449,7 @@ function makeNoteElement(id, data) {
     dot.style.background = nt.bg;
     dot.addEventListener('click', (e) => {
       e.stopPropagation();
+      pushHistorySnapshot();
       data.tone = nt.id;
       el.className = 'note' + toneClass(data.tone);
       saveBoard(true);
@@ -1765,6 +2460,7 @@ function makeNoteElement(id, data) {
   ta.value = data.text || '';
   place(el, data.x, data.y);
   requestAnimationFrame(() => autosize(ta));
+  ta.addEventListener('focus', () => pushHistorySnapshot());
   ta.addEventListener('input', () => {
     autosize(ta);
     data.text = ta.value;
@@ -1775,6 +2471,7 @@ function makeNoteElement(id, data) {
   head.addEventListener('pointerdown', (e) => {
     if (e.target.closest('button')) return;
     e.stopPropagation();
+    pushHistorySnapshot();
     head.setPointerCapture(e.pointerId);
     drag = { sx: e.clientX, sy: e.clientY, ox: data.x, oy: data.y, moved: false };
     el.classList.add('lifted');
@@ -1797,6 +2494,7 @@ function makeNoteElement(id, data) {
   head.addEventListener('pointercancel', drop);
 
   del.addEventListener('click', () => {
+    pushHistorySnapshot();
     delete BOARD.notes[id];
     el.remove();
     saveBoard(true);
@@ -1804,6 +2502,7 @@ function makeNoteElement(id, data) {
 }
 
 function addStickyNote(x, y) {
+  pushHistorySnapshot();
   const id = 'n_' + Date.now().toString(36);
   BOARD.notes = BOARD.notes || {};
   BOARD.notes[id] = { x: Math.round(x), y: Math.round(y), text: '', tone: 'gold', author: myProfile.name };
@@ -1811,13 +2510,8 @@ function addStickyNote(x, y) {
   saveBoard(true);
 }
 
-$('#addNote').addEventListener('click', () => {
-  const W = vp.clientWidth, H = vp.clientHeight;
-  addStickyNote((W / 2 - tx) / z - 116, (H / 2 - ty) / z - 60);
-});
-
 /* ==================================================================
-   10. PAN & ZOOM ENGINE
+   14. PAN & ZOOM ENGINE
    ================================================================== */
 const zoomPct = $('#zoomPct');
 function applyTransform() {
@@ -1874,16 +2568,8 @@ function animateTo(v) {
 function goZone(i) {
   const zo = BOARD.zones[i];
   if (!zo) return;
-  const rect = { x: zo.x || 0, y: zo.y || 0, w: zo.w || 900, h: zo.h || 680 };
+  const rect = { x: zo.x || 0, y: zo.y || 0, w: zo.w || 900, h: zo.h || 700 };
   animateTo(fitView(rect, 36, 0.92));
-}
-function focusCardOnCanvas(cardId) {
-  requestAnimationFrame(() => {
-    const info = findCardById(cardId);
-    if (!info) return;
-    const rect = { x: (info.card.x || 0) - 60, y: (info.card.y || 0) - 60, w: CW + 120, h: 320 };
-    animateTo(centerView(rect, Math.max(z, 0.85)));
-  });
 }
 function allBoardRect() {
   let minX = 0, minY = 0, maxX = 1200, maxY = 800;
@@ -1891,12 +2577,11 @@ function allBoardRect() {
     minX = Math.min(minX, zo.x || 0);
     minY = Math.min(minY, zo.y || 0);
     maxX = Math.max(maxX, (zo.x || 0) + (zo.w || 900));
-    maxY = Math.max(maxY, (zo.y || 0) + (zo.h || 680));
+    maxY = Math.max(maxY, (zo.y || 0) + (zo.h || 700));
   }
   return { x: minX, y: minY, w: maxX - minX, h: maxY - minY };
 }
 
-// Canvas background pan
 let bgPan = null;
 vp.addEventListener('pointerdown', (e) => {
   if (e.target.closest('.card, .zhead, .zone-resize, .note, .port, .wire-group, .hud, .hint, button, input, textarea, select')) return;
@@ -1907,7 +2592,6 @@ vp.addEventListener('pointerdown', (e) => {
   vp.classList.add('grabbing');
 });
 vp.addEventListener('pointermove', (e) => {
-  // Always broadcast live mouse cursor position in world coordinates
   const pt = vpPoint(e.clientX, e.clientY);
   myCursorWorld.x = Math.round((pt.x - tx) / z);
   myCursorWorld.y = Math.round((pt.y - ty) / z);
@@ -1934,18 +2618,12 @@ vp.addEventListener('wheel', (e) => {
   zoomAt(p.x, p.y, Math.exp(-dy * (e.ctrlKey ? 0.01 : 0.0018)));
 }, { passive: false });
 
-vp.addEventListener('dblclick', (e) => {
-  if (e.target.closest('.card, .note, .hud, .hint, button, textarea, .zhead')) return;
-  const p = vpPoint(e.clientX, e.clientY);
-  addStickyNote((p.x - tx) / z - 116, (p.y - ty) / z - 24);
-});
-
 $('#zoomIn').addEventListener('click', () => zoomAt(vp.clientWidth / 2, vp.clientHeight / 2, 1.25));
 $('#zoomOut').addEventListener('click', () => zoomAt(vp.clientWidth / 2, vp.clientHeight / 2, 0.8));
 $('#fitAll').addEventListener('click', () => animateTo(fitView(allBoardRect(), 40)));
 
 /* ==================================================================
-   11. CANVA-STYLE LIVE MULTIPLAYER SYNC (WebRTC PeerJS + BroadcastChannel)
+   15. CANVA-STYLE LIVE MULTIPLAYER SYNC (WebRTC PeerJS + BroadcastChannel)
    ================================================================== */
 const COLORS = ['#e11d48', '#2563eb', '#16a34a', '#d97706', '#9333ea', '#0891b2'];
 const savedUser = lsGet(LS_USER) || {};
@@ -1955,19 +2633,17 @@ const myProfile = {
   color: savedUser.color || COLORS[Math.floor(Math.random() * COLORS.length)]
 };
 const myCursorWorld = { x: 400, y: 350 };
-const remotePeers = new Map(); // peerUserId -> { id, name, color, x, y, selectedId, lastSeen, el }
+const remotePeers = new Map();
 
-// 11A. Local BroadcastChannel so two tabs on the same computer sync automatically at 60fps
 const localBus = ('BroadcastChannel' in window) ? new BroadcastChannel('govi_thena_live_bus') : null;
 if (localBus) {
   localBus.onmessage = (ev) => handleIncomingSyncPacket(ev.data);
 }
 
-// 11B. PeerJS WebRTC Room Engine (works across the internet on GitHub Pages with zero backend)
 let peerInstance = null;
 let isRoomHost = false;
 let currentRoomCode = '';
-const dataConnections = new Map(); // peerId -> DataConnection
+const dataConnections = new Map();
 
 function sanitizeRoomCode(code) {
   return String(code || '').trim().toLowerCase().replace(/[^a-z0-9_-]/g, '-');
@@ -2045,7 +2721,6 @@ function handleIncomingSyncPacket(pkt) {
     lsSet(LS_BOARD, BOARD);
     rebuildBoard();
     if (selectedItem) openInspector(selectedItem);
-    // If we are the WebRTC Host, relay this update to all other connected guests
     if (isRoomHost) {
       for (const conn of dataConnections.values()) {
         if (conn && conn.open) {
@@ -2118,7 +2793,6 @@ function renderPeerAvatars() {
   const listEl = $('#peerListContainer');
   listEl.replaceChildren();
 
-  // Always show self in modal list
   listEl.append(
     h('div', { class: 'peer-row' },
       h('span', { text: `${myProfile.name} (You)` }),
@@ -2155,7 +2829,6 @@ function renderPeerAvatars() {
   }
 }
 
-// Clean up stale cursors after 15 seconds of disconnect
 setInterval(() => {
   const now = Date.now();
   let changed = false;
@@ -2191,7 +2864,6 @@ function connectToWebRTCRoom(rawCode) {
   $('#collabStatusMsg').textContent = `Connecting to room "${code}"...`;
   updateInviteUrl(code);
 
-  // First try to claim the Host ID for this room code
   const candidateHost = new Peer(hostPeerId);
 
   candidateHost.on('open', () => {
@@ -2207,7 +2879,6 @@ function connectToWebRTCRoom(rawCode) {
   });
 
   candidateHost.on('error', (err) => {
-    // If the Host ID is already taken, join as a Guest and connect to the Host!
     if (err && err.type === 'unavailable-id') {
       isRoomHost = false;
       const guestPeer = new Peer();
@@ -2228,7 +2899,6 @@ function connectToWebRTCRoom(rawCode) {
 function setupDataConnection(conn) {
   conn.on('open', () => {
     dataConnections.set(conn.peer, conn);
-    // Send our cursor and either push state (if host) or request latest state (if guest)
     broadcastCursorPosition();
     if (isRoomHost) {
       conn.send({ type: 'board-state', user: myProfile, board: BOARD });
@@ -2238,7 +2908,6 @@ function setupDataConnection(conn) {
   });
   conn.on('data', (data) => {
     handleIncomingSyncPacket(data);
-    // If we are host, relay cursor/move packets to other connected peers
     if (isRoomHost && data && (data.type === 'cursor' || data.type === 'card-move')) {
       for (const [pid, otherConn] of dataConnections.entries()) {
         if (pid !== conn.peer && otherConn.open) {
@@ -2260,7 +2929,6 @@ function updateInviteUrl(code) {
   $('#inviteUrlText').textContent = url.toString();
 }
 
-/* Collab Modal UI Wiring */
 const collabSheet = $('#collabSheet');
 $('#myNameInput').value = myProfile.name;
 $('#myColorInput').value = myProfile.color;
@@ -2312,12 +2980,12 @@ $('#copyInviteBtn').addEventListener('click', async () => {
 });
 
 /* ==================================================================
-   12. EXPORT / IMPORT JSON & MARKDOWN OUTLINE SHEET
+   16. EXPORT / IMPORT JSON & MARKDOWN PRODUCTION OUTLINE
    ================================================================== */
 const sheet = $('#sheet'), sheetText = $('#sheetText'), sheetMsg = $('#sheetMsg');
 
 function generateFullScriptOutline() {
-  const out = ['# GOVI THENA — COLLABORATIVE STORY OUTLINE', ''];
+  const out = ['# GOVI THENA — STORY, CUTSCENE & ASSET PRODUCTION OUTLINE', ''];
   for (const z of BOARD.zones) {
     out.push(`## ${z.title} (${z.era || ''})`);
     if (z.sub) out.push(`_${z.sub}_`);
@@ -2330,8 +2998,15 @@ function generateFullScriptOutline() {
       out.push('');
     } else {
       for (const b of (z.beats || [])) {
-        out.push(`### • [${(b.status || 'planned').toUpperCase()}] ${b.title}`);
+        const kindTag = (b.cardType || 'story').toUpperCase();
+        out.push(`### • [${kindTag} | ${(b.status || 'planned').toUpperCase()}] ${b.title}`);
         out.push(b.text || '');
+        if (b.camera || b.audio || b.duration) {
+          out.push(`  - **Camera:** ${b.camera || '-'} | **Audio:** ${b.audio || '-'} | **Duration:** ${b.duration || '-'}`);
+        }
+        for (const ast of (b.assets || [])) {
+          out.push(`  - [${ast.done ? 'x' : ' '}] Asset: ${ast.name}`);
+        }
         for (const tg of (b.tags || [])) {
           out.push(`  - *${TAG[tg.k] || tg.k}:* ${tg.t}`);
         }
@@ -2344,18 +3019,14 @@ function generateFullScriptOutline() {
 
 function generateFullJson() {
   return JSON.stringify({
-    app: 'Govi Thena Live Collaborative Story Board',
+    app: 'Govi Thena Live Cutscene & Story Studio',
     updatedAt: new Date().toISOString(),
     board: BOARD
   }, null, 2);
 }
 
-$('#tabFullScriptBtn').addEventListener('click', () => {
-  sheetText.value = generateFullScriptOutline();
-});
-$('#tabJsonBtn').addEventListener('click', () => {
-  sheetText.value = generateFullJson();
-});
+$('#tabFullScriptBtn').addEventListener('click', () => { sheetText.value = generateFullScriptOutline(); });
+$('#tabJsonBtn').addEventListener('click', () => { sheetText.value = generateFullJson(); });
 $('#copyAll').addEventListener('click', () => {
   sheetText.value = generateFullScriptOutline();
   sheetMsg.textContent = '';
@@ -2393,6 +3064,7 @@ $('#jsonFileInput').addEventListener('change', (e) => {
     try {
       const parsed = JSON.parse(String(ev.target.result || '{}'));
       if (parsed.board && Array.isArray(parsed.board.zones)) {
+        pushHistorySnapshot();
         BOARD = parsed.board;
         saveBoard(true);
         rebuildBoard();
@@ -2409,6 +3081,7 @@ $('#jsonFileInput').addEventListener('change', (e) => {
 
 $('#resetBoardBtn').addEventListener('click', () => {
   if (!confirm('Reset the board back to the default Govi Thena layout?')) return;
+  pushHistorySnapshot();
   BOARD = createInitialStateFromZones(DEFAULT_STORY_ZONES);
   closeInspector();
   saveBoard(true);
@@ -2417,7 +3090,7 @@ $('#resetBoardBtn').addEventListener('click', () => {
 });
 
 /* ==================================================================
-   13. INITIAL BOOT & URL ROOM AUTO-JOIN
+   17. INITIAL BOOT & URL ROOM AUTO-JOIN
    ================================================================== */
 rebuildBoard();
 const firstZone = BOARD.zones[0] ? { x: BOARD.zones[0].x, y: 0, w: BOARD.zones[0].w, h: BOARD.zones[0].h } : allBoardRect();
@@ -2426,7 +3099,6 @@ tx = initV.tx; ty = initV.ty; z = initV.z;
 applyTransform();
 renderPeerAvatars();
 
-// Auto-connect if URL has ?room=CODE
 const urlParams = new URLSearchParams(window.location.search);
 const roomFromUrl = urlParams.get('room');
 if (roomFromUrl) {
