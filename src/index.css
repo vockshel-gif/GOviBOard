@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #0b0c10;
+    color: #f1f5f9;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow: hidden;
+  }
+}
+
+/* React Flow Dark Detective Theme Overrides */
+.react-flow__controls-button {
+  background-color: #12141f !important;
+  border-bottom: 1px solid #1e293b !important;
+  fill: #cbd5e1 !important;
+  color: #cbd5e1 !important;
+  transition: all 150ms ease;
+}
+
+.react-flow__controls-button:hover {
+  background-color: #1e2235 !important;
+  fill: #ef4444 !important;
+}
+
+.react-flow__edge.selected path {
+  stroke-width: 3.5px;
+}
+
+/* Custom sleek dark scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0c10;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
