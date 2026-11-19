@@ -1,15 +1,2439 @@
 <!doctype html>
-<html lang="en" class="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CrimsonThread // Narrative Evidence & Story Flowchart</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  </head>
-  <body class="bg-[#0b0c10] text-slate-100 antialiased selection:bg-red-500/30 selection:text-red-200 overflow-hidden">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Govi Thena Story Board // Live Collaborative Studio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Caveat:wght@500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Noto+Sans+Sinhala:wght@500;600&display=swap">
+<!-- PeerJS for Free Zero-Config WebRTC Multiplayer Sync on GitHub Pages -->
+<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<style>
+:root{
+  --ground:#e6e4d6; --dot:rgba(50,56,38,.17);
+  --card:#fcfbf6; --edge:rgba(36,40,28,.14); --shadow:rgba(30,34,20,.16); --scrim:rgba(24,28,18,.42);
+  --ink:#1c211b; --muted:#5a6155; --faint:#80877a;
+  --path:#9a7a32;
+  --light:#2a5ff0; --on-light:#ffffff; --light-soft:rgba(42,95,240,.10); --light-glow:rgba(42,95,240,.30);
+  --built:#3b7432; --built-soft:rgba(59,116,50,.13);
+  --planned:#8e600c; --planned-soft:rgba(148,101,15,.14);
+  --stale:#b3441c; --stale-soft:rgba(179,68,28,.12);
+  --z-deep:#d6d4cb; --z-day:#d9e2c3; --z-dusk:#e6d7c1; --z-night:#1f2546;
+  --z-ink:#1c211b; --z-muted:#5a6155; --z-night-ink:#e9ecf8; --z-night-muted:#aab1d2;
+  --note:#f3e29a; --note-ink:#352d0c; --note-edge:rgba(80,64,0,.22);
+  --bar:#f4f3ec; --bar-edge:rgba(36,40,28,.12);
+  --f-display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --f-body:"Inter","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+  --f-hand:"Caveat","Noto Sans Sinhala","Segoe Print",cursive;
+  --f-sinhala:"Noto Sans Sinhala","Iskoola Pota","Nirmala UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0f1311; --dot:rgba(220,230,210,.08);
+    --card:#1b211d; --edge:rgba(230,240,220,.12); --shadow:rgba(0,0,0,.48); --scrim:rgba(0,0,0,.6);
+    --ink:#e6e9df; --muted:#a2aa9a; --faint:#7d8576;
+    --path:#c8a250;
+    --light:#7598ff; --on-light:#0b1230; --light-soft:rgba(117,152,255,.12); --light-glow:rgba(117,152,255,.30);
+    --built:#82c46f; --built-soft:rgba(130,196,111,.14);
+    --planned:#dcaa48; --planned-soft:rgba(220,170,72,.14);
+    --stale:#ef8256; --stale-soft:rgba(239,130,86,.14);
+    --z-deep:#18191d; --z-day:#152016; --z-dusk:#211b15; --z-night:#111631;
+    --z-ink:#e6e9df; --z-muted:#a2aa9a; --z-night-ink:#e9ecf8; --z-night-muted:#9aa3c9;
+    --note:#e8d47e; --note-ink:#2d260a; --note-edge:rgba(0,0,0,.35);
+    --bar:#141917; --bar-edge:rgba(230,240,220,.10);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0f1311; --dot:rgba(220,230,210,.08);
+  --card:#1b211d; --edge:rgba(230,240,220,.12); --shadow:rgba(0,0,0,.48); --scrim:rgba(0,0,0,.6);
+  --ink:#e6e9df; --muted:#a2aa9a; --faint:#7d8576;
+  --path:#c8a250;
+  --light:#7598ff; --on-light:#0b1230; --light-soft:rgba(117,152,255,.12); --light-glow:rgba(117,152,255,.30);
+  --built:#82c46f; --built-soft:rgba(130,196,111,.14);
+  --planned:#dcaa48; --planned-soft:rgba(220,170,72,.14);
+  --stale:#ef8256; --stale-soft:rgba(239,130,86,.14);
+  --z-deep:#18191d; --z-day:#152016; --z-dusk:#211b15; --z-night:#111631;
+  --z-ink:#e6e9df; --z-muted:#a2aa9a; --z-night-ink:#e9ecf8; --z-night-muted:#9aa3c9;
+  --note:#e8d47e; --note-ink:#2d260a; --note-edge:rgba(0,0,0,.35);
+  --bar:#141917; --bar-edge:rgba(230,240,220,.10);
+  color-scheme:dark;
+}
+:root[data-theme="light"]{ color-scheme:light; }
+
+html,body{height:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--f-body);display:flex;flex-direction:column;overflow:hidden}
+button,input,select,textarea{font-family:inherit}
+:focus-visible{outline:2px solid var(--light);outline-offset:2px}
+
+/* top bar */
+.bar{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding-block:9px;padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px));background:var(--bar);border-bottom:1px solid var(--bar-edge);position:relative;z-index:15}
+.brand{display:flex;align-items:center;gap:9px;flex:none}
+.brand b{font-family:var(--f-display);font-weight:780;font-size:19px;letter-spacing:-.01em}
+.brand span{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.parts{display:flex;gap:5px;overflow-x:auto;min-width:0;flex:1 1 240px;scrollbar-width:none;padding-block:2px;align-items:center}
+.parts::-webkit-scrollbar{display:none}
+.chip{flex:none;font:500 12.5px/1 var(--f-body);color:var(--muted);background:transparent;border:1px solid var(--bar-edge);border-radius:999px;padding:7px 11px;cursor:pointer;white-space:nowrap;transition:all .15s}
+.chip:hover{color:var(--ink);border-color:var(--faint)}
+.chip[aria-current="true"]{color:var(--ink);background:var(--card);border-color:var(--path);box-shadow:0 0 0 1px var(--path)}
+.chip.add-chip{border-style:dashed;color:var(--path);border-color:var(--path);font-weight:600}
+.chip.add-chip:hover{background:rgba(200,162,80,.12)}
+.tools{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+
+/* Story Built/Planned Progress Bar */
+.progress{display:flex;align-items:center;gap:7px;font:500 11.5px var(--f-mono);color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;background:var(--card);padding:5px 10px;border-radius:999px;border:1px solid var(--edge)}
+.meter{width:76px;height:7px;border-radius:4px;background:rgba(128,128,128,.16);overflow:hidden;display:flex}
+.meter .m-built{height:100%;background:var(--built);transition:width .3s}
+.meter .m-planned{height:100%;background:var(--planned);transition:width .3s}
+
+.btn{font:600 12px/1 var(--f-body);color:var(--ink);background:var(--card);border:1px solid var(--edge);border-radius:9px;padding:8px 11px;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;transition:all .15s}
+.btn:hover{border-color:var(--faint);transform:translateY(-1px)}
+.btn.primary{background:var(--light);color:var(--on-light);border-color:transparent}
+.btn.gold{background:var(--path);color:#fff;border-color:transparent}
+.btn.live-btn{background:var(--built-soft);color:var(--built);border-color:var(--built)}
+.btn.live-btn.connected{background:var(--built);color:#fff;border-color:transparent;box-shadow:0 0 14px rgba(130,196,111,.4)}
+.btn.danger{background:var(--stale-soft);color:var(--stale);border-color:rgba(179,68,28,.3)}
+.btn[disabled]{opacity:.5;cursor:default;transform:none}
+
+.live-dot{width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block}
+.btn.live-btn.connected .live-dot{background:#fff;animation:livePulse 1.8s infinite}
+@keyframes livePulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)}70%{box-shadow:0 0 0 7px transparent}100%{box-shadow:0 0 0 0 transparent}}
+
+/* Peer Avatars in Top Bar */
+.peer-avatars{display:flex;align-items:center;gap:4px}
+.peer-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:999px;font:600 11px/1 var(--f-mono);color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+
+/* main workspace split */
+.workspace{flex:1;display:flex;position:relative;overflow:hidden}
+
+/* canvas */
+#viewport{flex:1;position:relative;overflow:hidden;touch-action:none;cursor:grab;background-color:var(--ground);background-image:radial-gradient(circle,var(--dot) 1.3px,transparent 1.7px);user-select:none;-webkit-user-select:none}
+#viewport.grabbing{cursor:grabbing}
+#viewport.connecting-wire{cursor:crosshair}
+#world{position:absolute;left:0;top:0;transform-origin:0 0}
+.layer{position:absolute;left:0;top:0}
+#wires{position:absolute;left:0;top:0;overflow:visible;pointer-events:stroke}
+
+/* Connection Lines between cards */
+.wire-group{cursor:pointer;pointer-events:stroke}
+.w-hit{stroke:transparent;stroke-width:16;fill:none;pointer-events:stroke}
+.w-line{stroke:var(--path);stroke-width:3;fill:none;stroke-linecap:round;transition:stroke-width .15s,filter .15s}
+.w-line.color-gold{stroke:var(--path)}
+.w-line.color-blue{stroke:var(--light)}
+.w-line.color-green{stroke:var(--built)}
+.w-line.color-crimson{stroke:#e11d48}
+.wire-group:hover .w-line,.wire-group.selected .w-line{stroke-width:4.5;filter:drop-shadow(0 0 8px var(--path))}
+.w-label-bg{fill:var(--bar);stroke:var(--path);stroke-width:1;rx:6}
+.w-label-text{font:600 10.5px var(--f-mono);fill:var(--ink);letter-spacing:.06em;text-transform:uppercase;pointer-events:none}
+.w-temp{stroke:var(--light);stroke-width:3;stroke-dasharray:6 5;fill:none;pointer-events:none}
+
+/* zones (Parts) */
+.zone{position:absolute;border-radius:36px;background:var(--zbg);transition:box-shadow .2s;box-sizing:border-box}
+.zone.tone-cast{background:transparent;border:2px dashed var(--edge)}
+.zone.selected-zone{box-shadow:0 0 0 3px var(--path)}
+.tone-cast,.tone-deep{--zbg:var(--z-deep);--zink:var(--z-ink);--zmuted:var(--z-muted)}
+.tone-day{--zbg:var(--z-day);--zink:var(--z-ink);--zmuted:var(--z-muted)}
+.tone-dusk{--zbg:var(--z-dusk);--zink:var(--z-ink);--zmuted:var(--z-muted)}
+.tone-night{--zbg:var(--z-night);--zink:var(--z-night-ink);--zmuted:var(--z-night-muted)}
+.zhead{position:absolute;color:var(--zink);cursor:grab}
+.zhead:active{cursor:grabbing}
+.era{font:500 12.5px/1 var(--f-mono);letter-spacing:.16em;text-transform:uppercase;color:var(--zmuted);display:flex;align-items:center;gap:8px}
+.era-drag-badge{font:600 10px/1 var(--f-mono);padding:3px 7px;border-radius:6px;background:rgba(128,128,128,.16);color:var(--zmuted)}
+.zhead h2{font-family:var(--f-display);font-weight:800;font-size:80px;line-height:.95;letter-spacing:-.035em;margin:10px 0 12px;text-wrap:balance;cursor:pointer}
+.zhead h2:hover{opacity:.85}
+.zhead .sub{font:500 19px/1.35 var(--f-body);margin:0 0 14px;max-width:42ch}
+.mood{display:flex;align-items:center;gap:8px;font:500 12.5px var(--f-mono);color:var(--zmuted);flex-wrap:wrap}
+.mood .k{letter-spacing:.14em;text-transform:uppercase;margin-right:4px}
+.sw{width:20px;height:20px;border-radius:50%;box-shadow:0 0 0 1px var(--edge)}
+.gap{position:absolute;width:200px;margin-left:-100px;text-align:center;font:500 12px/1.35 var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);pointer-events:none}
+
+/* zone action bar */
+.zactions{display:inline-flex;gap:6px;align-items:center;margin-top:12px;flex-wrap:wrap}
+.zbtn{font:600 11.5px/1 var(--f-mono);letter-spacing:.04em;padding:7px 11px;border-radius:999px;border:1px solid rgba(128,128,128,.3);background:var(--card);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:5px;box-shadow:0 4px 12px -4px var(--shadow);transition:all .15s}
+.zbtn:hover{border-color:var(--path);color:var(--path);transform:translateY(-1px)}
+
+/* zone bottom-right resize handle */
+.zone-resize{position:absolute;right:14px;bottom:14px;width:24px;height:24px;border-radius:8px;background:rgba(128,128,128,.16);color:var(--zmuted);display:flex;align-items:center;justify-content:center;cursor:nwse-resize;font:600 12px var(--f-mono);opacity:.6;transition:opacity .15s}
+.zone:hover .zone-resize{opacity:1}
+
+/* cards (freely draggable & connectable) */
+.card{position:absolute;width:272px;box-sizing:border-box;background:var(--card);border:1.5px solid var(--edge);border-radius:14px;padding:16px 18px 18px;box-shadow:0 1px 0 var(--edge),0 14px 28px -18px var(--shadow);transition:box-shadow .15s,border-color .15s;cursor:grab;z-index:2}
+.card:hover{border-color:var(--faint)}
+.card.dragging{cursor:grabbing;z-index:12;box-shadow:0 24px 48px -12px var(--shadow),0 0 0 2px var(--path);transform:scale(1.02)}
+.card.selected{border-color:var(--path);box-shadow:0 0 0 2.5px var(--path),0 18px 36px -14px var(--shadow);z-index:5}
+.card.wire-target-hover{border-color:var(--light);box-shadow:0 0 0 3px var(--light),0 0 28px var(--light-glow)}
+
+/* Connection Ports (Left input, Right output) */
+.port{position:absolute;top:50%;width:15px;height:15px;border-radius:50%;background:var(--card);border:2.5px solid var(--path);transform:translateY(-50%);cursor:crosshair;z-index:6;transition:transform .15s,background .15s,box-shadow .15s;opacity:.35}
+.card:hover .port,.card.selected .port,#viewport.connecting-wire .port{opacity:1}
+.port:hover{transform:translateY(-50%) scale(1.35);background:var(--path);box-shadow:0 0 10px var(--path)}
+.port-in{left:-9px}
+.port-out{right:-9px;background:var(--path)}
+
+/* card hover quick actions */
+.card-tools{position:absolute;top:10px;right:10px;display:flex;gap:4px;opacity:0;transition:opacity .15s;z-index:4}
+.card:hover .card-tools,.card.selected .card-tools{opacity:1}
+.ctool{width:24px;height:24px;border-radius:6px;border:1px solid var(--edge);background:var(--bar);color:var(--muted);font:600 12px/1 var(--f-mono);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.ctool:hover{color:var(--ink);border-color:var(--faint);background:var(--card)}
+.ctool.conn-btn{color:var(--path);border-color:rgba(200,162,80,.4)}
+.ctool.conn-btn:hover{background:var(--path);color:#fff}
+.ctool.del:hover{background:var(--stale-soft);color:var(--stale);border-color:var(--stale)}
+
+/* Status badge pill on card */
+.status-pill{display:inline-flex;align-items:center;gap:4px;padding:3px 7px;border-radius:999px;font:600 9.5px/1 var(--f-mono);letter-spacing:.07em;text-transform:uppercase}
+.status-pill.built{background:var(--built-soft);color:var(--built)}
+.status-pill.planned{background:var(--planned-soft);color:var(--planned)}
+.status-pill.draft{background:rgba(128,128,128,.14);color:var(--muted)}
+
+.kicker{font:500 11px/1 var(--f-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--faint);display:flex;gap:8px;align-items:center;margin-bottom:10px;padding-right:64px;flex-wrap:wrap}
+.kicker .no{color:var(--path);font-variant-numeric:tabular-nums;font-weight:700}
+.beat h3{font-family:var(--f-display);font-weight:720;font-size:21px;line-height:1.14;letter-spacing:-.01em;margin:0 0 8px;text-wrap:balance}
+.beat p{font-size:15px;line-height:1.45;margin:0;white-space:pre-wrap}
+.tags{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:6px}
+.tag{font-size:12.5px;line-height:1.38;padding:7px 10px;border-radius:8px;position:relative}
+.tag b{display:block;font:500 10px/1 var(--f-mono);letter-spacing:.09em;text-transform:uppercase;margin-bottom:4px}
+.tag.built{background:var(--built-soft)} .tag.built b{color:var(--built)}
+.tag.planned{background:var(--planned-soft)} .tag.planned b{color:var(--planned)}
+.tag.stale{background:var(--stale-soft)} .tag.stale b{color:var(--stale)}
+
+.person h3{font-family:var(--f-display);font-weight:720;font-size:23px;line-height:1.1;margin:0;padding-right:52px}
+.person .si{font-family:var(--f-sinhala);font-weight:600;font-size:17px;color:var(--muted);margin:4px 0 9px;min-height:1.2em}
+.person p{font-size:14.5px;line-height:1.45;margin:0}
+
+.legend{cursor:grab}
+.legend h3{font-family:var(--f-display);font-weight:720;font-size:20px;margin:0 0 10px}
+.legend ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-size:13.5px;line-height:1.38}
+.legend li{display:flex;gap:10px;align-items:flex-start}
+.legend .mk{flex:none;width:26px;height:16px;border-radius:5px;margin-top:1px}
+.mk.line{height:3px;margin-top:8px;background:var(--path);border-radius:2px}
+.mk.built{background:var(--built-soft);box-shadow:inset 0 0 0 1px var(--built)}
+.mk.planned{background:var(--planned-soft);box-shadow:inset 0 0 0 1px var(--planned)}
+.mk.stale{background:var(--stale-soft);box-shadow:inset 0 0 0 1px var(--stale)}
+.legend .how{margin-top:12px;padding-top:10px;border-top:1px solid var(--edge);font-size:12.5px;color:var(--muted);line-height:1.42}
+
+/* Sticky notes */
+.note{position:absolute;width:236px;background:var(--note);color:var(--note-ink);border-radius:4px 4px 14px 4px;box-shadow:0 0 0 1px var(--note-edge),0 16px 26px -16px var(--shadow);transform:rotate(-1.2deg);transition:box-shadow .15s;z-index:7}
+.note.lifted{transform:rotate(0) scale(1.02);box-shadow:0 0 0 1px var(--note-edge),0 22px 36px -16px var(--shadow);z-index:14}
+.note.tone-rose{--note:#f9cbd6;--note-ink:#3b0d1a}
+.note.tone-mint{--note:#c6efd8;--note-ink:#0b3520}
+.note.tone-sky{--note:#cbe3ff;--note-ink:#0d254c}
+.note-head{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:7px 8px 0 12px;cursor:move;font:500 10.5px var(--f-mono);letter-spacing:.09em;text-transform:uppercase;touch-action:none}
+.note-head span{opacity:.75}
+.note-colors{display:flex;gap:4px;align-items:center}
+.nc-dot{width:11px;height:11px;border-radius:50%;border:1px solid rgba(0,0,0,.25);cursor:pointer;padding:0}
+.note-del{font:500 10.5px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--note-ink);background:transparent;border:1px solid transparent;border-radius:6px;padding:3px 6px;cursor:pointer;opacity:.65}
+.note-del:hover{opacity:1;border-color:var(--note-edge)}
+.note-del.armed{opacity:1;border-color:currentColor;background:rgba(179,68,28,.15)}
+.note textarea{display:block;width:100%;box-sizing:border-box;border:0;background:transparent;resize:none;overflow:hidden;font-family:var(--f-hand);font-weight:500;font-size:25px;line-height:1.18;color:var(--note-ink);padding:4px 12px 16px;min-height:84px;user-select:text;-webkit-user-select:text}
+.note textarea:focus{outline:none}
+
+/* Canva-Style Remote Multiplayer Cursors */
+#layerCursors{position:absolute;left:0;top:0;pointer-events:none;z-index:30}
+.remote-cursor{position:absolute;left:0;top:0;pointer-events:none;transition:transform 55ms linear;will-change:transform;z-index:30}
+.rc-svg{width:22px;height:22px;filter:drop-shadow(0 2px 5px rgba(0,0,0,.45))}
+.rc-badge{position:absolute;left:16px;top:16px;padding:3px 9px;border-radius:999px;font:600 11.5px/1.2 var(--f-body);color:#fff;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.35);display:flex;align-items:center;gap:5px}
+.rc-action{font:500 10px var(--f-mono);opacity:.9}
+
+/* Remote peer card selection ring */
+.peer-editing-tag{position:absolute;top:-22px;left:10px;padding:2px 8px;border-radius:6px;font:600 10px var(--f-mono);color:#fff;pointer-events:none;white-space:nowrap;z-index:8;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+
+/* Right-hand Inspector Drawer */
+.inspector{width:350px;max-width:92vw;background:var(--bar);border-left:1px solid var(--bar-edge);display:flex;flex-direction:column;z-index:14;box-shadow:-12px 0 32px -16px var(--shadow)}
+.inspector[hidden]{display:none}
+.insp-head{padding:14px 16px;border-bottom:1px solid var(--bar-edge);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.insp-head h3{font-family:var(--f-display);font-weight:750;font-size:17px;margin:0}
+.insp-head .sub-k{font:500 10.5px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.insp-body{padding:16px;overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:14px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font:600 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.field input,.field textarea,.field select{width:100%;box-sizing:border-box;font:400 13.5px/1.4 var(--f-body);color:var(--ink);background:var(--card);border:1px solid var(--edge);border-radius:8px;padding:8px 10px}
+.field textarea{resize:vertical;min-height:76px}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tag-editor-list{display:flex;flex-direction:column;gap:8px}
+.tag-edit-item{background:var(--card);border:1px solid var(--edge);border-radius:8px;padding:8px;display:flex;flex-direction:column;gap:6px}
+.tag-edit-top{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.insp-foot{padding:12px 16px;border-top:1px solid var(--bar-edge);display:flex;gap:8px;justify-content:space-between;align-items:center;flex-wrap:wrap}
+
+/* floating HUD controls */
+.hud{position:absolute;right:calc(env(safe-area-inset-right,0px) + 14px);bottom:calc(env(safe-area-inset-bottom,0px) + 14px);display:flex;gap:4px;align-items:center;background:var(--bar);border:1px solid var(--bar-edge);border-radius:12px;padding:5px;z-index:6;box-shadow:0 10px 24px -16px var(--shadow)}
+.hud button{min-width:34px;height:34px;font:600 13.5px/1 var(--f-body);color:var(--ink);background:transparent;border:0;border-radius:8px;cursor:pointer;padding:0 10px}
+.hud button:hover{background:var(--card)}
+.hud .pct{font:500 12px var(--f-mono);color:var(--muted);min-width:46px;text-align:center;font-variant-numeric:tabular-nums}
+.hint{position:absolute;left:calc(env(safe-area-inset-left,0px) + 14px);bottom:calc(env(safe-area-inset-bottom,0px) + 14px);font:500 11.5px var(--f-mono);color:var(--muted);background:var(--bar);border:1px solid var(--bar-edge);border-radius:10px;padding:9px 12px;z-index:6;max-width:calc(100% - 360px)}
+@media (max-width:720px){.hint{display:none}.brand span{display:none}}
+
+/* modal sheets */
+.sheet{position:fixed;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;padding:16px;background:var(--scrim);backdrop-filter:blur(4px)}
+.sheet[hidden]{display:none}
+.sheet-box{width:min(680px,100%);max-height:calc(100% - 32px);display:flex;flex-direction:column;gap:14px;box-sizing:border-box;background:var(--bar);border:1px solid var(--bar-edge);border-radius:16px;padding:22px;box-shadow:0 24px 60px -20px var(--shadow);overflow-y:auto}
+.sheet-box h2{font-family:var(--f-display);font-weight:760;font-size:24px;line-height:1.15;margin:0}
+.sheet-box p{margin:0;font-size:14px;line-height:1.45;color:var(--muted)}
+.sheet-box textarea{flex:1 1 auto;min-height:220px;width:100%;box-sizing:border-box;resize:vertical;font:400 13.5px/1.5 var(--f-mono);color:var(--ink);background:var(--card);border:1px solid var(--edge);border-radius:10px;padding:12px}
+.sheet-row{display:flex;gap:8px;justify-content:flex-end;align-items:center;flex-wrap:wrap}
+.sheet-row .status{margin-right:auto;font:500 12px var(--f-mono);color:var(--muted)}
+
+/* Live Co-Edit Room Modal */
+.collab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.collab-grid{grid-template-columns:1fr}}
+.collab-card{background:var(--card);border:1px solid var(--edge);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.collab-share-box{display:flex;gap:8px;align-items:center;background:var(--ground);border:1px solid var(--edge);padding:8px 10px;border-radius:9px;font:500 12px var(--f-mono);word-break:break-all}
+.peer-list{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.peer-row{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:8px;background:var(--ground);font:500 13px var(--f-body)}
+</style>
+</head>
+<body>
+
+<div class="bar" role="toolbar" aria-label="Govi Thena Story Board Studio Controls">
+  <div class="brand">
+    <b>Govi Thena</b>
+    <span>Live Co-Op Board</span>
+    <a href="/" class="chip" style="margin-left:4px;text-decoration:none;font-size:11px;padding:5px 9px" title="Switch to CrimsonThread Detective Board">← CrimsonThread</a>
+  </div>
+
+  <nav class="parts" id="parts" aria-label="Jump to a part"></nav>
+
+  <div class="tools">
+    <!-- Story Progress Meter (Built + Planned vs Total Beats) -->
+    <div class="progress" aria-live="polite" title="Story implementation progress across all parts">
+      <span class="meter">
+        <i class="m-built" id="meterBuilt" style="width:0%"></i>
+        <i class="m-planned" id="meterPlanned" style="width:0%"></i>
+      </span>
+      <span id="progText">0/0 built</span>
+    </div>
+
+    <!-- Connected Peer Avatars -->
+    <div class="peer-avatars" id="peerAvatars"></div>
+
+    <!-- Live Sync / Room Button -->
+    <button class="btn live-btn" id="openCollabBtn" type="button" title="Collaborate live with your friend (Canva-style cursors & instant sync)">
+      <span class="live-dot"></span>
+      <span id="collabBtnLabel">Live Sync</span>
+    </button>
+
+    <button class="btn gold" id="addCardBtn" type="button">+ Add card</button>
+    <button class="btn" id="addPartBtn" type="button">+ New part</button>
+    <button class="btn" id="addNote" type="button">+ Sticky note</button>
+    <button class="btn" id="autoLayoutBtn" type="button" title="Tidy & snap all cards back into clean part columns">Tidy layout</button>
+    <button class="btn" id="copyAll" type="button">Export / JSON</button>
+    <button class="btn" id="themeToggle" type="button" title="Switch Light / Dark theme">Theme</button>
+  </div>
+</div>
+
+<!-- Main Workspace: Endless Canvas + Right Inspector Drawer -->
+<div class="workspace">
+  <main id="viewport" aria-label="Story canvas">
+    <div id="world">
+      <div class="layer" id="layerZones"></div>
+      <svg id="wires" aria-hidden="true"></svg>
+      <div class="layer" id="layerCards"></div>
+      <div class="layer" id="layerNotes"></div>
+      <div class="layer" id="layerCursors"></div>
+    </div>
+    <div class="hint">Drag any card or part header to move it · Drag from a card’s right gold dot (●) to connect lines · Click any card or wire to edit</div>
+    <div class="hud">
+      <button type="button" id="zoomOut" aria-label="Zoom out">−</button>
+      <span class="pct" id="zoomPct">100%</span>
+      <button type="button" id="zoomIn" aria-label="Zoom in">+</button>
+      <button type="button" id="fitAll">Whole story</button>
+    </div>
+  </main>
+
+  <!-- Right-hand Inspector Drawer -->
+  <aside class="inspector" id="inspector" hidden aria-label="Card, Wire & Part Inspector">
+    <div class="insp-head">
+      <div>
+        <div class="sub-k" id="inspKicker">INSPECTOR</div>
+        <h3 id="inspTitle">Edit Item</h3>
+      </div>
+      <button class="btn" id="inspClose" type="button">✕</button>
+    </div>
+    <div class="insp-body" id="inspBody"></div>
+    <div class="insp-foot" id="inspFoot"></div>
+  </aside>
+</div>
+
+<!-- Live Multiplayer Co-Op Room Modal -->
+<div class="sheet" id="collabSheet" hidden>
+  <div class="sheet-box" role="dialog" aria-modal="true" aria-labelledby="collabTitle">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <span class="sub-k" style="font:600 11px var(--f-mono);color:var(--built);letter-spacing:.1em;text-transform:uppercase">CANVA-STYLE REALTIME P2P SYNC</span>
+        <h2 id="collabTitle" style="margin-top:2px">Edit Together Live</h2>
+      </div>
+      <button class="btn" id="collabClose" type="button">Close</button>
+    </div>
+    <p>Enter your name and a shared <b>Room Code</b>. When you and your friend join the same Room Code (or open the invite link), you will see each other's <b>live mouse pointers</b>, move cards together, draw connection lines, and create parts in real time.</p>
+
+    <div class="collab-grid">
+      <div class="collab-card">
+        <div class="field">
+          <label>Your Display Name</label>
+          <input type="text" id="myNameInput" placeholder="e.g. Vikum" />
+        </div>
+        <div class="field">
+          <label>Your Cursor Color</label>
+          <select id="myColorInput">
+            <option value="#e11d48">Crimson Red</option>
+            <option value="#2563eb">Cobalt Blue</option>
+            <option value="#16a34a">Emerald Green</option>
+            <option value="#d97706">Golden Amber</option>
+            <option value="#9333ea">Royal Violet</option>
+            <option value="#0891b2">Cyber Cyan</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="collab-card">
+        <div class="field">
+          <label>Shared Room Code</label>
+          <input type="text" id="roomCodeInput" placeholder="e.g. govi-thena-team" />
+        </div>
+        <div style="display:flex;gap:8px;margin-top:auto">
+          <button class="btn primary" id="joinRoomBtn" type="button" style="flex:1;justify-content:center">Connect to Room</button>
+          <button class="btn danger" id="leaveRoomBtn" type="button" hidden>Disconnect</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="collab-card">
+      <label style="font:600 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Direct Invite Link (Send to your friend)</label>
+      <div class="collab-share-box">
+        <span id="inviteUrlText" style="flex:1">Connect to a room to generate invite link...</span>
+        <button class="btn" id="copyInviteBtn" type="button">Copy Link</button>
+      </div>
+      <div id="collabStatusMsg" style="font:500 12px var(--f-mono);color:var(--built)">Ready to connect. (Also syncs automatically across open tabs on this computer!)</div>
+    </div>
+
+    <div class="collab-card">
+      <label style="font:600 11px var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)">Editors Online in This Room</label>
+      <div class="peer-list" id="peerListContainer"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Export / Import JSON Modal -->
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet-box" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <h2 id="sheetTitle">Story Outline &amp; JSON Backup</h2>
+      <div style="display:flex;gap:6px">
+        <button class="btn" id="tabFullScriptBtn" type="button">Markdown Outline</button>
+        <button class="btn" id="tabJsonBtn" type="button">JSON Board State</button>
+      </div>
+    </div>
+    <p id="sheetDesc">Complete Markdown outline or full JSON backup of all parts, cards, positions, wires, and sticky notes.</p>
+    <textarea id="sheetText" aria-labelledby="sheetTitle"></textarea>
+    <div class="sheet-row">
+      <span class="status" id="sheetMsg" role="status"></span>
+      <input type="file" id="jsonFileInput" accept=".json,application/json" hidden />
+      <button class="btn danger" id="resetBoardBtn" type="button">Reset Default Board</button>
+      <button class="btn" id="importJsonBtn" type="button">Import JSON</button>
+      <button class="btn" id="exportJsonBtn" type="button">Download JSON</button>
+      <button class="btn" id="sheetClose" type="button">Close</button>
+      <button class="btn primary" id="sheetCopy" type="button">Copy Text</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+/* ==================================================================
+   1. DEFAULT STORY DATA (NO HOLES, FREE-MOVING CARDS + WIRES)
+   ================================================================== */
+const DEFAULT_STORY_ZONES = [
+  { id:'cast', kind:'cast', tone:'cast', chip:"Who's who", era:'Before you start', title:"Who's who",
+    sub:'The family, the friend, the smith, and the ones who came back for their ship.',
+    cards:[
+      { id:'c-legend', legend:true },
+      { id:'c-putha', name:'Putha', si:'පුතා', text:'The son, and the one you play. A young boy.' },
+      { id:'c-tata', name:'Tata', si:'තාත්තා', text:'Putha’s father, also called Appachchi. Taken on the night of 1935. The village thinks he murdered his friend.' },
+      { id:'c-amma', name:'Amma', si:'අම්මා', text:'Putha’s mother. Thrown out of the village with Putha and Seeya.' },
+      { id:'c-seeya', name:'Seeya', si:'සීයා', text:'Putha’s grandfather. He knows something he isn’t saying.' },
+      { id:'c-friend', name:'Tata’s friend', si:'', text:'Shot the alien by mistake. Found dead in the jungle. The village blames Tata.' },
+      { id:'c-baas', name:'Kammala Baas', si:'කම්මල් බාස්', text:'The village smith. The only one who still deals with the family.' },
+      { id:'c-aliens', name:'The aliens', si:'', text:'Ethical. They take a life only for a life. They want their ship back.' },
+    ]},
+  { id:'ship', kind:'timeline', tone:'deep', chip:'Long ago', era:'Thousands of years ago', title:'The ship',
+    sub:'Before any people lived here.', mood:'deep time · stone · silence', swatches:['#4a4e57','#8b8577','#1b2a3a'],
+    gapBefore:'The story starts here',
+    beats:[
+      { id:'a1', title:'It comes on a mission', text:'A ship comes to this place on a mission. It doesn’t crash.', status:'planned', tags:[] },
+      { id:'a2', title:'It’s left in the ground', text:'The ship stays buried under the place that will one day be the village. Its entrance is at the bottom of what will be the wewa.', status:'planned', tags:[] },
+      { id:'a3', title:'Still brand new', text:'It’s never used. It still has all its fuel, so one day they’ll come back for it.', status:'planned', tags:[] },
+    ]},
+  { id:'night', kind:'timeline', tone:'night', chip:'1935', era:'1935', title:'The night',
+    sub:'Tata and his friend, alone in the jungle.', mood:'thunder · lantern · blue light', swatches:['#10163a','#f2b44a','#3d7bff'],
+    gapBefore:'Thousands of years pass',
+    beats:[
+      { id:'b1', title:'A small ship lands', text:'A small alien ship comes down near the village. An alien jumps out.', status:'planned', tags:[] },
+      { id:'b2', title:'The friend shoots', text:'Tata and his friend see it. The friend shoots it by mistake, and it dies.', status:'planned', tags:[] },
+      { id:'b3', title:'They hide the body', text:'They panic and hide it.', status:'planned', tags:[] },
+      { id:'b4', title:'Into the jungle', text:'That night they carry the body into the jungle to bury it.', status:'planned', tags:[] },
+      { id:'b5', title:'The blue light', text:'Another ship comes. Not the big mothership, an ordinary one. This is the blue light.', status:'built',
+        tags:[{k:'built', t:'The opening shows the blue light.'}] },
+      { id:'b6', title:'Bullets bounce off', text:'They shoot at it and the bullets bounce off. They hide in a cave.', status:'planned', tags:[] },
+      { id:'b7', title:'Tata runs home for his gun', text:'A gun is the only weapon they trust. He runs to the village, takes the gun and the lantern, and heads back.', status:'built',
+        tags:[{k:'built', t:'This is the opening scene.'}] },
+      { id:'b8', title:'The cave', text:'His friend lies dead. The aliens take Tata. They kill only the one who killed.', status:'built',
+        tags:[{k:'built', t:'The opening ends as the light fills the screen. The cave isn’t shown.'}] },
+    ]},
+  { id:'exile', kind:'timeline', tone:'dusk', chip:'Exile', era:'The days after', title:'The exile',
+    sub:'The village decides what happened.', mood:'whispers · shut doors · the long walk', swatches:['#8a6e58','#c9b79c','#5a5f66'],
+    gapBefore:'Days later',
+    beats:[
+      { id:'c1', title:'The body is found', text:'The village finds the friend’s body. Tata is gone.', status:'planned', tags:[] },
+      { id:'c2', title:'Tata gets the blame', text:'They decide Tata killed his friend and ran away.', status:'planned',
+        tags:[{k:'stale', t:'Baas calls it a curse ("a light in the sky, a man gone"), not a murder.'}] },
+      { id:'c3', title:'“You are not welcome”', text:'The village throws the family out.', status:'planned', tags:[] },
+      { id:'c4', title:'The farm past the jungle', text:'Putha, Amma and Seeya start again on their own land, away from the village.', status:'built',
+        tags:[{k:'built', t:'The farm, the field and the house.'}] },
+    ]},
+  { id:'farm', kind:'timeline', tone:'day', chip:'The farm', era:'3 months later', title:'The farm',
+    sub:'The game you play. Cozy days, scary nights.', mood:'mud · sun · goyam kavi', swatches:['#6f9a3c','#c7a15a','#e9dfb8'],
+    gapBefore:'3 months pass',
+    beats:[
+      { id:'d1', title:'Putha wakes up', text:'The night of 1935 comes back as a nightmare. He wakes in the farm house. Nobody is home.', status:'built',
+        tags:[{k:'built', t:'The end of the opening.'}] },
+      { id:'d2', title:'Waking the field', text:'Flood, churn, level, sow. Seeya teaches him, and Kammala Baas makes the tools.', status:'built',
+        tags:[{k:'built', t:'The farming and the upgrades.'}] },
+      { id:'d3', title:'The village keeps away', text:'Only Kammala Baas still deals with the family.', status:'built',
+        tags:[{k:'built', t:'Baas: "The village says I should not deal with your family."'}] },
+      { id:'d4', title:'Seeya knows something', text:'He isn’t saying what. Finding out is part of the game.', status:'planned',
+        tags:[{k:'stale', t:'His story still says a violet light and the udella.'}] },
+    ]},
+  { id:'fields', kind:'timeline', tone:'dusk', chip:'The fields die', era:'Later', title:'The fields die',
+    sub:'The aliens’ first try to empty the village.', mood:'dry stalks · crop circles · signs at night', swatches:['#b29a5d','#5b4a3a','#3d7bff'],
+    beats:[
+      { id:'e1', title:'The village crops fail', text:'The aliens make every village field impossible to harvest.', status:'planned',
+        tags:[{k:'planned', t:'Crop circles, then a disease.'}] },
+      { id:'e2', title:'Only our land grows', text:'The family’s field, out past the jungle, still grows.', status:'planned', tags:[] },
+      { id:'e3', title:'The village comes to us', text:'They don’t leave. They walk to the land of the family they threw out, harvest it and carry the food home.', status:'planned', tags:[] },
+      { id:'e4', title:'Field leader', text:'The king asks Putha his secret. "It’s the land." He makes Putha field leader, and every village helps grow the field.', status:'planned',
+        tags:[{k:'planned', t:'The last upgrade level.'}] },
+      { id:'e5', title:'The signs', text:'The aliens are provoked. They start sending signs to Putha.', status:'planned', tags:[] },
+    ]},
+  { id:'deal', kind:'timeline', tone:'night', chip:'The deal', era:'The end', title:'The deal',
+    sub:'Putha gets his father back.', mood:'dust · a father home · the ship leaves', swatches:['#6b6257','#f2b44a','#9fc0ff'],
+    beats:[
+      { id:'f1', title:'Putha sees the danger', text:'The signs convince him the village can’t stay.', status:'planned', tags:[] },
+      { id:'f2', title:'The deal', text:'The aliens’ offer: do this, and we give you your father back.', status:'planned', tags:[] },
+      { id:'f3', title:'The trick', text:'Putha gets every villager out of the village.', status:'planned', tags:[] },
+      { id:'f4', title:'Tata comes home', text:'Putha gets his father back.', status:'planned', tags:[] },
+      { id:'f5', title:'The ship rises', text:'The ancient ship comes up from under the village. The village crumbles, and the ship leaves to carry on its mission.', status:'planned', tags:[] },
+    ]},
+];
+
+const TAG = { built:'In the game', planned:'Planned', stale:'Game says otherwise' };
+const CW = 272, GX = 64, PAD = 56, ZGAP = 180, CAST_COLS = 4, CAST_GX = 26;
+const LS_BOARD = 'gt-collab-board-v3';
+const LS_THEME = 'gt-story-theme-v1';
+const LS_USER  = 'gt-collab-user-v1';
+
+const lsGet = (k) => { try { return JSON.parse(localStorage.getItem(k) || 'null'); } catch (_) { return null; } };
+const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (_) {} };
+
+/* Build initial positioned board state (zones, free-positioned cards, wires, notes) */
+function createInitialStateFromZones(rawZones) {
+  const zonesData = JSON.parse(JSON.stringify(rawZones));
+  const connections = [];
+  let xCursor = 0;
+  const topY = 310;
+  let prevBeatId = null;
+
+  for (const z of zonesData) {
+    const isCast = z.kind === 'cast';
+    const items = isCast ? (z.cards || []) : (z.beats || []);
+    const cols = isCast ? CAST_COLS : Math.max(1, items.length);
+    const gap = isCast ? CAST_GX : GX;
+    const innerW = cols * CW + (cols - 1) * gap;
+    z.x = xCursor;
+    z.y = 0;
+    z.w = innerW + PAD * 2;
+    z.h = isCast ? 720 : 680;
+
+    if (isCast) {
+      items.forEach((c, idx) => {
+        const r = Math.floor(idx / CAST_COLS);
+        const col = idx % CAST_COLS;
+        c.x = z.x + PAD + col * (CW + CAST_GX);
+        c.y = topY + r * 205;
+      });
+    } else {
+      items.forEach((b, idx) => {
+        b.x = z.x + PAD + idx * (CW + GX);
+        b.y = topY;
+        if (!b.status) {
+          const hasBuilt = (b.tags || []).some(t => t.k === 'built');
+          b.status = hasBuilt ? 'built' : 'planned';
+        }
+        if (prevBeatId) {
+          connections.push({
+            id: 'w_' + prevBeatId + '_' + b.id,
+            from: prevBeatId,
+            to: b.id,
+            color: 'gold',
+            label: idx === 0 && z.gapBefore ? z.gapBefore : ''
+          });
+        }
+        prevBeatId = b.id;
+      });
+    }
+    xCursor += z.w + ZGAP;
+  }
+
+  return {
+    zones: zonesData,
+    connections,
+    notes: {}
+  };
+}
+
+let BOARD = lsGet(LS_BOARD);
+if (!BOARD || !Array.isArray(BOARD.zones) || !Array.isArray(BOARD.connections)) {
+  BOARD = createInitialStateFromZones(DEFAULT_STORY_ZONES);
+  lsSet(LS_BOARD, BOARD);
+}
+
+/* ==================================================================
+   2. DOM HELPERS & VIEWPORT STATE
+   ================================================================== */
+const $ = (s) => document.querySelector(s);
+const world = $('#world'), vp = $('#viewport'), wires = $('#wires');
+const layerZones = $('#layerZones'), layerCards = $('#layerCards'), layerNotes = $('#layerNotes'), layerCursors = $('#layerCursors');
+const progText = $('#progText'), meterBuilt = $('#meterBuilt'), meterPlanned = $('#meterPlanned');
+const inspectorEl = $('#inspector'), inspKicker = $('#inspKicker'), inspTitle = $('#inspTitle'), inspBody = $('#inspBody'), inspFoot = $('#inspFoot');
+
+function h(tag, attrs = {}, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (v == null) continue;
+    if (k === 'class') e.className = v;
+    else if (k === 'text') e.textContent = v;
+    else e.setAttribute(k, v);
+  }
+  for (const c of kids) if (c != null) e.append(c);
+  return e;
+}
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+const place = (el, x, y) => { el.style.left = Math.round(x) + 'px'; el.style.top = Math.round(y) + 'px'; };
+function autosize(ta) { if (!ta) return; ta.style.height = 'auto'; ta.style.height = ta.scrollHeight + 'px'; }
+
+let tx = 0, ty = 0, z = 0.78;
+const MINZ = 0.08, MAXZ = 2.2;
+let selectedItem = null; // { type: 'beat' | 'person' | 'zone' | 'wire', zoneId?, itemId }
+const cardElements = new Map(); // cardId -> HTMLElement
+const zoneRecords = new Map();  // zoneId -> { bg, head, data }
+let chips = [];
+
+// Theme setup
+const savedTheme = localStorage.getItem(LS_THEME);
+if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+$('#themeToggle').addEventListener('click', () => {
+  const cur = document.documentElement.getAttribute('data-theme');
+  const isDark = cur === 'dark' || (!cur && matchMedia('(prefers-color-scheme: dark)').matches);
+  const next = isDark ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem(LS_THEME, next);
+});
+
+/* ==================================================================
+   3. SAVE & PROGRESS TRACKING
+   ================================================================== */
+function saveBoard(broadcast = true) {
+  lsSet(LS_BOARD, BOARD);
+  updateProgress();
+  if (broadcast) broadcastBoardState();
+}
+
+function findCardById(cardId) {
+  for (const zo of BOARD.zones) {
+    if (zo.kind === 'cast') {
+      const c = (zo.cards || []).find(item => item.id === cardId);
+      if (c) return { card: c, zone: zo, kind: 'person' };
+    } else {
+      const b = (zo.beats || []).find(item => item.id === cardId);
+      if (b) return { card: b, zone: zo, kind: 'beat' };
+    }
+  }
+  return null;
+}
+
+function updateProgress() {
+  let total = 0, built = 0, planned = 0;
+  for (const zo of BOARD.zones) {
+    if (zo.kind === 'cast') continue;
+    for (const b of (zo.beats || [])) {
+      total++;
+      const isBuilt = b.status === 'built' || (b.tags || []).some(t => t.k === 'built');
+      if (isBuilt) built++;
+      else if (b.status === 'planned') planned++;
+    }
+  }
+  const builtPct = total ? Math.round((built / total) * 100) : 0;
+  const plannedPct = total ? Math.round((planned / total) * 100) : 0;
+  meterBuilt.style.width = builtPct + '%';
+  meterPlanned.style.width = plannedPct + '%';
+  progText.textContent = `${built} of ${total} built (${builtPct}%)`;
+}
+
+/* ==================================================================
+   4. RENDER ZONES (PARTS), CARDS, STICKY NOTES & CONNECTION WIRES
+   ================================================================== */
+function rebuildBoard() {
+  layerZones.replaceChildren();
+  layerCards.replaceChildren();
+  layerNotes.replaceChildren();
+  $('#parts').replaceChildren();
+  cardElements.clear();
+  zoneRecords.clear();
+  chips = [];
+
+  let beatCounter = 0;
+
+  for (const [zIdx, zo] of BOARD.zones.entries()) {
+    const isZoneSel = selectedItem && selectedItem.type === 'zone' && selectedItem.itemId === zo.id;
+    const bg = h('div', { class: 'zone tone-' + (zo.tone || 'dusk') + (isZoneSel ? ' selected-zone' : ''), 'data-zone': zo.id });
+    Object.assign(bg.style, {
+      left: (zo.x || 0) + 'px',
+      top: (zo.y || 0) + 'px',
+      width: (zo.w || 900) + 'px',
+      height: (zo.h || 680) + 'px'
+    });
+
+    // Resize handle at bottom-right of each Part zone
+    const resizeHandle = h('div', { class: 'zone-resize', title: 'Drag to resize this Part container', text: '↘' });
+    makeZoneResizable(resizeHandle, zo, bg);
+    bg.append(resizeHandle);
+    layerZones.append(bg);
+
+    // Zone Header (Draggable to move the entire Part + its cards!)
+    const titleEl = h('h2', { text: zo.title, title: 'Click to edit Part · Drag header to move Part' });
+    const actionsBar = h('div', { class: 'zactions' });
+
+    if (zo.kind === 'cast') {
+      const addCharBtn = h('button', { class: 'zbtn', type: 'button', text: '+ Add character' });
+      addCharBtn.addEventListener('click', (e) => { e.stopPropagation(); addCharacterCard(zo.id); });
+      actionsBar.append(addCharBtn);
+    } else {
+      const addBeatBtn = h('button', { class: 'zbtn', type: 'button', text: '+ Add card to part' });
+      addBeatBtn.addEventListener('click', (e) => { e.stopPropagation(); addBeatCard(zo.id); });
+      actionsBar.append(addBeatBtn);
+    }
+    const editZoneBtn = h('button', { class: 'zbtn', type: 'button', text: '⚙ Edit part' });
+    editZoneBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openInspector({ type: 'zone', zoneId: zo.id, itemId: zo.id });
+    });
+    actionsBar.append(editZoneBtn);
+
+    const head = h('header', { class: 'zhead tone-' + (zo.tone || 'dusk') },
+      h('div', { class: 'era' },
+        h('span', { text: zo.era || 'Chapter' }),
+        h('span', { class: 'era-drag-badge', text: '⠿ Drag Part' })
+      ),
+      titleEl,
+      h('p', { class: 'sub', text: zo.sub || '' })
+    );
+    head.style.width = Math.max(320, (zo.w || 900) - PAD * 2) + 'px';
+    place(head, (zo.x || 0) + PAD, (zo.y || 0) + 42);
+
+    if (zo.mood) {
+      const m = h('div', { class: 'mood' }, h('span', { class: 'k', text: 'Mood' }));
+      for (const c of (zo.swatches || [])) {
+        const s = h('span', { class: 'sw' });
+        s.style.background = c;
+        m.append(s);
+      }
+      m.append(h('span', { text: zo.mood }));
+      head.append(m);
+    }
+    head.append(actionsBar);
+    makeZoneDraggable(head, zo);
+    layerCards.append(head);
+
+    zoneRecords.set(zo.id, { bg, head, data: zo });
+
+    // Build Cards inside this Part
+    if (zo.kind === 'cast') {
+      for (const c of (zo.cards || [])) {
+        const el = c.legend ? buildLegendCard(c, zo) : buildPersonCard(c, zo);
+        layerCards.append(el);
+        cardElements.set(c.id, el);
+      }
+    } else {
+      for (const b of (zo.beats || [])) {
+        beatCounter++;
+        const el = buildBeatCard(b, beatCounter, zo);
+        layerCards.append(el);
+        cardElements.set(b.id, el);
+      }
+    }
+
+    // Top bar chip for jumping to this Part
+    const chipBtn = h('button', { class: 'chip', type: 'button', text: zo.chip || zo.title });
+    chipBtn.addEventListener('click', () => goZone(zIdx));
+    $('#parts').append(chipBtn);
+    chips.push(chipBtn);
+  }
+
+  const addPartChip = h('button', { class: 'chip add-chip', type: 'button', text: '+ New Part' });
+  addPartChip.addEventListener('click', () => addNewPart());
+  $('#parts').append(addPartChip);
+
+  // Build Sticky Notes
+  for (const [nId, nData] of Object.entries(BOARD.notes || {})) {
+    if (nData && Number.isFinite(nData.x)) makeNoteElement(nId, nData);
+  }
+
+  requestAnimationFrame(() => {
+    drawWires();
+    updateProgress();
+    renderPeerSelectionBadges();
+  });
+}
+
+function buildLegendCard(c, zo) {
+  const el = h('article', { class: 'card legend', 'data-card': c.id },
+    h('h3', { text: 'How to co-edit this board' })
+  );
+  const ul = h('ul');
+  const row = (cls, text) => ul.append(h('li', {}, h('span', { class: 'mk ' + cls }), h('span', { text })));
+  row('line', 'Drag from any card’s right gold dot (●) to another card to connect lines.');
+  row('built', 'In the game: already built (counts toward progress).');
+  row('planned', 'Planned: designed on the board, not built yet.');
+  row('stale', 'Game says otherwise: discrepancy note.');
+  el.append(
+    ul,
+    h('div', {
+      class: 'how',
+      text: 'Drag any card to move it freely. Drag a Part title to move the entire Part. Click "Live Sync" in the top bar to edit together with live cursors.'
+    })
+  );
+  place(el, c.x || 56, c.y || 310);
+  makeCardDraggable(el, c, zo);
+  return el;
+}
+
+function buildPersonCard(c, zo) {
+  const isSel = selectedItem && selectedItem.itemId === c.id;
+  const tools = h('div', { class: 'card-tools' });
+  const editB = h('button', { class: 'ctool', type: 'button', title: 'Edit character', text: '✎' });
+  const delB = h('button', { class: 'ctool del', type: 'button', title: 'Delete character', text: '×' });
+  editB.addEventListener('click', (e) => { e.stopPropagation(); openInspector({ type: 'person', zoneId: zo.id, itemId: c.id }); });
+  delB.addEventListener('click', (e) => { e.stopPropagation(); deleteCard(zo.id, c.id); });
+  tools.append(editB, delB);
+
+  const portIn = h('div', { class: 'port port-in', 'data-port-in': c.id, title: 'Drop connection wire here' });
+  const portOut = h('div', { class: 'port port-out', 'data-port-out': c.id, title: 'Drag to connect this character to any card' });
+  makePortConnectable(portOut, c.id);
+
+  const el = h('article', { class: 'card person' + (isSel ? ' selected' : ''), 'data-card': c.id },
+    tools,
+    portIn,
+    portOut,
+    h('h3', { text: c.name || 'Character' }),
+    h('div', { class: 'si', text: c.si || '' }),
+    h('p', { text: c.text || '' })
+  );
+  place(el, c.x || 100, c.y || 310);
+  makeCardDraggable(el, c, zo, 'person');
+  return el;
+}
+
+function buildBeatCard(b, no, zo) {
+  const isSel = selectedItem && selectedItem.itemId === b.id;
+  const tools = h('div', { class: 'card-tools' });
+  const editB = h('button', { class: 'ctool', type: 'button', title: 'Edit card', text: '✎' });
+  const addAfterB = h('button', { class: 'ctool', type: 'button', title: 'Add connected card after this one', text: '+' });
+  const delB = h('button', { class: 'ctool del', type: 'button', title: 'Delete card', text: '×' });
+
+  editB.addEventListener('click', (e) => { e.stopPropagation(); openInspector({ type: 'beat', zoneId: zo.id, itemId: b.id }); });
+  addAfterB.addEventListener('click', (e) => { e.stopPropagation(); addBeatCard(zo.id, b.id); });
+  delB.addEventListener('click', (e) => { e.stopPropagation(); deleteCard(zo.id, b.id); });
+  tools.append(editB, addAfterB, delB);
+
+  const portIn = h('div', { class: 'port port-in', 'data-port-in': b.id, title: 'Drop connection line here' });
+  const portOut = h('div', { class: 'port port-out', 'data-port-out': b.id, title: 'Drag from here to connect to another card' });
+  makePortConnectable(portOut, b.id);
+
+  const st = b.status || 'planned';
+  const statusBadge = h('span', {
+    class: 'status-pill ' + st,
+    text: st === 'built' ? '✓ Built' : st === 'planned' ? 'Planned' : 'Draft'
+  });
+
+  const el = h('article', { class: 'card beat' + (isSel ? ' selected' : ''), 'data-card': b.id },
+    tools,
+    portIn,
+    portOut,
+    h('div', { class: 'kicker' },
+      h('span', { class: 'no', text: String(no).padStart(2, '0') }),
+      h('span', { text: zo.era || zo.title }),
+      statusBadge
+    ),
+    h('h3', { text: b.title || 'Untitled Beat' }),
+    h('p', { text: b.text || '' })
+  );
+
+  if (b.tags && b.tags.length) {
+    const ul = h('ul', { class: 'tags' });
+    for (const t of b.tags) {
+      ul.append(h('li', { class: 'tag ' + t.k }, h('b', { text: TAG[t.k] || t.k }), document.createTextNode(t.t)));
+    }
+    el.append(ul);
+  }
+
+  place(el, b.x || 100, b.y || 310);
+  makeCardDraggable(el, b, zo, 'beat');
+  return el;
+}
+
+/* ==================================================================
+   5. FREE DRAGGING OF CARDS, PARTS (ZONES) & WIRE DRAWING
+   ================================================================== */
+function makeCardDraggable(el, cardObj, zoneObj, inspectType = null) {
+  let drag = null;
+  el.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('button, .port, input, textarea, select')) return;
+    if (e.button !== 0 && e.pointerType === 'mouse') return;
+    e.stopPropagation();
+    el.setPointerCapture(e.pointerId);
+    drag = {
+      id: e.pointerId,
+      sx: e.clientX,
+      sy: e.clientY,
+      ox: cardObj.x || 0,
+      oy: cardObj.y || 0,
+      moved: false
+    };
+  });
+
+  el.addEventListener('pointermove', (e) => {
+    if (!drag || drag.id !== e.pointerId) return;
+    const dx = (e.clientX - drag.sx) / z;
+    const dy = (e.clientY - drag.sy) / z;
+    if (!drag.moved && Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) > 4) {
+      drag.moved = true;
+      el.classList.add('dragging');
+    }
+    if (drag.moved) {
+      cardObj.x = Math.round(drag.ox + dx);
+      cardObj.y = Math.round(drag.oy + dy);
+      place(el, cardObj.x, cardObj.y);
+      drawWires();
+      broadcastCardMove(cardObj.id, cardObj.x, cardObj.y);
+    }
+  });
+
+  const endDrag = (e) => {
+    if (!drag || drag.id !== e.pointerId) return;
+    const wasMoved = drag.moved;
+    drag = null;
+    el.classList.remove('dragging');
+    if (wasMoved) {
+      // Check if card was dragged into a different timeline Part zone
+      reassignCardZoneIfNeeded(cardObj, zoneObj);
+      saveBoard(true);
+    } else if (inspectType) {
+      openInspector({ type: inspectType, zoneId: zoneObj.id, itemId: cardObj.id });
+    }
+  };
+  el.addEventListener('pointerup', endDrag);
+  el.addEventListener('pointercancel', endDrag);
+}
+
+function reassignCardZoneIfNeeded(cardObj, currentZone) {
+  if (currentZone.kind === 'cast') return;
+  const cx = (cardObj.x || 0) + CW / 2;
+  const cy = (cardObj.y || 0) + 80;
+  for (const zo of BOARD.zones) {
+    if (zo.kind === 'cast') continue;
+    if (cx >= zo.x && cx <= zo.x + zo.w && cy >= zo.y && cy <= zo.y + zo.h) {
+      if (zo.id !== currentZone.id) {
+        currentZone.beats = (currentZone.beats || []).filter(b => b.id !== cardObj.id);
+        zo.beats = zo.beats || [];
+        zo.beats.push(cardObj);
+        rebuildBoard();
+      }
+      return;
+    }
+  }
+}
+
+function makeZoneDraggable(headEl, zo) {
+  let drag = null;
+  headEl.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('button, input, textarea, select')) return;
+    if (e.button !== 0 && e.pointerType === 'mouse') return;
+    e.stopPropagation();
+    headEl.setPointerCapture(e.pointerId);
+    const items = zo.kind === 'cast' ? (zo.cards || []) : (zo.beats || []);
+    drag = {
+      id: e.pointerId,
+      sx: e.clientX,
+      sy: e.clientY,
+      ox: zo.x || 0,
+      oy: zo.y || 0,
+      cardStarts: items.map(item => ({ item, x: item.x || 0, y: item.y || 0 })),
+      moved: false
+    };
+  });
+
+  headEl.addEventListener('pointermove', (e) => {
+    if (!drag || drag.id !== e.pointerId) return;
+    if (!drag.moved && Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) > 5) {
+      drag.moved = true;
+    }
+    if (drag.moved) {
+      const dx = Math.round((e.clientX - drag.sx) / z);
+      const dy = Math.round((e.clientY - drag.sy) / z);
+      zo.x = drag.ox + dx;
+      zo.y = drag.oy + dy;
+      const rec = zoneRecords.get(zo.id);
+      if (rec) {
+        place(rec.bg, zo.x, zo.y);
+        place(rec.head, zo.x + PAD, zo.y + 42);
+      }
+      for (const cs of drag.cardStarts) {
+        cs.item.x = cs.x + dx;
+        cs.item.y = cs.y + dy;
+        const cEl = cardElements.get(cs.item.id);
+        if (cEl) place(cEl, cs.item.x, cs.item.y);
+      }
+      drawWires();
+    }
+  });
+
+  const endZoneDrag = (e) => {
+    if (!drag || drag.id !== e.pointerId) return;
+    const wasMoved = drag.moved;
+    drag = null;
+    if (wasMoved) {
+      saveBoard(true);
+    } else {
+      openInspector({ type: 'zone', zoneId: zo.id, itemId: zo.id });
+    }
+  };
+  headEl.addEventListener('pointerup', endZoneDrag);
+  headEl.addEventListener('pointercancel', endZoneDrag);
+}
+
+function makeZoneResizable(handleEl, zo, bgEl) {
+  let rDrag = null;
+  handleEl.addEventListener('pointerdown', (e) => {
+    e.stopPropagation();
+    handleEl.setPointerCapture(e.pointerId);
+    rDrag = { id: e.pointerId, sx: e.clientX, sy: e.clientY, ow: zo.w || 900, oh: zo.h || 680 };
+  });
+  handleEl.addEventListener('pointermove', (e) => {
+    if (!rDrag || rDrag.id !== e.pointerId) return;
+    zo.w = Math.max(420, Math.round(rDrag.ow + (e.clientX - rDrag.sx) / z));
+    zo.h = Math.max(420, Math.round(rDrag.oh + (e.clientY - rDrag.sy) / z));
+    bgEl.style.width = zo.w + 'px';
+    bgEl.style.height = zo.h + 'px';
+    const rec = zoneRecords.get(zo.id);
+    if (rec) rec.head.style.width = Math.max(320, zo.w - PAD * 2) + 'px';
+  });
+  const endResize = (e) => {
+    if (!rDrag || rDrag.id !== e.pointerId) return;
+    rDrag = null;
+    saveBoard(true);
+  };
+  handleEl.addEventListener('pointerup', endResize);
+  handleEl.addEventListener('pointercancel', endResize);
+}
+
+/* Interactive Drag-to-Connect Wires Between Any Cards */
+let activeWireDrag = null; // { fromId, x1, y1, x2, y2, hoverCardId }
+
+function makePortConnectable(portEl, fromCardId) {
+  portEl.addEventListener('pointerdown', (e) => {
+    e.stopPropagation();
+    portEl.setPointerCapture(e.pointerId);
+    const fromEl = cardElements.get(fromCardId);
+    const found = findCardById(fromCardId);
+    if (!fromEl || !found) return;
+    const x1 = (found.card.x || 0) + CW;
+    const y1 = (found.card.y || 0) + fromEl.offsetHeight / 2;
+    activeWireDrag = { pointerId: e.pointerId, fromId: fromCardId, x1, y1, x2: x1, y2: y1, hoverCardId: null };
+    vp.classList.add('connecting-wire');
+  });
+
+  portEl.addEventListener('pointermove', (e) => {
+    if (!activeWireDrag || activeWireDrag.pointerId !== e.pointerId) return;
+    const pt = vpPoint(e.clientX, e.clientY);
+    activeWireDrag.x2 = (pt.x - tx) / z;
+    activeWireDrag.y2 = (pt.y - ty) / z;
+
+    // Hit-test target card
+    let hitId = null;
+    for (const [cid, cEl] of cardElements.entries()) {
+      cEl.classList.remove('wire-target-hover');
+      if (cid === activeWireDrag.fromId) continue;
+      const info = findCardById(cid);
+      if (!info) continue;
+      const cx = info.card.x || 0, cy = info.card.y || 0, cw = cEl.offsetWidth || CW, ch = cEl.offsetHeight || 160;
+      if (activeWireDrag.x2 >= cx - 24 && activeWireDrag.x2 <= cx + cw + 24 &&
+          activeWireDrag.y2 >= cy - 20 && activeWireDrag.y2 <= cy + ch + 20) {
+        hitId = cid;
+        cEl.classList.add('wire-target-hover');
+        break;
+      }
+    }
+    activeWireDrag.hoverCardId = hitId;
+    drawWires();
+  });
+
+  const endWireDrag = (e) => {
+    if (!activeWireDrag || activeWireDrag.pointerId !== e.pointerId) return;
+    vp.classList.remove('connecting-wire');
+    cardElements.forEach(el => el.classList.remove('wire-target-hover'));
+    const targetId = activeWireDrag.hoverCardId;
+    const sourceId = activeWireDrag.fromId;
+    activeWireDrag = null;
+
+    if (targetId && targetId !== sourceId) {
+      const exists = BOARD.connections.some(w => w.from === sourceId && w.to === targetId);
+      if (!exists) {
+        const newWire = {
+          id: 'w_' + Date.now().toString(36),
+          from: sourceId,
+          to: targetId,
+          color: 'gold',
+          label: ''
+        };
+        BOARD.connections.push(newWire);
+        saveBoard(true);
+        openInspector({ type: 'wire', itemId: newWire.id });
+      }
+    }
+    drawWires();
+  };
+  portEl.addEventListener('pointerup', endWireDrag);
+  portEl.addEventListener('pointercancel', endWireDrag);
+}
+
+/* ==================================================================
+   6. SVG CURVED CONNECTION WIRES RENDERER
+   ================================================================== */
+function drawWires() {
+  const NS = 'http://www.w3.org/2000/svg';
+  wires.replaceChildren();
+
+  const addSvg = (parent, tag, attrs) => {
+    const e = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(attrs)) if (v != null) e.setAttribute(k, v);
+    parent.append(e);
+    return e;
+  };
+
+  for (const conn of BOARD.connections) {
+    const fromInfo = findCardById(conn.from);
+    const toInfo = findCardById(conn.to);
+    const fromEl = cardElements.get(conn.from);
+    const toEl = cardElements.get(conn.to);
+    if (!fromInfo || !toInfo || !fromEl || !toEl) continue;
+
+    const x1 = (fromInfo.card.x || 0) + (fromEl.offsetWidth || CW);
+    const y1 = (fromInfo.card.y || 0) + (fromEl.offsetHeight || 140) / 2;
+    const x2 = (toInfo.card.x || 0);
+    const y2 = (toInfo.card.y || 0) + (toEl.offsetHeight || 140) / 2;
+
+    const dx = Math.max(60, Math.abs(x2 - x1) * 0.42);
+    const pathD = `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+
+    const isSel = selectedItem && selectedItem.type === 'wire' && selectedItem.itemId === conn.id;
+    const g = addSvg(wires, 'g', { class: 'wire-group' + (isSel ? ' selected' : ''), 'data-wire': conn.id });
+
+    // Wide invisible hit path so clicking a wire is effortless
+    addSvg(g, 'path', { d: pathD, class: 'w-hit' });
+    addSvg(g, 'path', { d: pathD, class: 'w-line color-' + (conn.color || 'gold') });
+
+    // Arrowhead at destination
+    addSvg(g, 'path', {
+      d: `M ${x2 - 11} ${y2 - 7} L ${x2} ${y2} L ${x2 - 11} ${y2 + 7}`,
+      class: 'w-line color-' + (conn.color || 'gold')
+    });
+
+    // Midpoint chevron or label badge
+    const mx = (x1 + x2) / 2;
+    const my = (y1 + y2) / 2;
+    if (conn.label) {
+      const textLen = conn.label.length * 6.8 + 18;
+      addSvg(g, 'rect', {
+        x: mx - textLen / 2,
+        y: my - 12,
+        width: textLen,
+        height: 24,
+        class: 'w-label-bg'
+      });
+      const txt = addSvg(g, 'text', {
+        x: mx,
+        y: my + 4,
+        'text-anchor': 'middle',
+        class: 'w-label-text'
+      });
+      txt.textContent = conn.label;
+    }
+
+    g.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openInspector({ type: 'wire', itemId: conn.id });
+    });
+  }
+
+  // Draw active drag preview wire
+  if (activeWireDrag) {
+    const { x1, y1, x2, y2 } = activeWireDrag;
+    const dx = Math.max(50, Math.abs(x2 - x1) * 0.38);
+    addSvg(wires, 'path', {
+      d: `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`,
+      class: 'w-temp'
+    });
+  }
+}
+
+/* ==================================================================
+   7. ADD / EDIT / DELETE CARDS, PARTS (ZONES) & WIRES
+   ================================================================== */
+function getActiveTimelineZone() {
+  if (selectedItem && selectedItem.zoneId) {
+    const z = BOARD.zones.find(s => s.id === selectedItem.zoneId && s.kind !== 'cast');
+    if (z) return z;
+  }
+  const cx = (vp.clientWidth / 2 - tx) / z;
+  let cur = BOARD.zones.find(zo => zo.kind !== 'cast') || BOARD.zones[0];
+  for (const zo of BOARD.zones) {
+    if (zo.kind !== 'cast' && cx >= (zo.x || 0) - 90) cur = zo;
+  }
+  return cur;
+}
+
+function addBeatCard(zoneId, afterBeatId = null) {
+  const zo = BOARD.zones.find(s => s.id === zoneId && s.kind !== 'cast') || getActiveTimelineZone();
+  if (!zo) return;
+  zo.beats = zo.beats || [];
+  const newId = 'b_' + Date.now().toString(36);
+
+  let spawnX = (zo.x || 0) + PAD;
+  let spawnY = (zo.y || 0) + 310;
+  let connectFromId = afterBeatId;
+
+  if (afterBeatId) {
+    const prev = zo.beats.find(b => b.id === afterBeatId);
+    if (prev) {
+      spawnX = (prev.x || 0) + CW + GX;
+      spawnY = (prev.y || 310) + 24;
+    }
+  } else if (zo.beats.length > 0) {
+    const last = zo.beats[zo.beats.length - 1];
+    spawnX = (last.x || 0) + CW + GX;
+    spawnY = last.y || 310;
+    connectFromId = last.id;
+  }
+
+  // Expand zone width if card extends past right edge
+  if (spawnX + CW + PAD > (zo.x || 0) + (zo.w || 900)) {
+    zo.w = (spawnX + CW + PAD) - (zo.x || 0);
+  }
+
+  const newBeat = {
+    id: newId,
+    title: 'New story card',
+    text: 'Write what happens in this beat. Drag the card anywhere or connect its right port to another card.',
+    status: 'planned',
+    x: spawnX,
+    y: spawnY,
+    tags: []
+  };
+
+  zo.beats.push(newBeat);
+
+  if (connectFromId) {
+    BOARD.connections.push({
+      id: 'w_' + Date.now().toString(36),
+      from: connectFromId,
+      to: newId,
+      color: 'gold',
+      label: ''
+    });
+  }
+
+  saveBoard(true);
+  selectedItem = { type: 'beat', zoneId: zo.id, itemId: newId };
+  rebuildBoard();
+  openInspector(selectedItem);
+  focusCardOnCanvas(newId);
+}
+
+function addCharacterCard(zoneId = 'cast') {
+  const zo = BOARD.zones.find(s => s.id === zoneId) || BOARD.zones[0];
+  if (!zo) return;
+  zo.cards = zo.cards || [];
+  const idx = zo.cards.length;
+  const r = Math.floor(idx / CAST_COLS);
+  const col = idx % CAST_COLS;
+  const newId = 'c_' + Date.now().toString(36);
+  const newChar = {
+    id: newId,
+    name: 'New Character',
+    si: '',
+    text: 'Who they are and their connection to the village.',
+    x: (zo.x || 0) + PAD + col * (CW + CAST_GX),
+    y: (zo.y || 0) + 310 + r * 205
+  };
+  zo.cards.push(newChar);
+  zo.h = Math.max(zo.h || 720, 310 + (r + 1) * 215 + PAD);
+  saveBoard(true);
+  selectedItem = { type: 'person', zoneId: zo.id, itemId: newId };
+  rebuildBoard();
+  openInspector(selectedItem);
+  focusCardOnCanvas(newId);
+}
+
+function addNewPart() {
+  const lastZone = BOARD.zones[BOARD.zones.length - 1];
+  const startX = lastZone ? (lastZone.x || 0) + (lastZone.w || 900) + ZGAP : 0;
+  const newZoneId = 'part_' + Date.now().toString(36);
+  const firstBeatId = 'b_' + Date.now().toString(36) + '_1';
+
+  const newZone = {
+    id: newZoneId,
+    kind: 'timeline',
+    tone: 'dusk',
+    chip: 'New part',
+    era: 'New chapter',
+    title: 'New Part',
+    sub: 'Describe this era or chapter of the journey.',
+    mood: 'wind · lanterns · mystery',
+    swatches: ['#8a6e58', '#c9b79c', '#3d7bff'],
+    x: startX,
+    y: 0,
+    w: CW * 2 + GX + PAD * 2,
+    h: 680,
+    beats: [
+      {
+        id: firstBeatId,
+        title: 'Opening beat of this part',
+        text: 'Drag this card or connect it to the rest of the story.',
+        status: 'planned',
+        x: startX + PAD,
+        y: 310,
+        tags: []
+      }
+    ]
+  };
+
+  // Auto-connect from previous zone's last beat
+  const prevTimelineZones = BOARD.zones.filter(s => s.kind !== 'cast' && s.beats && s.beats.length);
+  const prevZone = prevTimelineZones[prevTimelineZones.length - 1];
+  if (prevZone) {
+    const prevBeat = prevZone.beats[prevZone.beats.length - 1];
+    if (prevBeat) {
+      BOARD.connections.push({
+        id: 'w_' + Date.now().toString(36),
+        from: prevBeat.id,
+        to: firstBeatId,
+        color: 'gold',
+        label: 'Next Part'
+      });
+    }
+  }
+
+  BOARD.zones.push(newZone);
+  saveBoard(true);
+  selectedItem = { type: 'zone', zoneId: newZoneId, itemId: newZoneId };
+  rebuildBoard();
+  openInspector(selectedItem);
+  goZone(BOARD.zones.length - 1);
+}
+
+function deleteCard(zoneId, cardId) {
+  const zo = BOARD.zones.find(s => s.id === zoneId);
+  if (!zo) return;
+  if (zo.kind === 'cast') {
+    zo.cards = (zo.cards || []).filter(c => c.id !== cardId);
+  } else {
+    zo.beats = (zo.beats || []).filter(b => b.id !== cardId);
+  }
+  BOARD.connections = BOARD.connections.filter(w => w.from !== cardId && w.to !== cardId);
+  if (selectedItem && selectedItem.itemId === cardId) closeInspector();
+  saveBoard(true);
+  rebuildBoard();
+}
+
+function tidyAutoLayout() {
+  let xCursor = 0;
+  const topY = 310;
+  for (const zo of BOARD.zones) {
+    const isCast = zo.kind === 'cast';
+    const items = isCast ? (zo.cards || []) : (zo.beats || []);
+    const cols = isCast ? CAST_COLS : Math.max(1, items.length);
+    const gap = isCast ? CAST_GX : GX;
+    const innerW = cols * CW + (cols - 1) * gap;
+    zo.x = xCursor;
+    zo.y = 0;
+    zo.w = innerW + PAD * 2;
+    zo.h = isCast ? 720 : 680;
+    if (isCast) {
+      items.forEach((c, idx) => {
+        const r = Math.floor(idx / CAST_COLS);
+        const col = idx % CAST_COLS;
+        c.x = zo.x + PAD + col * (CW + CAST_GX);
+        c.y = topY + r * 205;
+      });
+    } else {
+      items.forEach((b, idx) => {
+        b.x = zo.x + PAD + idx * (CW + GX);
+        b.y = topY;
+      });
+    }
+    xCursor += zo.w + ZGAP;
+  }
+  saveBoard(true);
+  rebuildBoard();
+}
+
+$('#addCardBtn').addEventListener('click', () => {
+  if (selectedItem && selectedItem.zoneId === 'cast') {
+    addCharacterCard('cast');
+    return;
+  }
+  const activeZone = getActiveTimelineZone();
+  const afterBeatId = (selectedItem && selectedItem.type === 'beat') ? selectedItem.itemId : null;
+  if (activeZone) addBeatCard(activeZone.id, afterBeatId);
+});
+$('#addPartBtn').addEventListener('click', () => addNewPart());
+$('#autoLayoutBtn').addEventListener('click', () => tidyAutoLayout());
+
+/* ==================================================================
+   8. RIGHT-HAND INSPECTOR DRAWER (CARDS, WIRES, PARTS)
+   ================================================================== */
+function closeInspector() {
+  selectedItem = null;
+  inspectorEl.hidden = true;
+  document.querySelectorAll('.card.selected, .zone.selected-zone, .wire-group.selected').forEach(el => {
+    el.classList.remove('selected', 'selected-zone');
+  });
+  broadcastCursorPosition();
+}
+$('#inspClose').addEventListener('click', closeInspector);
+
+function openInspector(sel) {
+  selectedItem = sel;
+  inspectorEl.hidden = false;
+  inspBody.replaceChildren();
+  inspFoot.replaceChildren();
+  broadcastCursorPosition();
+
+  document.querySelectorAll('.card.selected, .zone.selected-zone, .wire-group.selected').forEach(el => {
+    el.classList.remove('selected', 'selected-zone');
+  });
+
+  if (sel.type === 'wire') {
+    const wire = BOARD.connections.find(w => w.id === sel.itemId);
+    if (!wire) { closeInspector(); return; }
+    const wEl = wires.querySelector(`[data-wire="${wire.id}"]`);
+    if (wEl) wEl.classList.add('selected');
+
+    const fromInfo = findCardById(wire.from);
+    const toInfo = findCardById(wire.to);
+    inspKicker.textContent = 'CONNECTION LINE';
+    inspTitle.textContent = `${fromInfo?.card.title || fromInfo?.card.name || 'Card'} → ${toInfo?.card.title || toInfo?.card.name || 'Card'}`;
+
+    const labelIn = h('input', { type: 'text', value: wire.label || '', placeholder: 'e.g. 3 months later / Secret branch' });
+    labelIn.addEventListener('input', () => {
+      wire.label = labelIn.value;
+      saveBoard(true);
+      drawWires();
+    });
+
+    const colorSel = h('select');
+    [
+      { id: 'gold', label: 'Golden Thread (Default)' },
+      { id: 'blue', label: 'Electric Blue (Mystery / Alien)' },
+      { id: 'green', label: 'Emerald Green (Farm / Built)' },
+      { id: 'crimson', label: 'Crimson Red (Conflict / Danger)' }
+    ].forEach(c => {
+      const o = h('option', { value: c.id, text: c.label });
+      if ((wire.color || 'gold') === c.id) o.selected = true;
+      colorSel.append(o);
+    });
+    colorSel.addEventListener('change', () => {
+      wire.color = colorSel.value;
+      saveBoard(true);
+      drawWires();
+    });
+
+    inspBody.append(
+      h('div', { class: 'field' }, h('label', { text: 'Label on Connection Line' }), labelIn),
+      h('div', { class: 'field' }, h('label', { text: 'Line Color' }), colorSel)
+    );
+
+    const delWireBtn = h('button', { class: 'btn danger', type: 'button', text: 'Delete Connection Line' });
+    delWireBtn.addEventListener('click', () => {
+      BOARD.connections = BOARD.connections.filter(w => w.id !== wire.id);
+      closeInspector();
+      saveBoard(true);
+      drawWires();
+    });
+    inspFoot.append(delWireBtn);
+    return;
+  }
+
+  const zo = BOARD.zones.find(s => s.id === sel.zoneId);
+  if (!zo) { closeInspector(); return; }
+
+  if (sel.type === 'beat') {
+    const beat = (zo.beats || []).find(b => b.id === sel.itemId);
+    if (!beat) { closeInspector(); return; }
+    const cardEl = cardElements.get(beat.id);
+    if (cardEl) cardEl.classList.add('selected');
+
+    inspKicker.textContent = `STORY CARD · ${zo.title.toUpperCase()}`;
+    inspTitle.textContent = beat.title || 'Story Card';
+
+    const titleIn = h('input', { type: 'text', value: beat.title || '' });
+    titleIn.addEventListener('input', () => {
+      beat.title = titleIn.value;
+      inspTitle.textContent = beat.title || 'Story Card';
+      saveBoard(true);
+      rebuildBoard();
+    });
+
+    const statusSel = h('select');
+    [
+      { id: 'built', label: '✓ In the game (Built — counts in progress)' },
+      { id: 'planned', label: 'Planned (On story board)' },
+      { id: 'draft', label: 'Draft / Idea' }
+    ].forEach(st => {
+      const o = h('option', { value: st.id, text: st.label });
+      if ((beat.status || 'planned') === st.id) o.selected = true;
+      statusSel.append(o);
+    });
+    statusSel.addEventListener('change', () => {
+      beat.status = statusSel.value;
+      saveBoard(true);
+      rebuildBoard();
+    });
+
+    const textIn = h('textarea', { rows: '4' });
+    textIn.value = beat.text || '';
+    textIn.addEventListener('input', () => {
+      beat.text = textIn.value;
+      saveBoard(true);
+      rebuildBoard();
+    });
+
+    // Quick Connect to Another Card dropdown
+    const connectSel = h('select');
+    connectSel.append(h('option', { value: '', text: 'Select a card to connect a line to...' }));
+    for (const part of BOARD.zones) {
+      const list = part.kind === 'cast' ? (part.cards || []) : (part.beats || []);
+      for (const item of list) {
+        if (item.legend || item.id === beat.id) continue;
+        connectSel.append(h('option', { value: item.id, text: `[${part.title}] ${item.title || item.name}` }));
+      }
+    }
+    const connectBtn = h('button', { class: 'btn gold', type: 'button', text: '+ Connect Line' });
+    connectBtn.addEventListener('click', () => {
+      const targetId = connectSel.value;
+      if (!targetId) return;
+      BOARD.connections.push({
+        id: 'w_' + Date.now().toString(36),
+        from: beat.id,
+        to: targetId,
+        color: 'gold',
+        label: ''
+      });
+      connectSel.value = '';
+      saveBoard(true);
+      drawWires();
+      openInspector(sel);
+    });
+
+    // Existing connections list
+    const linkedWires = BOARD.connections.filter(w => w.from === beat.id || w.to === beat.id);
+    const wiresBox = h('div', { class: 'tag-editor-list' });
+    linkedWires.forEach(w => {
+      const otherId = w.from === beat.id ? w.to : w.from;
+      const other = findCardById(otherId);
+      const dirLabel = w.from === beat.id ? '→ To: ' : '← From: ';
+      const row = h('div', { class: 'tag-edit-item' });
+      const top = h('div', { class: 'tag-edit-top' },
+        h('span', { style: 'font:600 11.5px var(--f-mono)', text: dirLabel + (other?.card.title || other?.card.name || otherId) }),
+        h('button', {
+          class: 'btn danger',
+          type: 'button',
+          style: 'padding:3px 7px;font-size:11px',
+          text: 'Unlink'
+        })
+      );
+      top.querySelector('button').addEventListener('click', () => {
+        BOARD.connections = BOARD.connections.filter(item => item.id !== w.id);
+        saveBoard(true);
+        drawWires();
+        openInspector(sel);
+      });
+      row.append(top);
+      wiresBox.append(row);
+    });
+
+    // Callout tags editor
+    const tagsWrap = h('div', { class: 'field' }, h('label', { text: 'Callout Notes on Card' }));
+    const tagList = h('div', { class: 'tag-editor-list' });
+    const renderTags = () => {
+      tagList.replaceChildren();
+      (beat.tags || []).forEach((tg, idx) => {
+        const item = h('div', { class: 'tag-edit-item' });
+        const topRow = h('div', { class: 'tag-edit-top' });
+        const kindSel = h('select');
+        [
+          { k: 'built', label: 'In the game (Built)' },
+          { k: 'planned', label: 'Planned' },
+          { k: 'stale', label: 'Game says otherwise' }
+        ].forEach(opt => {
+          const o = h('option', { value: opt.k, text: opt.label });
+          if (tg.k === opt.k) o.selected = true;
+          kindSel.append(o);
+        });
+        kindSel.addEventListener('change', () => { tg.k = kindSel.value; saveBoard(true); rebuildBoard(); });
+        const rmB = h('button', { class: 'btn danger', type: 'button', style: 'padding:3px 7px', text: '×' });
+        rmB.addEventListener('click', () => { beat.tags.splice(idx, 1); saveBoard(true); rebuildBoard(); renderTags(); });
+        topRow.append(kindSel, rmB);
+        const tIn = h('input', { type: 'text', value: tg.t });
+        tIn.addEventListener('input', () => { tg.t = tIn.value; saveBoard(true); rebuildBoard(); });
+        item.append(topRow, tIn);
+        tagList.append(item);
+      });
+    };
+    renderTags();
+    const addTagB = h('button', { class: 'btn', type: 'button', text: '+ Add Callout Tag' });
+    addTagB.addEventListener('click', () => {
+      beat.tags = beat.tags || [];
+      beat.tags.push({ k: 'planned', t: 'Note on this scene.' });
+      saveBoard(true);
+      rebuildBoard();
+      renderTags();
+    });
+    tagsWrap.append(tagList, addTagB);
+
+    inspBody.append(
+      h('div', { class: 'field' }, h('label', { text: 'Card Title' }), titleIn),
+      h('div', { class: 'field' }, h('label', { text: 'Progress Status' }), statusSel),
+      h('div', { class: 'field' }, h('label', { text: 'Story Text' }), textIn),
+      h('div', { class: 'field' },
+        h('label', { text: 'Connect Line to Another Card' }),
+        connectSel,
+        connectBtn,
+        wiresBox
+      ),
+      tagsWrap
+    );
+
+    const addNextBtn = h('button', { class: 'btn gold', type: 'button', text: '+ Card After' });
+    addNextBtn.addEventListener('click', () => addBeatCard(zo.id, beat.id));
+    const delBtn = h('button', { class: 'btn danger', type: 'button', text: 'Delete Card' });
+    delBtn.addEventListener('click', () => deleteCard(zo.id, beat.id));
+    inspFoot.append(addNextBtn, delBtn);
+  }
+
+  else if (sel.type === 'person') {
+    const person = (zo.cards || []).find(c => c.id === sel.itemId);
+    if (!person) { closeInspector(); return; }
+    const cardEl = cardElements.get(person.id);
+    if (cardEl) cardEl.classList.add('selected');
+
+    inspKicker.textContent = 'CHARACTER CARD';
+    inspTitle.textContent = person.name || 'Character';
+
+    const nameIn = h('input', { type: 'text', value: person.name || '' });
+    nameIn.addEventListener('input', () => { person.name = nameIn.value; inspTitle.textContent = person.name; saveBoard(true); rebuildBoard(); });
+
+    const siIn = h('input', { type: 'text', value: person.si || '', placeholder: 'පුතා (Sinhala script)' });
+    siIn.addEventListener('input', () => { person.si = siIn.value; saveBoard(true); rebuildBoard(); });
+
+    const textIn = h('textarea', { rows: '4' });
+    textIn.value = person.text || '';
+    textIn.addEventListener('input', () => { person.text = textIn.value; saveBoard(true); rebuildBoard(); });
+
+    inspBody.append(
+      h('div', { class: 'field' }, h('label', { text: 'Character Name' }), nameIn),
+      h('div', { class: 'field' }, h('label', { text: 'Sinhala Script / Subtitle' }), siIn),
+      h('div', { class: 'field' }, h('label', { text: 'Description & Role' }), textIn)
+    );
+
+    const delBtn = h('button', { class: 'btn danger', type: 'button', text: 'Delete Character' });
+    delBtn.addEventListener('click', () => deleteCard(zo.id, person.id));
+    inspFoot.append(delBtn);
+  }
+
+  else if (sel.type === 'zone') {
+    inspKicker.textContent = 'STORY PART / ERA CONTAINER';
+    inspTitle.textContent = zo.title || 'Edit Part';
+
+    const titleIn = h('input', { type: 'text', value: zo.title || '' });
+    titleIn.addEventListener('input', () => { zo.title = titleIn.value; inspTitle.textContent = zo.title; saveBoard(true); rebuildBoard(); });
+
+    const chipIn = h('input', { type: 'text', value: zo.chip || '' });
+    chipIn.addEventListener('input', () => { zo.chip = chipIn.value; saveBoard(true); rebuildBoard(); });
+
+    const eraIn = h('input', { type: 'text', value: zo.era || '' });
+    eraIn.addEventListener('input', () => { zo.era = eraIn.value; saveBoard(true); rebuildBoard(); });
+
+    const toneSel = h('select');
+    [
+      { id: 'deep', label: 'Deep Time (Stone Grey)' },
+      { id: 'night', label: 'Night (1935 Indigo Blue)' },
+      { id: 'dusk', label: 'Dusk (Warm Earth / Exile)' },
+      { id: 'day', label: 'Day (Paddy Field Green)' },
+      { id: 'cast', label: 'Cast Outline (Dashed)' }
+    ].forEach(t => {
+      const o = h('option', { value: t.id, text: t.label });
+      if (zo.tone === t.id) o.selected = true;
+      toneSel.append(o);
+    });
+    toneSel.addEventListener('change', () => { zo.tone = toneSel.value; saveBoard(true); rebuildBoard(); });
+
+    const subIn = h('textarea', { rows: '2' });
+    subIn.value = zo.sub || '';
+    subIn.addEventListener('input', () => { zo.sub = subIn.value; saveBoard(true); rebuildBoard(); });
+
+    const moodIn = h('input', { type: 'text', value: zo.mood || '' });
+    moodIn.addEventListener('input', () => { zo.mood = moodIn.value; saveBoard(true); rebuildBoard(); });
+
+    inspBody.append(
+      h('div', { class: 'field' }, h('label', { text: 'Part Title' }), titleIn),
+      h('div', { class: 'row-2' },
+        h('div', { class: 'field' }, h('label', { text: 'Top Bar Chip' }), chipIn),
+        h('div', { class: 'field' }, h('label', { text: 'Era Subtitle' }), eraIn)
+      ),
+      h('div', { class: 'field' }, h('label', { text: 'Color Band Tone' }), toneSel),
+      h('div', { class: 'field' }, h('label', { text: 'Description' }), subIn),
+      h('div', { class: 'field' }, h('label', { text: 'Mood Keywords' }), moodIn)
+    );
+
+    if (BOARD.zones.length > 1) {
+      const delZoneBtn = h('button', { class: 'btn danger', type: 'button', text: 'Delete Entire Part' });
+      delZoneBtn.addEventListener('click', () => {
+        if (!confirm(`Delete part "${zo.title}" and its cards?`)) return;
+        BOARD.zones = BOARD.zones.filter(s => s.id !== zo.id);
+        closeInspector();
+        saveBoard(true);
+        rebuildBoard();
+      });
+      inspFoot.append(delZoneBtn);
+    }
+  }
+}
+
+/* ==================================================================
+   9. STICKY NOTES
+   ================================================================== */
+const NOTE_TONES = [
+  { id: 'gold', bg: '#f3e29a' },
+  { id: 'rose', bg: '#f9cbd6' },
+  { id: 'mint', bg: '#c6efd8' },
+  { id: 'sky',  bg: '#cbe3ff' }
+];
+
+function makeNoteElement(id, data) {
+  const del = h('button', { class: 'note-del', type: 'button', text: 'Delete' });
+  const colorBox = h('div', { class: 'note-colors' });
+  const toneClass = (t) => (t && t !== 'gold' ? ' tone-' + t : '');
+  const head = h('div', { class: 'note-head' }, h('span', { text: data.author ? `Note · ${data.author}` : 'Sticky note' }), colorBox, del);
+  const ta = h('textarea', { rows: '2', placeholder: 'Write anything…' });
+  const el = h('div', { class: 'note' + toneClass(data.tone), 'data-note': id }, head, ta);
+  layerNotes.append(el);
+
+  NOTE_TONES.forEach(nt => {
+    const dot = h('button', { class: 'nc-dot', type: 'button', title: nt.id });
+    dot.style.background = nt.bg;
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();
+      data.tone = nt.id;
+      el.className = 'note' + toneClass(data.tone);
+      saveBoard(true);
+    });
+    colorBox.append(dot);
+  });
+
+  ta.value = data.text || '';
+  place(el, data.x, data.y);
+  requestAnimationFrame(() => autosize(ta));
+  ta.addEventListener('input', () => {
+    autosize(ta);
+    data.text = ta.value;
+    saveBoard(true);
+  });
+
+  let drag = null;
+  head.addEventListener('pointerdown', (e) => {
+    if (e.target.closest('button')) return;
+    e.stopPropagation();
+    head.setPointerCapture(e.pointerId);
+    drag = { sx: e.clientX, sy: e.clientY, ox: data.x, oy: data.y, moved: false };
+    el.classList.add('lifted');
+  });
+  head.addEventListener('pointermove', (e) => {
+    if (!drag) return;
+    data.x = Math.round(drag.ox + (e.clientX - drag.sx) / z);
+    data.y = Math.round(drag.oy + (e.clientY - drag.sy) / z);
+    drag.moved = true;
+    place(el, data.x, data.y);
+  });
+  const drop = () => {
+    if (!drag) return;
+    const moved = drag.moved;
+    drag = null;
+    el.classList.remove('lifted');
+    if (moved) saveBoard(true);
+  };
+  head.addEventListener('pointerup', drop);
+  head.addEventListener('pointercancel', drop);
+
+  del.addEventListener('click', () => {
+    delete BOARD.notes[id];
+    el.remove();
+    saveBoard(true);
+  });
+}
+
+function addStickyNote(x, y) {
+  const id = 'n_' + Date.now().toString(36);
+  BOARD.notes = BOARD.notes || {};
+  BOARD.notes[id] = { x: Math.round(x), y: Math.round(y), text: '', tone: 'gold', author: myProfile.name };
+  makeNoteElement(id, BOARD.notes[id]);
+  saveBoard(true);
+}
+
+$('#addNote').addEventListener('click', () => {
+  const W = vp.clientWidth, H = vp.clientHeight;
+  addStickyNote((W / 2 - tx) / z - 116, (H / 2 - ty) / z - 60);
+});
+
+/* ==================================================================
+   10. PAN & ZOOM ENGINE
+   ================================================================== */
+const zoomPct = $('#zoomPct');
+function applyTransform() {
+  world.style.transform = `translate(${tx}px, ${ty}px) scale(${z})`;
+  let s = 28 * z;
+  while (s < 14) s *= 4;
+  vp.style.backgroundSize = `${s}px ${s}px`;
+  vp.style.backgroundPosition = `${tx}px ${ty}px`;
+  zoomPct.textContent = Math.round(z * 100) + '%';
+  const cx = (vp.clientWidth / 2 - tx) / z;
+  let cur = 0;
+  BOARD.zones.forEach((zo, i) => { if (cx >= (zo.x || 0) - 90) cur = i; });
+  chips.forEach((c, i) => c.setAttribute('aria-current', i === cur ? 'true' : 'false'));
+}
+function vpPoint(clientX, clientY) {
+  const r = vp.getBoundingClientRect();
+  return { x: clientX - r.left, y: clientY - r.top };
+}
+function zoomAt(px, py, factor) {
+  const nz = clamp(z * factor, MINZ, MAXZ);
+  tx = px - (px - tx) * (nz / z);
+  ty = py - (py - ty) * (nz / z);
+  z = nz;
+  applyTransform();
+}
+function centerView(rect, nz) {
+  const W = vp.clientWidth, H = vp.clientHeight;
+  return { z: nz, tx: W / 2 - (rect.x + rect.w / 2) * nz, ty: H / 2 - (rect.y + rect.h / 2) * nz };
+}
+function fitView(rect, pad = 44, maxZ = 1) {
+  const W = vp.clientWidth, H = vp.clientHeight;
+  const nz = clamp(Math.min((W - pad * 2) / Math.max(100, rect.w), (H - pad * 2) / Math.max(100, rect.h)), MINZ, maxZ);
+  return centerView(rect, nz);
+}
+let anim = 0;
+function animateTo(v) {
+  cancelAnimationFrame(anim);
+  const W = vp.clientWidth, H = vp.clientHeight;
+  const s = { z, cx: (W / 2 - tx) / z, cy: (H / 2 - ty) / z };
+  const e = { z: v.z, cx: (W / 2 - v.tx) / v.z, cy: (H / 2 - v.ty) / v.z };
+  const t0 = performance.now(), D = 460;
+  return new Promise(res => {
+    const step = (t) => {
+      const k = Math.min(1, (t - t0) / D), q = 1 - Math.pow(1 - k, 3);
+      z = Math.exp(Math.log(s.z) + (Math.log(e.z) - Math.log(s.z)) * q);
+      const cx = s.cx + (e.cx - s.cx) * q, cy = s.cy + (e.cy - s.cy) * q;
+      tx = W / 2 - cx * z; ty = H / 2 - cy * z;
+      applyTransform();
+      if (k < 1) anim = requestAnimationFrame(step); else res();
+    };
+    anim = requestAnimationFrame(step);
+  });
+}
+function goZone(i) {
+  const zo = BOARD.zones[i];
+  if (!zo) return;
+  const rect = { x: zo.x || 0, y: zo.y || 0, w: zo.w || 900, h: zo.h || 680 };
+  animateTo(fitView(rect, 36, 0.92));
+}
+function focusCardOnCanvas(cardId) {
+  requestAnimationFrame(() => {
+    const info = findCardById(cardId);
+    if (!info) return;
+    const rect = { x: (info.card.x || 0) - 60, y: (info.card.y || 0) - 60, w: CW + 120, h: 320 };
+    animateTo(centerView(rect, Math.max(z, 0.85)));
+  });
+}
+function allBoardRect() {
+  let minX = 0, minY = 0, maxX = 1200, maxY = 800;
+  for (const zo of BOARD.zones) {
+    minX = Math.min(minX, zo.x || 0);
+    minY = Math.min(minY, zo.y || 0);
+    maxX = Math.max(maxX, (zo.x || 0) + (zo.w || 900));
+    maxY = Math.max(maxY, (zo.y || 0) + (zo.h || 680));
+  }
+  return { x: minX, y: minY, w: maxX - minX, h: maxY - minY };
+}
+
+// Canvas background pan
+let bgPan = null;
+vp.addEventListener('pointerdown', (e) => {
+  if (e.target.closest('.card, .zhead, .zone-resize, .note, .port, .wire-group, .hud, .hint, button, input, textarea, select')) return;
+  if (e.button !== 0 && e.pointerType === 'mouse') return;
+  cancelAnimationFrame(anim);
+  vp.setPointerCapture(e.pointerId);
+  bgPan = { id: e.pointerId, sx: e.clientX, sy: e.clientY, tx, ty };
+  vp.classList.add('grabbing');
+});
+vp.addEventListener('pointermove', (e) => {
+  // Always broadcast live mouse cursor position in world coordinates
+  const pt = vpPoint(e.clientX, e.clientY);
+  myCursorWorld.x = Math.round((pt.x - tx) / z);
+  myCursorWorld.y = Math.round((pt.y - ty) / z);
+  broadcastCursorPosition();
+
+  if (!bgPan || bgPan.id !== e.pointerId) return;
+  tx = bgPan.tx + (e.clientX - bgPan.sx);
+  ty = bgPan.ty + (e.clientY - bgPan.sy);
+  applyTransform();
+});
+const endBgPan = (e) => {
+  if (!bgPan || bgPan.id !== e.pointerId) return;
+  bgPan = null;
+  vp.classList.remove('grabbing');
+};
+vp.addEventListener('pointerup', endBgPan);
+vp.addEventListener('pointercancel', endBgPan);
+
+vp.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  cancelAnimationFrame(anim);
+  const p = vpPoint(e.clientX, e.clientY);
+  const dy = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaMode === 2 ? e.deltaY * 400 : e.deltaY;
+  zoomAt(p.x, p.y, Math.exp(-dy * (e.ctrlKey ? 0.01 : 0.0018)));
+}, { passive: false });
+
+vp.addEventListener('dblclick', (e) => {
+  if (e.target.closest('.card, .note, .hud, .hint, button, textarea, .zhead')) return;
+  const p = vpPoint(e.clientX, e.clientY);
+  addStickyNote((p.x - tx) / z - 116, (p.y - ty) / z - 24);
+});
+
+$('#zoomIn').addEventListener('click', () => zoomAt(vp.clientWidth / 2, vp.clientHeight / 2, 1.25));
+$('#zoomOut').addEventListener('click', () => zoomAt(vp.clientWidth / 2, vp.clientHeight / 2, 0.8));
+$('#fitAll').addEventListener('click', () => animateTo(fitView(allBoardRect(), 40)));
+
+/* ==================================================================
+   11. CANVA-STYLE LIVE MULTIPLAYER SYNC (WebRTC PeerJS + BroadcastChannel)
+   ================================================================== */
+const COLORS = ['#e11d48', '#2563eb', '#16a34a', '#d97706', '#9333ea', '#0891b2'];
+const savedUser = lsGet(LS_USER) || {};
+const myProfile = {
+  id: 'u_' + Math.random().toString(36).slice(2, 9),
+  name: savedUser.name || 'Designer-' + Math.floor(100 + Math.random() * 899),
+  color: savedUser.color || COLORS[Math.floor(Math.random() * COLORS.length)]
+};
+const myCursorWorld = { x: 400, y: 350 };
+const remotePeers = new Map(); // peerUserId -> { id, name, color, x, y, selectedId, lastSeen, el }
+
+// 11A. Local BroadcastChannel so two tabs on the same computer sync automatically at 60fps
+const localBus = ('BroadcastChannel' in window) ? new BroadcastChannel('govi_thena_live_bus') : null;
+if (localBus) {
+  localBus.onmessage = (ev) => handleIncomingSyncPacket(ev.data);
+}
+
+// 11B. PeerJS WebRTC Room Engine (works across the internet on GitHub Pages with zero backend)
+let peerInstance = null;
+let isRoomHost = false;
+let currentRoomCode = '';
+const dataConnections = new Map(); // peerId -> DataConnection
+
+function sanitizeRoomCode(code) {
+  return String(code || '').trim().toLowerCase().replace(/[^a-z0-9_-]/g, '-');
+}
+
+function sendPacketToAll(packet) {
+  if (localBus) {
+    try { localBus.postMessage(packet); } catch (_) {}
+  }
+  for (const conn of dataConnections.values()) {
+    if (conn && conn.open) {
+      try { conn.send(packet); } catch (_) {}
+    }
+  }
+}
+
+let lastCursorSent = 0;
+function broadcastCursorPosition() {
+  const now = performance.now();
+  if (now - lastCursorSent < 40) return;
+  lastCursorSent = now;
+  sendPacketToAll({
+    type: 'cursor',
+    user: myProfile,
+    x: myCursorWorld.x,
+    y: myCursorWorld.y,
+    selectedId: selectedItem ? selectedItem.itemId : null
+  });
+}
+
+let lastMoveSent = 0;
+function broadcastCardMove(cardId, x, y) {
+  const now = performance.now();
+  if (now - lastMoveSent < 30) return;
+  lastMoveSent = now;
+  sendPacketToAll({
+    type: 'card-move',
+    user: myProfile,
+    cardId,
+    x,
+    y,
+    cx: myCursorWorld.x,
+    cy: myCursorWorld.y
+  });
+}
+
+function broadcastBoardState() {
+  sendPacketToAll({
+    type: 'board-state',
+    user: myProfile,
+    board: BOARD
+  });
+}
+
+function handleIncomingSyncPacket(pkt) {
+  if (!pkt || !pkt.user || pkt.user.id === myProfile.id) return;
+
+  if (pkt.type === 'cursor') {
+    updateRemotePeerCursor(pkt.user, pkt.x, pkt.y, pkt.selectedId);
+  }
+  else if (pkt.type === 'card-move') {
+    updateRemotePeerCursor(pkt.user, pkt.cx || pkt.x, pkt.cy || pkt.y, pkt.cardId);
+    const info = findCardById(pkt.cardId);
+    if (info) {
+      info.card.x = pkt.x;
+      info.card.y = pkt.y;
+      const el = cardElements.get(pkt.cardId);
+      if (el) place(el, pkt.x, pkt.y);
+      drawWires();
+      lsSet(LS_BOARD, BOARD);
+    }
+  }
+  else if (pkt.type === 'board-state' && pkt.board) {
+    BOARD = pkt.board;
+    lsSet(LS_BOARD, BOARD);
+    rebuildBoard();
+    if (selectedItem) openInspector(selectedItem);
+    // If we are the WebRTC Host, relay this update to all other connected guests
+    if (isRoomHost) {
+      for (const conn of dataConnections.values()) {
+        if (conn && conn.open) {
+          try { conn.send(pkt); } catch (_) {}
+        }
+      }
+    }
+  }
+  else if (pkt.type === 'request-state') {
+    sendPacketToAll({
+      type: 'board-state',
+      user: myProfile,
+      board: BOARD
+    });
+  }
+}
+
+function updateRemotePeerCursor(user, x, y, selectedId) {
+  let rec = remotePeers.get(user.id);
+  const selectionChanged = rec && rec.selectedId !== selectedId;
+  if (!rec) {
+    const el = h('div', { class: 'remote-cursor' });
+    el.innerHTML = `
+      <svg class="rc-svg" viewBox="0 0 24 24" fill="${user.color}" stroke="#ffffff" stroke-width="1.8">
+        <path d="M4 3l16 7.5-7.2 2.2-2.3 7.3L4 3z"/>
+      </svg>
+      <div class="rc-badge" style="background:${user.color}">
+        <span class="rc-name"></span>
+      </div>
+    `;
+    layerCursors.append(el);
+    rec = { id: user.id, name: user.name, color: user.color, x, y, selectedId, lastSeen: Date.now(), el };
+    remotePeers.set(user.id, rec);
+    renderPeerAvatars();
+  }
+  rec.name = user.name;
+  rec.color = user.color;
+  rec.x = x;
+  rec.y = y;
+  rec.selectedId = selectedId;
+  rec.lastSeen = Date.now();
+  rec.el.querySelector('.rc-name').textContent = user.name;
+  rec.el.querySelector('.rc-badge').style.background = user.color;
+  rec.el.querySelector('svg').setAttribute('fill', user.color);
+  rec.el.style.transform = `translate(${x}px, ${y}px)`;
+
+  if (selectionChanged) renderPeerSelectionBadges();
+}
+
+function renderPeerSelectionBadges() {
+  document.querySelectorAll('.peer-editing-tag').forEach(e => e.remove());
+  for (const peer of remotePeers.values()) {
+    if (!peer.selectedId) continue;
+    const cardEl = cardElements.get(peer.selectedId);
+    if (cardEl) {
+      cardEl.style.boxShadow = `0 0 0 2.5px ${peer.color}`;
+      const badge = h('div', {
+        class: 'peer-editing-tag',
+        style: `background:${peer.color}`,
+        text: `${peer.name} editing`
+      });
+      cardEl.append(badge);
+    }
+  }
+}
+
+function renderPeerAvatars() {
+  const box = $('#peerAvatars');
+  box.replaceChildren();
+  const listEl = $('#peerListContainer');
+  listEl.replaceChildren();
+
+  // Always show self in modal list
+  listEl.append(
+    h('div', { class: 'peer-row' },
+      h('span', { text: `${myProfile.name} (You)` }),
+      h('span', { class: 'peer-pill', style: `background:${myProfile.color}`, text: isRoomHost ? 'HOST' : 'ONLINE' })
+    )
+  );
+
+  for (const peer of remotePeers.values()) {
+    box.append(
+      h('span', {
+        class: 'peer-pill',
+        style: `background:${peer.color}`,
+        title: `${peer.name} is editing live`,
+        text: peer.name
+      })
+    );
+    listEl.append(
+      h('div', { class: 'peer-row' },
+        h('span', { text: peer.name }),
+        h('span', { class: 'peer-pill', style: `background:${peer.color}`, text: 'LIVE CURSOR' })
+      )
+    );
+  }
+
+  const count = remotePeers.size;
+  const btn = $('#openCollabBtn');
+  const lbl = $('#collabBtnLabel');
+  if (currentRoomCode || count > 0) {
+    btn.classList.add('connected');
+    lbl.textContent = count > 0 ? `Live (${count + 1})` : `Room: ${currentRoomCode}`;
+  } else {
+    btn.classList.remove('connected');
+    lbl.textContent = 'Live Sync';
+  }
+}
+
+// Clean up stale cursors after 15 seconds of disconnect
+setInterval(() => {
+  const now = Date.now();
+  let changed = false;
+  for (const [id, peer] of remotePeers.entries()) {
+    if (now - peer.lastSeen > 15000) {
+      peer.el.remove();
+      remotePeers.delete(id);
+      changed = true;
+    }
+  }
+  if (changed) {
+    renderPeerAvatars();
+    renderPeerSelectionBadges();
+  }
+}, 4000);
+
+function connectToWebRTCRoom(rawCode) {
+  const code = sanitizeRoomCode(rawCode);
+  if (!code) return;
+  if (typeof Peer === 'undefined') {
+    $('#collabStatusMsg').textContent = 'PeerJS library loading... Local tab sync is active.';
+    return;
+  }
+
+  if (peerInstance) {
+    try { peerInstance.destroy(); } catch (_) {}
+    peerInstance = null;
+    dataConnections.clear();
+  }
+
+  currentRoomCode = code;
+  const hostPeerId = 'govi-thena-room-' + code;
+  $('#collabStatusMsg').textContent = `Connecting to room "${code}"...`;
+  updateInviteUrl(code);
+
+  // First try to claim the Host ID for this room code
+  const candidateHost = new Peer(hostPeerId);
+
+  candidateHost.on('open', () => {
+    isRoomHost = true;
+    peerInstance = candidateHost;
+    $('#collabStatusMsg').textContent = `Hosting room "${code}". Share the invite link or Room Code with your friend!`;
+    $('#leaveRoomBtn').hidden = false;
+    renderPeerAvatars();
+
+    candidateHost.on('connection', (conn) => {
+      setupDataConnection(conn);
+    });
+  });
+
+  candidateHost.on('error', (err) => {
+    // If the Host ID is already taken, join as a Guest and connect to the Host!
+    if (err && err.type === 'unavailable-id') {
+      isRoomHost = false;
+      const guestPeer = new Peer();
+      peerInstance = guestPeer;
+      guestPeer.on('open', () => {
+        const conn = guestPeer.connect(hostPeerId, { reliable: true });
+        setupDataConnection(conn);
+        $('#collabStatusMsg').textContent = `Connected to friend's room "${code}"!`;
+        $('#leaveRoomBtn').hidden = false;
+        renderPeerAvatars();
+      });
+    } else {
+      $('#collabStatusMsg').textContent = `Note: ${err.type || 'Network error'}. Local tab sync is still active.`;
+    }
+  });
+}
+
+function setupDataConnection(conn) {
+  conn.on('open', () => {
+    dataConnections.set(conn.peer, conn);
+    // Send our cursor and either push state (if host) or request latest state (if guest)
+    broadcastCursorPosition();
+    if (isRoomHost) {
+      conn.send({ type: 'board-state', user: myProfile, board: BOARD });
+    } else {
+      conn.send({ type: 'request-state', user: myProfile });
+    }
+  });
+  conn.on('data', (data) => {
+    handleIncomingSyncPacket(data);
+    // If we are host, relay cursor/move packets to other connected peers
+    if (isRoomHost && data && (data.type === 'cursor' || data.type === 'card-move')) {
+      for (const [pid, otherConn] of dataConnections.entries()) {
+        if (pid !== conn.peer && otherConn.open) {
+          try { otherConn.send(data); } catch (_) {}
+        }
+      }
+    }
+  });
+  conn.on('close', () => {
+    dataConnections.delete(conn.peer);
+  });
+}
+
+function updateInviteUrl(code) {
+  const url = new URL(window.location.href);
+  if (code) url.searchParams.set('room', code);
+  else url.searchParams.delete('room');
+  window.history.replaceState({}, '', url.toString());
+  $('#inviteUrlText').textContent = url.toString();
+}
+
+/* Collab Modal UI Wiring */
+const collabSheet = $('#collabSheet');
+$('#myNameInput').value = myProfile.name;
+$('#myColorInput').value = myProfile.color;
+
+$('#myNameInput').addEventListener('input', (e) => {
+  myProfile.name = e.target.value.trim() || 'Designer';
+  lsSet(LS_USER, myProfile);
+  renderPeerAvatars();
+  broadcastCursorPosition();
+});
+$('#myColorInput').addEventListener('change', (e) => {
+  myProfile.color = e.target.value;
+  lsSet(LS_USER, myProfile);
+  renderPeerAvatars();
+  broadcastCursorPosition();
+});
+
+$('#openCollabBtn').addEventListener('click', () => {
+  renderPeerAvatars();
+  collabSheet.hidden = false;
+});
+$('#collabClose').addEventListener('click', () => { collabSheet.hidden = true; });
+collabSheet.addEventListener('click', (e) => { if (e.target === collabSheet) collabSheet.hidden = true; });
+
+$('#joinRoomBtn').addEventListener('click', () => {
+  const code = $('#roomCodeInput').value.trim() || 'govi-thena-live';
+  $('#roomCodeInput').value = code;
+  connectToWebRTCRoom(code);
+});
+
+$('#leaveRoomBtn').addEventListener('click', () => {
+  if (peerInstance) { try { peerInstance.destroy(); } catch (_) {} peerInstance = null; }
+  dataConnections.clear();
+  currentRoomCode = '';
+  $('#leaveRoomBtn').hidden = true;
+  $('#collabStatusMsg').textContent = 'Disconnected from WebRTC room.';
+  renderPeerAvatars();
+});
+
+$('#copyInviteBtn').addEventListener('click', async () => {
+  const code = $('#roomCodeInput').value.trim() || currentRoomCode || 'govi-thena-live';
+  $('#roomCodeInput').value = code;
+  if (!currentRoomCode) connectToWebRTCRoom(code);
+  updateInviteUrl(code);
+  try {
+    await navigator.clipboard.writeText($('#inviteUrlText').textContent);
+    $('#collabStatusMsg').textContent = 'Invite link copied! Send it to your friend.';
+  } catch (_) {}
+});
+
+/* ==================================================================
+   12. EXPORT / IMPORT JSON & MARKDOWN OUTLINE SHEET
+   ================================================================== */
+const sheet = $('#sheet'), sheetText = $('#sheetText'), sheetMsg = $('#sheetMsg');
+
+function generateFullScriptOutline() {
+  const out = ['# GOVI THENA — COLLABORATIVE STORY OUTLINE', ''];
+  for (const z of BOARD.zones) {
+    out.push(`## ${z.title} (${z.era || ''})`);
+    if (z.sub) out.push(`_${z.sub}_`);
+    out.push('');
+    if (z.kind === 'cast') {
+      for (const c of (z.cards || [])) {
+        if (c.legend) continue;
+        out.push(`- **${c.name}** ${c.si ? '(' + c.si + ')' : ''}: ${c.text}`);
+      }
+      out.push('');
+    } else {
+      for (const b of (z.beats || [])) {
+        out.push(`### • [${(b.status || 'planned').toUpperCase()}] ${b.title}`);
+        out.push(b.text || '');
+        for (const tg of (b.tags || [])) {
+          out.push(`  - *${TAG[tg.k] || tg.k}:* ${tg.t}`);
+        }
+        out.push('');
+      }
+    }
+  }
+  return out.join('\n').trim();
+}
+
+function generateFullJson() {
+  return JSON.stringify({
+    app: 'Govi Thena Live Collaborative Story Board',
+    updatedAt: new Date().toISOString(),
+    board: BOARD
+  }, null, 2);
+}
+
+$('#tabFullScriptBtn').addEventListener('click', () => {
+  sheetText.value = generateFullScriptOutline();
+});
+$('#tabJsonBtn').addEventListener('click', () => {
+  sheetText.value = generateFullJson();
+});
+$('#copyAll').addEventListener('click', () => {
+  sheetText.value = generateFullScriptOutline();
+  sheetMsg.textContent = '';
+  sheet.hidden = false;
+});
+$('#sheetClose').addEventListener('click', () => { sheet.hidden = true; });
+sheet.addEventListener('click', (e) => { if (e.target === sheet) sheet.hidden = true; });
+
+$('#sheetCopy').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(sheetText.value);
+    sheetMsg.textContent = 'Copied to clipboard!';
+  } catch (_) {}
+});
+
+$('#exportJsonBtn').addEventListener('click', () => {
+  const blob = new Blob([generateFullJson()], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `govi-thena-board-${new Date().toISOString().slice(0, 10)}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  sheetMsg.textContent = 'Downloaded JSON file.';
+});
+
+$('#importJsonBtn').addEventListener('click', () => $('#jsonFileInput').click());
+$('#jsonFileInput').addEventListener('change', (e) => {
+  const file = e.target.files && e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    try {
+      const parsed = JSON.parse(String(ev.target.result || '{}'));
+      if (parsed.board && Array.isArray(parsed.board.zones)) {
+        BOARD = parsed.board;
+        saveBoard(true);
+        rebuildBoard();
+        sheetText.value = generateFullJson();
+        sheetMsg.textContent = 'Imported board state & synced with room!';
+      }
+    } catch (_) {
+      alert('Invalid JSON file.');
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';
+});
+
+$('#resetBoardBtn').addEventListener('click', () => {
+  if (!confirm('Reset the board back to the default Govi Thena layout?')) return;
+  BOARD = createInitialStateFromZones(DEFAULT_STORY_ZONES);
+  closeInspector();
+  saveBoard(true);
+  rebuildBoard();
+  sheet.hidden = true;
+});
+
+/* ==================================================================
+   13. INITIAL BOOT & URL ROOM AUTO-JOIN
+   ================================================================== */
+rebuildBoard();
+const firstZone = BOARD.zones[0] ? { x: BOARD.zones[0].x, y: 0, w: BOARD.zones[0].w, h: BOARD.zones[0].h } : allBoardRect();
+const initV = fitView(firstZone, 36, 0.9);
+tx = initV.tx; ty = initV.ty; z = initV.z;
+applyTransform();
+renderPeerAvatars();
+
+// Auto-connect if URL has ?room=CODE
+const urlParams = new URLSearchParams(window.location.search);
+const roomFromUrl = urlParams.get('room');
+if (roomFromUrl) {
+  $('#roomCodeInput').value = roomFromUrl;
+  setTimeout(() => connectToWebRTCRoom(roomFromUrl), 400);
+}
+})();
+</script>
+</body>
 </html>
